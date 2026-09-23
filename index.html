@@ -1,0 +1,3947 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>PRE-CLASS INTERACTIVE WORKBOOK: Chapter 3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- MathJax for rendering mathematics -->
+<script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1,
+                minScale: 0.8
+            }
+        };
+    </script>
+<script async="" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F6FA; /* Very light purple/white */
+            color: #172033;
+            overscroll-behavior-y: none;
+        }
+
+        /* Page Transitions */
+        .page-section {
+            display: none;
+            animation: slideFadeIn 0.3s ease-out forwards;
+        }
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes slideFadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SAFE ICON CONSTRAINTS: Prevents massive SVG expansion */
+        .ui-icon {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+            flex-shrink: 0;
+            display: inline-block;
+        }
+        
+        /* Lock down specific header/button SVGs */
+        .card-concept-header svg, .nav-item svg, button svg {
+            flex-shrink: 0 !important;
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+            max-width: 24px !important;
+            max-height: 24px !important;
+            display: inline-block !important;
+        }
+
+        /* Allow larger SVGs only in specific completion/end screens */
+        .large-icon {
+            flex-shrink: 0 !important;
+            width: 3rem !important;
+            height: 3rem !important;
+            max-width: 56px !important;
+            max-height: 56px !important;
+            display: inline-block !important;
+        }
+
+        /* CRITICAL MATHJAX FIX: Hide MathJax internal SVG cache */
+        #MathJax_SVG_Hidden, svg[id^="MathJax"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+            position: absolute !important;
+            pointer-events: none !important;
+        }
+
+        /* Allow actual mathematical formulas to render correctly */
+        mjx-container svg, .math-display svg {
+            display: inline-block !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: none !important;
+        }
+
+        /* Premium Playbook Cards */
+        .playbook-card {
+            background-color: #FFFFFF;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid #F3F4F6;
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+        }
+
+        /* Card Sub-types */
+        .card-concept {
+            background-color: #FFFFFF;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid #F3F4F6;
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+        }
+        .card-concept-header {
+            background-color: #F5F6FA;
+            color: #512E5F;
+            padding: 0.75rem 1.25rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border-bottom: 1px solid #E1E3ED;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-example {
+            background-color: #FFFFFF;
+            border-left: 4px solid #8B0E2D;
+            padding: 1.25rem;
+            border-radius: 0 1rem 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            margin-bottom: 1.25rem;
+            border: 1px solid #F3F4F6;
+            border-left-width: 4px;
+        }
+
+        .card-hint {
+            background-color: #F7F2F8;
+            border-left: 4px solid #7A4B92;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .card-think {
+            background-color: #F1F4FB;
+            border-left: 4px solid #25408F;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .card-solution {
+            background-color: #FFFFFF;
+            border: 1px solid #AAB1D1;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            margin-top: 0.75rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(134, 16, 168, 0.05);
+        }
+        
+        .card-takeaway {
+            background-color: #F5F6FA;
+            border-left: 4px solid #512E5F;
+            padding: 1rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin-top: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            font-weight: 500;
+            color: #512E5F;
+        }
+
+        /* Formula Cards - Monochromatic Premium Style */
+        .formula-card {
+            position: relative;
+            background-color: #F5F6FA;
+            border: 1px solid #AAB1D1;
+            border-left: 4px solid #8B0E2D;
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            box-shadow: 0 4px 12px rgba(74, 0, 94, 0.05);
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            overflow: visible;
+            height: auto;
+            transition: all 0.2s ease;
+        }
+        .formula-card:hover {
+            box-shadow: 0 6px 16px rgba(74, 0, 94, 0.08);
+            transform: translateY(-1px);
+            border-color: #5B74B8;
+        }
+        .formula-tag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #8B0E2D;
+            color: #FFFFFF;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        .formula-bg-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            color: #8B0E2D;
+            pointer-events: none;
+            user-select: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+
+        /* Navigation Styles */
+        .nav-item {
+            transition: all 0.2s ease;
+            border-radius: 10px;
+            margin-bottom: 0.25rem;
+            border-left: 4px solid transparent;
+            background-color: transparent;
+            color: #4B5563;
+        }
+
+        .nav-item.nav-active {
+            background-color: #D8CDDC !important;
+            color: #512E5F !important;
+            font-weight: 700 !important;
+            border-left-color: #8B0E2D !important;
+            box-shadow: 0 2px 6px rgba(134,16,168,0.1);
+        }
+
+        .nav-item svg {
+            color: #7C8291;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.nav-active svg {
+            color: #8B0E2D !important;
+        }
+
+        .nav-item:hover:not(.nav-active) {
+            background-color: rgba(0,0,0,0.03);
+        }
+
+        /* Quiz Option Base */
+        .quiz-opt-base {
+            background-color: #FFFFFF;
+            border: 2px solid #DDD6E8;
+            color: #374151;
+            transition: all 0.2s ease;
+            border-radius: 0.75rem;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .quiz-opt-base:hover:not(:disabled) {
+            background-color: #F7F2F8;
+            border-color: #5B74B8;
+        }
+
+        /* Selected State */
+        .quiz-opt-selected {
+            background-color: #D8CDDC !important;
+            border-color: #8B0E2D !important;
+            color: #512E5F !important;
+            box-shadow: 0 4px 6px -1px rgba(134, 16, 168, 0.1) !important;
+        }
+
+        /* Correct State */
+        .quiz-opt-correct {
+            background-color: #dcfce7 !important;
+            border-color: #15803d !important;
+            color: #166534 !important;
+        }
+
+        /* Incorrect State */
+        .quiz-opt-incorrect {
+            background-color: #fee2e2 !important;
+            border-color: #b91c1c !important;
+            color: #7f1d1d !important;
+        }
+
+        /* Math Display Constraints */
+        .math-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.15rem 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        /* Responsive Formula Sizing */
+        .formula-primary { font-size: clamp(1.15rem, 2vw, 1.75rem); }
+        .formula-secondary { font-size: clamp(1rem, 1.6vw, 1.25rem); }
+
+        /* Responsive discrete probability line graph */
+        .probability-graph-card {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            background: #FFFFFF;
+            border: 1px solid #D8CDDC;
+            border-radius: 0.9rem;
+            padding: 0.85rem;
+            overflow: hidden;
+        }
+        .probability-graph-title {
+            text-align: center;
+            color: #512E5F;
+            font-size: 0.82rem;
+            font-weight: 800;
+            margin-bottom: 0.35rem;
+        }
+        .probability-line-graph {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+        .probability-line-graph .graph-tick {
+            fill: #475569;
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .probability-line-graph .graph-value {
+            fill: #512E5F;
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+        }
+        .probability-line-graph .graph-axis-label {
+            fill: #512E5F;
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+        }
+        .probability-graph-caption {
+            margin-top: 0.35rem;
+            text-align: center;
+            color: #64748B;
+            font-size: 0.74rem;
+            line-height: 1.45;
+        }
+        @media (max-width: 430px) {
+            .probability-graph-card { padding: 0.55rem 0.35rem; }
+            .probability-graph-title { font-size: 0.76rem; }
+            .probability-line-graph .graph-tick,
+            .probability-line-graph .graph-value,
+            .probability-line-graph .graph-axis-label { font-size: 13px; }
+        }
+
+        /* Typography overrides */
+        .text-body {
+            font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+            line-height: 1.6;
+            color: #374151;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+    </style>
+<style id="progressive-workbook-enhancements">
+:root{--plum:#512E5F;--violet:#8B0E2D;--lilac:#F7F2F8;--success:#15803d;--muted:#64748b}
+
+
+
+
+.nav-locked .nav-completed .nav-active 
+.section-complete-wrap{margin:1rem 0 0;display:flex;justify-content:flex-end}
+.section-complete-btn{border:0;border-radius:.9rem;padding:.8rem 1rem;font-weight:800;font-size:.875rem;background:linear-gradient(135deg,#512E5F,#8B0E2D);color:#fff;box-shadow:0 8px 20px rgba(91,23,109,.16);transition:.2s;width:auto}
+.section-complete-btn:disabled{background:#e2e8f0;color:#64748b;box-shadow:none;cursor:not-allowed}
+.section-complete-btn:not(:disabled):hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(91,23,109,.22)}
+.requirement-note{font-size:.78rem;color:#64748b;margin-top:.55rem;text-align:right}
+.reset-progress-btn{width:100%;margin-top:.8rem;border:1px solid #AAB1D1;background:#fff;color:#512E5F;border-radius:.7rem;padding:.55rem .75rem;font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:.35rem;transition:.2s}
+.reset-progress-btn:hover{background:#F7F2F8;border-color:#7A4B92;transform:translateY(-1px)}
+.lock-toast{position:fixed;z-index:2500;left:50%;top:18px;transform:translate(-50%,-18px);opacity:0;pointer-events:none;width:min(92vw,430px);background:rgba(255,255,255,.98);border:1px solid #e9d5ff;border-left:4px solid #8B0E2D;border-radius:1rem;padding:1rem 1.1rem;box-shadow:0 18px 50px rgba(61,0,85,.18);transition:.25s}
+.lock-toast.show{opacity:1;transform:translate(-50%,0)}
+.lock-toast strong{display:block;color:#512E5F;margin-bottom:.15rem}.lock-toast span{font-size:.82rem;color:#64748b}
+.completion-toast{border-left-color:#22c55e}.completion-toast strong{color:#166534}
+.reset-modal-backdrop{position:fixed;inset:0;z-index:2600;background:rgba(23,32,51,.48);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:1rem}
+.reset-modal-backdrop.hidden{display:none!important}
+.reset-modal{width:min(92vw,440px);background:#fff;border:1px solid #D8CDDC;border-radius:1.15rem;box-shadow:0 24px 70px rgba(61,0,85,.24);padding:1.35rem}
+.reset-modal-icon{width:2.75rem;height:2.75rem;border-radius:999px;background:#F7F2F8;color:#8B0E2D;display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:.8rem}
+.reset-modal h3{font-size:1.08rem;font-weight:800;color:#512E5F;margin:0 0 .45rem}
+.reset-modal p{font-size:.86rem;line-height:1.55;color:#64748b;margin:0 0 1rem}
+.reset-modal-actions{display:flex;gap:.65rem;justify-content:flex-end}
+.reset-modal-actions button{border-radius:.75rem;padding:.65rem .9rem;font-size:.8rem;font-weight:800;transition:.2s}
+.reset-cancel{background:#fff;color:#475569;border:1px solid #CBD5E1}
+.reset-confirm{background:linear-gradient(135deg,#512E5F,#8B0E2D);color:#fff;border:1px solid transparent}
+.reset-success-toast{position:fixed;z-index:2700;left:50%;bottom:24px;transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#F0FDF4;color:#166534;border:1px solid #86EFAC;border-radius:.9rem;padding:.72rem 1rem;font-size:.82rem;font-weight:800;box-shadow:0 12px 36px rgba(22,101,52,.15);transition:.25s;white-space:nowrap}
+.reset-success-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:767px){.section-complete-wrap{justify-content:stretch}.section-complete-btn{width:100%}.requirement-note{text-align:center}}
+@media(max-width:520px){.reset-modal{padding:1.05rem}.reset-modal-actions{flex-direction:column-reverse}.reset-modal-actions button{width:100%}}
+</style>
+<style id="formula-no-scrollbar-final-fix">
+/* IMPORTANT FORMULAS — complete display, no horizontal scrollbar */
+.important-formula-grid {
+    width: 100%;
+    min-width: 0;
+}
+
+.important-formula-grid .formula-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: visible !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.important-formula-grid .math-display {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: visible !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.15rem;
+}
+
+.important-formula-grid mjx-container[jax="CHTML"] {
+    display: inline-block !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    white-space: nowrap;
+}
+
+/* Slightly smaller, but fully readable, formula sizing */
+.important-formula-grid .formula-primary {
+    font-size: clamp(1rem, 1.5vw, 1.34rem) !important;
+}
+
+.important-formula-grid .formula-secondary {
+    font-size: clamp(0.96rem, 1.35vw, 1.20rem) !important;
+}
+
+/* Standard deviation has a full row, so it may be slightly larger */
+.important-formula-grid .formula-card.md\:col-span-2 .formula-secondary {
+    font-size: clamp(1rem, 1.5vw, 1.28rem) !important;
+}
+
+@media (max-width: 767px) {
+    .important-formula-grid .formula-card {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .important-formula-grid .formula-primary {
+        font-size: clamp(0.92rem, 4.2vw, 1.12rem) !important;
+    }
+
+    .important-formula-grid .formula-secondary {
+        font-size: clamp(0.90rem, 4vw, 1.08rem) !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .important-formula-grid .formula-card {
+        padding-left: 0.55rem;
+        padding-right: 0.55rem;
+    }
+
+    .important-formula-grid .formula-primary,
+    .important-formula-grid .formula-secondary {
+        font-size: clamp(0.84rem, 3.7vw, 0.98rem) !important;
+    }
+}
+</style>
+<style id="binomial-compact-spacing">
+/* Reduce vertical gaps between the three binomial formula lines */
+.binomial-formula-stack {
+    gap: 0 !important;
+}
+.binomial-formula-stack .math-display {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+}
+.binomial-formula-stack mjx-container[display="true"] {
+    margin-top: 0.22em !important;
+    margin-bottom: 0.22em !important;
+}
+</style>
+<style id="binomial-mean-variance-compact">
+/* Compact Mean & Variance of Binomial Distribution */
+.binomial-mv-compact {
+    padding-top: 0.7rem !important;
+    padding-bottom: 0.7rem !important;
+}
+.binomial-mv-compact .formula-card {
+    padding-top: 0.55rem !important;
+    padding-bottom: 0.55rem !important;
+    min-height: 0 !important;
+}
+.binomial-mv-compact .formula-card h4 {
+    margin-top: 0 !important;
+    margin-bottom: 0.05rem !important;
+}
+.binomial-mv-compact .math-display {
+    margin: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 0 !important;
+}
+.binomial-mv-compact mjx-container[display="true"] {
+    margin-top: 0.12em !important;
+    margin-bottom: 0.12em !important;
+}
+</style>
+<style id="binomial-real-life-applications">
+.real-life-hero{
+    background:linear-gradient(135deg,#FFF9FF 0%,#F7F2F8 55%,#F5F6FA 100%);
+    border:1px solid #D8CDDC;
+    border-left:5px solid #8B0E2D;
+    border-radius:1rem;
+    padding:1.15rem;
+    margin-bottom:1.25rem;
+    box-shadow:0 6px 20px rgba(91,23,109,.06);
+}
+.real-life-hero h3{color:#512E5F;font-weight:800;font-size:1.15rem;margin-bottom:.4rem}
+.real-life-flow{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:.55rem;
+    margin-top:1rem;
+}
+.real-life-step{
+    background:#fff;
+    border:1px solid #D8CDDC;
+    border-radius:.8rem;
+    padding:.7rem .55rem;
+    text-align:center;
+    font-size:.74rem;
+    font-weight:800;
+    color:#512E5F;
+    line-height:1.35;
+}
+.application-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.85rem;
+}
+.application-card{
+    border:1px solid #D8CDDC;
+    background:#fff;
+    border-radius:1rem;
+    overflow:hidden;
+    box-shadow:0 4px 14px rgba(74,0,94,.045);
+    transition:.2s ease;
+}
+.application-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(74,0,94,.08);
+    border-color:#5B74B8;
+}
+.application-trigger{
+    width:100%;
+    border:0;
+    background:#fff;
+    padding:1rem;
+    display:flex;
+    align-items:flex-start;
+    gap:.8rem;
+    text-align:left;
+    cursor:pointer;
+}
+.application-icon{
+    width:2.6rem;
+    height:2.6rem;
+    border-radius:.8rem;
+    background:#F7F2F8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    font-size:1.25rem;
+}
+.application-title{font-weight:800;color:#512E5F;font-size:.95rem;margin-bottom:.15rem}
+.application-question{font-size:.79rem;color:#64748B;line-height:1.45}
+.application-chevron{
+    margin-left:auto;
+    color:#8B0E2D;
+    font-weight:900;
+    transition:transform .2s ease;
+}
+.application-card.open .application-chevron{transform:rotate(180deg)}
+.application-detail{
+    display:none;
+    padding:0 1rem 1rem 4.4rem;
+}
+.application-card.open .application-detail{display:block}
+.application-model{
+    background:#F5F6FA;
+    border:1px solid #E1E3ED;
+    border-radius:.75rem;
+    padding:.75rem;
+    font-size:.78rem;
+    color:#374151;
+    line-height:1.55;
+}
+.application-model strong{color:#512E5F}
+.application-decision{
+    margin-top:.55rem;
+    background:#F0FDF4;
+    border:1px solid #BBF7D0;
+    color:#166534;
+    border-radius:.7rem;
+    padding:.6rem .7rem;
+    font-size:.76rem;
+    line-height:1.45;
+}
+.binomial-big-idea{
+    margin-top:1rem;
+    background:linear-gradient(135deg,#512E5F,#8B0E2D);
+    color:white;
+    border-radius:1rem;
+    padding:1rem 1.1rem;
+    box-shadow:0 8px 22px rgba(91,23,109,.15);
+}
+.binomial-big-idea .eyebrow{
+    font-size:.68rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#D8CDDC;
+    margin-bottom:.25rem;
+}
+.binomial-big-idea p{font-size:.9rem;line-height:1.55}
+.real-life-check{
+    margin-top:1rem;
+    background:#F1F4FB;
+    border-left:4px solid #25408F;
+    border-radius:0 .8rem .8rem 0;
+    padding:.85rem;
+}
+.real-life-check-title{font-weight:800;color:#25408F;font-size:.82rem;margin-bottom:.4rem}
+.real-life-check button{
+    margin-top:.55rem;
+    background:#fff;
+    color:#25408F;
+    border:1px solid #AAB1D1;
+    border-radius:.65rem;
+    padding:.5rem .75rem;
+    font-size:.75rem;
+    font-weight:800;
+}
+.real-life-answer{
+    display:none;
+    margin-top:.6rem;
+    font-size:.78rem;
+    line-height:1.5;
+    color:#334155;
+}
+.real-life-answer.show{display:block}
+@media(max-width:767px){
+    .application-grid{grid-template-columns:1fr}
+    .real-life-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .application-detail{padding-left:1rem}
+}
+</style>
+<style id="binomial-opening-hook">
+.binomial-hook{
+    position:relative;
+    overflow:hidden;
+    border-radius:1.15rem;
+    margin-bottom:1.25rem;
+    background:linear-gradient(135deg,#512E5F 0%,#512E5F 48%,#8B0E2D 100%);
+    color:#fff;
+    box-shadow:0 14px 34px rgba(61,0,85,.18);
+    border:1px solid rgba(255,255,255,.08);
+}
+.binomial-hook-inner{
+    position:relative;
+    z-index:2;
+    padding:1.3rem;
+}
+.binomial-hook-kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:.35rem;
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#512E5F;
+    background:#fff;
+    border-radius:999px;
+    padding:.38rem .65rem;
+    margin-bottom:.8rem;
+}
+.binomial-hook-title{
+    font-size:clamp(1.35rem,3vw,1.8rem);
+    font-weight:800;
+    line-height:1.2;
+    margin-bottom:.5rem;
+}
+.binomial-hook-subtitle{
+    color:#F7F2F8;
+    font-size:.9rem;
+    line-height:1.55;
+    max-width:42rem;
+}
+.binomial-hook-scenario{
+    margin-top:1rem;
+    background:rgba(255,255,255,.96);
+    color:#172033;
+    border:1px solid rgba(255,255,255,.75);
+    border-radius:1rem;
+    padding:1rem;
+}
+.binomial-hook-scenario strong{color:#512E5F}
+.binomial-hook-prompt{
+    font-weight:800;
+    color:#512E5F;
+    margin-top:.8rem;
+    margin-bottom:.65rem;
+    font-size:.95rem;
+}
+.binomial-hook-options{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:.55rem;
+}
+.binomial-hook-option{
+    border:2px solid #D8CDDC;
+    background:#fff;
+    color:#475569;
+    border-radius:.8rem;
+    padding:.72rem .55rem;
+    font-size:.78rem;
+    font-weight:800;
+    line-height:1.3;
+    cursor:pointer;
+    transition:.2s;
+}
+.binomial-hook-option:hover{
+    border-color:#5B74B8;
+    background:#F5F6FA;
+    transform:translateY(-1px);
+}
+.binomial-hook-option.selected{
+    border-color:#8B0E2D;
+    background:#F7F2F8;
+    color:#512E5F;
+    box-shadow:0 5px 14px rgba(134,16,168,.09);
+}
+.binomial-hook-feedback{
+    display:none;
+    margin-top:.8rem;
+    border-radius:.85rem;
+    padding:.8rem .9rem;
+    font-size:.8rem;
+    line-height:1.5;
+}
+.binomial-hook-feedback.show{display:block}
+.binomial-hook-feedback.neutral{
+    background:#FFF7ED;
+    border:1px solid #FED7AA;
+    color:#9A3412;
+}
+.binomial-hook-curiosity{
+    display:none;
+    margin-top:.8rem;
+    background:#F1F4FB;
+    border-left:4px solid #25408F;
+    border-radius:0 .85rem .85rem 0;
+    padding:.85rem;
+    color:#334155;
+}
+.binomial-hook-curiosity.show{display:block}
+.binomial-hook-curiosity h4{
+    font-size:.85rem;
+    color:#25408F;
+    font-weight:800;
+    margin-bottom:.25rem;
+}
+.binomial-hook-cta{
+    display:none;
+    margin-top:.75rem;
+    width:100%;
+    border:0;
+    border-radius:.8rem;
+    padding:.78rem 1rem;
+    background:linear-gradient(135deg,#512E5F,#8B0E2D);
+    color:#fff;
+    font-weight:800;
+    font-size:.84rem;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(91,23,109,.14);
+}
+.binomial-hook-cta.show{display:block}
+.binomial-hook-remember{
+    display:none;
+    margin-top:.75rem;
+    background:#F0FDF4;
+    border:1px solid #BBF7D0;
+    color:#166534;
+    border-radius:.8rem;
+    padding:.72rem .8rem;
+    font-size:.78rem;
+    line-height:1.45;
+}
+.binomial-hook-remember.show{display:block}
+.binomial-hook-decor{
+    position:absolute;
+    right:-1.4rem;
+    top:-1.4rem;
+    width:9rem;
+    height:9rem;
+    border-radius:999px;
+    background:rgba(255,255,255,.06);
+}
+@media(max-width:640px){
+    .binomial-hook-options{grid-template-columns:1fr}
+}
+</style>
+<style id="probability-distribution-opening-hook">
+.pd-hook{
+    position:relative;
+    overflow:hidden;
+    border-radius:1.15rem;
+    margin-bottom:1.25rem;
+    background:linear-gradient(135deg,#F8F5FF 0%,#F7F2F8 52%,#FFFFFF 100%);
+    border:1px solid #D8CDDC;
+    border-left:5px solid #8B0E2D;
+    box-shadow:0 10px 28px rgba(91,23,109,.08);
+}
+.pd-hook-inner{padding:1.2rem;position:relative;z-index:2}
+.pd-hook-kicker{
+    display:inline-flex;align-items:center;gap:.35rem;
+    background:#512E5F;color:#fff;border-radius:999px;
+    padding:.38rem .68rem;font-size:.68rem;font-weight:800;
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:.7rem
+}
+.pd-hook h3{
+    color:#512E5F;font-weight:800;font-size:clamp(1.3rem,3vw,1.75rem);
+    line-height:1.2;margin-bottom:.45rem
+}
+.pd-hook-intro{color:#475569;font-size:.88rem;line-height:1.55}
+.pd-game-grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.75rem;margin-top:1rem
+}
+.pd-game-card{
+    background:#fff;border:1px solid #D8CDDC;border-radius:.9rem;padding:.9rem
+}
+.pd-game-label{
+    font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:#8B0E2D;margin-bottom:.35rem
+}
+.pd-game-card strong{color:#512E5F}
+.pd-choice-title{font-weight:800;color:#512E5F;margin-top:1rem;margin-bottom:.55rem;font-size:.92rem}
+.pd-choice-grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem
+}
+.pd-choice-btn{
+    border:2px solid #D8CDDC;background:#fff;color:#475569;border-radius:.8rem;
+    padding:.68rem .55rem;font-size:.78rem;font-weight:800;cursor:pointer;transition:.2s
+}
+.pd-choice-btn:hover{border-color:#5B74B8;background:#F5F6FA;transform:translateY(-1px)}
+.pd-choice-btn.selected{
+    border-color:#8B0E2D;background:#F7F2F8;color:#512E5F;
+    box-shadow:0 5px 14px rgba(134,16,168,.08)
+}
+.pd-hook-feedback{
+    display:none;margin-top:.8rem;background:#FFF7ED;border:1px solid #FED7AA;
+    color:#9A3412;border-radius:.8rem;padding:.8rem;font-size:.8rem;line-height:1.5
+}
+.pd-hook-feedback.show{display:block}
+.pd-hook-reveal{
+    display:none;margin-top:.75rem;background:#F1F4FB;border-left:4px solid #25408F;
+    border-radius:0 .8rem .8rem 0;padding:.8rem;color:#334155
+}
+.pd-hook-reveal.show{display:block}
+.pd-hook-reveal h4{font-size:.84rem;font-weight:800;color:#25408F;margin-bottom:.2rem}
+.pd-hook-flow{
+    display:none;grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:.5rem;margin-top:.75rem
+}
+.pd-hook-flow.show{display:grid}
+.pd-hook-step{
+    background:#fff;border:1px solid #D8CDDC;border-radius:.75rem;padding:.62rem .45rem;
+    text-align:center;color:#512E5F;font-size:.7rem;font-weight:800;line-height:1.35
+}
+.pd-hook-cta{
+    display:none;width:100%;margin-top:.75rem;border:0;border-radius:.8rem;
+    padding:.75rem 1rem;background:linear-gradient(135deg,#512E5F,#8B0E2D);
+    color:#fff;font-size:.82rem;font-weight:800;cursor:pointer;
+    box-shadow:0 8px 18px rgba(91,23,109,.14)
+}
+.pd-hook-cta.show{display:block}
+@media(max-width:640px){
+    .pd-game-grid,.pd-choice-grid{grid-template-columns:1fr}
+    .pd-hook-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+<style id="mean-variance-opening-hook">
+.mv-hook{
+    position:relative;
+    overflow:hidden;
+    border-radius:1.15rem;
+    margin-bottom:1.25rem;
+    background:linear-gradient(135deg,#FFF9F2 0%,#FFF3E6 48%,#FFFFFF 100%);
+    border:1px solid #FED7AA;
+    border-left:5px solid #EA580C;
+    box-shadow:0 10px 28px rgba(154,52,18,.07);
+}
+.mv-hook-inner{padding:1.2rem;position:relative;z-index:2}
+.mv-hook-kicker{
+    display:inline-flex;align-items:center;gap:.35rem;
+    background:#C2410C;color:#fff;border-radius:999px;
+    padding:.38rem .68rem;font-size:.68rem;font-weight:800;
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:.7rem
+}
+.mv-hook h3{
+    color:#7C2D12;font-weight:800;font-size:clamp(1.3rem,3vw,1.75rem);
+    line-height:1.2;margin-bottom:.45rem
+}
+.mv-hook-intro{color:#475569;font-size:.88rem;line-height:1.55}
+.mv-choice-cards{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.75rem;margin-top:1rem
+}
+.mv-card{
+    background:#fff;border:1px solid #FED7AA;border-radius:.9rem;padding:.9rem
+}
+.mv-card-label{
+    font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:#C2410C;margin-bottom:.35rem
+}
+.mv-card strong{color:#7C2D12}
+.mv-card .mv-small{
+    font-size:.76rem;color:#64748B;line-height:1.5;margin-top:.28rem
+}
+.mv-question{
+    font-weight:800;color:#7C2D12;margin-top:1rem;margin-bottom:.55rem;font-size:.92rem
+}
+.mv-choice-grid{
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem
+}
+.mv-choice-btn{
+    border:2px solid #FED7AA;background:#fff;color:#475569;border-radius:.8rem;
+    padding:.68rem .55rem;font-size:.78rem;font-weight:800;cursor:pointer;transition:.2s
+}
+.mv-choice-btn:hover{border-color:#FB923C;background:#FFF7ED;transform:translateY(-1px)}
+.mv-choice-btn.selected{
+    border-color:#EA580C;background:#FFF1E6;color:#9A3412;
+    box-shadow:0 5px 14px rgba(234,88,12,.09)
+}
+.mv-hook-feedback{
+    display:none;margin-top:.8rem;background:#FFF7ED;border:1px solid #FDBA74;
+    color:#9A3412;border-radius:.8rem;padding:.8rem;font-size:.8rem;line-height:1.5
+}
+.mv-hook-feedback.show{display:block}
+.mv-reveal{
+    display:none;margin-top:.75rem;background:#F0FDF4;border-left:4px solid #16A34A;
+    border-radius:0 .8rem .8rem 0;padding:.8rem;color:#334155
+}
+.mv-reveal.show{display:block}
+.mv-reveal h4{font-size:.84rem;font-weight:800;color:#15803D;margin-bottom:.2rem}
+.mv-compare{
+    display:none;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.55rem;margin-top:.75rem
+}
+.mv-compare.show{display:grid}
+.mv-stat{
+    background:#fff;border:1px solid #FED7AA;border-radius:.75rem;
+    padding:.7rem;text-align:center
+}
+.mv-stat-title{
+    font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;
+    font-weight:800;color:#C2410C
+}
+.mv-stat-main{
+    font-size:.9rem;font-weight:800;color:#7C2D12;margin-top:.16rem
+}
+.mv-big-idea{
+    display:none;margin-top:.75rem;background:#F8FAFC;border:1px solid #E2E8F0;
+    border-radius:.8rem;padding:.8rem
+}
+.mv-big-idea.show{display:block}
+.mv-big-idea strong{color:#7C2D12}
+.mv-hook-cta{
+    display:none;width:100%;margin-top:.75rem;border:0;border-radius:.8rem;
+    padding:.75rem 1rem;background:linear-gradient(135deg,#C2410C,#EA580C);
+    color:#fff;font-size:.82rem;font-weight:800;cursor:pointer;
+    box-shadow:0 8px 18px rgba(154,52,18,.14)
+}
+.mv-hook-cta.show{display:block}
+@media(max-width:640px){
+    .mv-choice-cards,.mv-choice-grid,.mv-compare{grid-template-columns:1fr}
+}
+</style>
+<style id="module3-statxplore-theme">
+:root{
+  --maroon:#8B0E2D;
+  --crimson:#A61C3C;
+  --purple:#512E5F;
+  --mauve:#7A4B92;
+  --royal:#25408F;
+  --slate:#5B74B8;
+  --bluegrey:#AAB1D1;
+  --lavender:#D8CDDC;
+  --ink:#202235;
+  --muted:#686B7C;
+  --white:#FFFFFF;
+  --page:#F5F6FA;
+  --soft-blue:#F1F4FB;
+  --soft-purple:#F7F2F8;
+  --soft-red:#FFF2F5;
+  --soft-green:#EDF8F3;
+  --soft-yellow:#FFF8E9;
+  --border:#E1E3ED;
+  --shadow:0 18px 45px rgba(37,64,143,.10);
+  --shadow-small:0 8px 24px rgba(37,64,143,.08);
+}
+
+html,body{max-width:100%;overflow:hidden;}
+.module3-body{
+  margin:0;
+  height:100vh;
+  display:block !important;
+  background:
+    radial-gradient(circle at 8% 5%,rgba(216,205,220,.30),transparent 24%),
+    radial-gradient(circle at 92% 0%,rgba(170,177,209,.24),transparent 28%),
+    var(--page) !important;
+  color:var(--ink);
+}
+
+/* Top bar */
+.module-topbar{
+  height:72px;
+  position:sticky;
+  top:0;
+  z-index:2000;
+  border-bottom:1px solid rgba(170,177,209,.4);
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(15px);
+}
+.module-topbar-inner{
+  max-width:1500px;
+  min-height:72px;
+  margin:auto;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+}
+.module-brand{display:flex;align-items:center;gap:12px;color:var(--purple);font-weight:800;min-width:0;}
+.module-brand-logo{
+  width:46px;height:46px;min-width:46px;border-radius:50%;overflow:hidden;
+  box-shadow:0 5px 14px rgba(37,64,143,.16);background:transparent;
+}
+.module-brand-logo img{width:100%;height:100%;display:block;object-fit:cover;border-radius:50%;}
+.module-headline-nav{display:flex;align-items:center;justify-content:flex-end;gap:.45rem;margin-left:auto;white-space:nowrap;font-size:1rem;font-weight:700;}
+.module-headline-link{
+  appearance:none;border:0;background:transparent;padding:.2rem 0;margin:0;
+  color:var(--ink);font:inherit;line-height:1.25;cursor:pointer;text-decoration:none;
+}
+.module-headline-link:hover{color:var(--royal);text-decoration:underline;text-underline-offset:3px;}
+.module-headline-sep{color:var(--muted);font-weight:500;}
+.module-theme-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:1.4rem;font-size:1.15rem;}
+
+/* Progress strip */
+.module-progress-top{
+  height:48px;
+  position:sticky;
+  top:72px;
+  z-index:1900;
+  padding:.55rem 1.2rem;
+  color:white;
+  background:linear-gradient(90deg,var(--maroon),var(--purple),var(--royal));
+}
+.module-progress-inner{max-width:1500px;height:100%;margin:auto;display:flex;align-items:center;gap:1rem;}
+.module-progress-track{height:8px;flex:1;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.23);}
+.module-progress-fill{width:0;height:100%;border-radius:999px;background:white;transition:width .3s ease;}
+.module-progress-inner strong{font-size:.88rem;white-space:nowrap;}
+#moduleProgressLabel{font-size:.82rem;font-weight:800;min-width:38px;text-align:right;}
+.module-menu-toggle{
+  width:34px;height:34px;min-width:34px;border:1px solid rgba(255,255,255,.42);
+  border-radius:10px;background:rgba(255,255,255,.13);color:#fff;font-size:1.35rem;
+  line-height:1;display:none;align-items:center;justify-content:center;
+}
+
+/* Main shell */
+.module-shell{
+  height:calc(100vh - 120px);
+  display:grid;
+  grid-template-columns:295px minmax(0,1fr);
+}
+#sidebar{
+  position:relative !important;
+  top:auto !important;
+  width:295px !important;
+  height:100% !important;
+  min-height:0 !important;
+  transform:none !important;
+  border-right:1px solid var(--border) !important;
+  background:#fff !important;
+  box-shadow:none !important;
+  z-index:100 !important;
+}
+#sidebar > div:first-child{
+  padding:1.15rem 1.15rem 1rem !important;
+  border-color:var(--border) !important;
+  background:linear-gradient(180deg,#fff,#fbfbfe);
+}
+#sidebar > div:first-child > span{color:var(--crimson) !important;letter-spacing:.08em;}
+#sidebar > div:first-child h1{color:var(--purple) !important;font-size:1.12rem !important;line-height:1.25 !important;}
+#sidebar nav{padding:.8rem !important;}
+.nav-item{
+  border-left:0 !important;
+  border-radius:9px !important;
+  color:var(--ink) !important;
+  background:transparent !important;
+  margin:.1rem 0 !important;
+}
+.nav-item:hover:not(.nav-active):not(.nav-locked){background:var(--soft-blue) !important;}
+.nav-item.nav-active{
+  color:#fff !important;
+  background:linear-gradient(90deg,var(--royal),var(--slate)) !important;
+  box-shadow:none !important;
+}
+.nav-item.nav-active svg,.nav-item.nav-active 
+
+#sidebar > div:last-child{background:#F9FAFC !important;border-color:var(--border) !important;}
+#progress-text{color:var(--royal) !important;}
+#progress-bar{background:linear-gradient(90deg,var(--maroon),var(--purple),var(--royal)) !important;}
+.reset-progress-btn{color:var(--purple) !important;border-color:var(--lavender) !important;}
+.reset-progress-btn:hover{background:var(--soft-purple) !important;border-color:var(--mauve) !important;}
+
+.module-main{
+  min-width:0;
+  height:100%;
+  padding:2rem !important;
+  background:transparent !important;
+}
+.module-content-wrap{max-width:1120px !important;width:100%;}
+
+/* Section surfaces: same rounded academic shell used in Modules 1 & 2 */
+.page-section{max-width:1120px;margin:0 auto;}
+.playbook-card,.card-concept,.card-example,.formula-card,.application-card{
+  border-color:var(--border) !important;
+  box-shadow:var(--shadow-small) !important;
+}
+.playbook-card,.card-concept,.application-card{background:#fff !important;}
+.card-concept-header{
+  color:var(--purple) !important;
+  background:linear-gradient(135deg,var(--soft-purple),var(--soft-blue)) !important;
+  border-bottom-color:var(--border) !important;
+}
+.card-example{border-left-color:var(--maroon) !important;}
+.card-hint{background:var(--soft-purple) !important;border-left-color:var(--mauve) !important;}
+.card-think{background:var(--soft-blue) !important;border-left-color:var(--royal) !important;}
+.card-solution{border-color:var(--lavender) !important;}
+.card-takeaway{background:var(--soft-purple) !important;border-left-color:var(--purple) !important;color:var(--purple) !important;}
+.formula-card{background:linear-gradient(135deg,#fff,var(--soft-purple)) !important;border-color:var(--lavender) !important;border-left-color:var(--royal) !important;}
+.formula-tag{background:var(--royal) !important;}
+
+/* Main purple hero/header blocks become Module 1/2 tricolour */
+.page-section > .playbook-card.bg-gradient-to-r,
+#sec-start > div:first-child{
+  background:radial-gradient(circle at 88% 10%,rgba(216,205,220,.20),transparent 28%),
+             linear-gradient(125deg,var(--maroon),var(--purple) 47%,var(--royal)) !important;
+  border-radius:22px !important;
+  box-shadow:var(--shadow) !important;
+}
+#sec-start > div:first-child{padding:2.2rem !important;}
+#sec-start > div:first-child h1,
+.page-section > .playbook-card.bg-gradient-to-r h2{color:#fff !important;}
+
+/* Buttons */
+.section-complete-btn,
+.reset-confirm,
+.binomial-hook-cta,
+.pd-hook-cta{
+  background:linear-gradient(90deg,var(--maroon),var(--purple)) !important;
+}
+.quiz-opt-selected{
+  background:var(--soft-purple) !important;
+  border-color:var(--royal) !important;
+  color:var(--purple) !important;
+}
+
+/* Keep content comfortably readable */
+.text-body{color:#374151 !important;}
+table{border-color:var(--border) !important;}
+th{color:var(--purple);}
+img,svg,canvas{max-width:100%;}
+
+/* Dark mode */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#F2F4FA;
+  --muted:#B6BBCB;
+  --page:#0D111B;
+  --soft-blue:#182239;
+  --soft-purple:#241A2C;
+  --soft-red:#301923;
+  --soft-green:#14271F;
+  --soft-yellow:#2A2416;
+  --border:#30374A;
+  --bluegrey:#6E7896;
+  --lavender:#403849;
+}
+html[data-theme="dark"] .module3-body{
+  background:radial-gradient(circle at 8% 5%,rgba(122,75,146,.16),transparent 24%),
+             radial-gradient(circle at 92% 0%,rgba(37,64,143,.20),transparent 28%),var(--page) !important;
+}
+html[data-theme="dark"] .module-topbar{background:rgba(17,21,33,.96);border-bottom-color:var(--border);}
+html[data-theme="dark"] #sidebar,
+html[data-theme="dark"] #sidebar > div:first-child,
+html[data-theme="dark"] #sidebar > div:last-child,
+html[data-theme="dark"] .playbook-card,
+html[data-theme="dark"] .card-concept,
+html[data-theme="dark"] .card-example,
+html[data-theme="dark"] .card-solution,
+html[data-theme="dark"] .formula-card,
+html[data-theme="dark"] .application-card,
+html[data-theme="dark"] .application-trigger,
+html[data-theme="dark"] .pd-game-card,
+html[data-theme="dark"] .mv-card{
+  background:#151A28 !important;
+  border-color:var(--border) !important;
+  color:var(--ink) !important;
+}
+html[data-theme="dark"] .card-concept-header{background:linear-gradient(135deg,#241A2C,#182239) !important;color:#E9DFF0 !important;}
+html[data-theme="dark"] .text-body,
+html[data-theme="dark"] .text-gray-700,
+html[data-theme="dark"] .text-gray-600,
+html[data-theme="dark"] .text-gray-500{color:#D4D8E4 !important;}
+html[data-theme="dark"] .bg-white{background:#151A28 !important;}
+html[data-theme="dark"] .bg-\[\#F5F6FA\],
+html[data-theme="dark"] .bg-\[\#F7F2F8\]{background:#182033 !important;}
+html[data-theme="dark"] .module-headline-link{color:var(--ink);}
+html[data-theme="dark"] .module-headline-link:hover{color:#9FB4FF;}
+html[data-theme="dark"] mjx-container{color:#F4F6FB !important;}
+
+/* Responsive */
+@media(max-width:900px){
+  .module-topbar{height:auto;min-height:72px;}
+  .module-topbar-inner{padding:10px 14px;flex-wrap:wrap;}
+  .module-headline-nav{width:100%;justify-content:flex-start;flex-wrap:wrap;white-space:normal;font-size:.9rem;}
+  .module-progress-top{top:92px;height:auto;min-height:48px;}
+  .module-menu-toggle{display:inline-flex;}
+  .module-shell{height:calc(100vh - 140px);grid-template-columns:1fr;}
+  #sidebar{
+    position:fixed !important;
+    left:0 !important;
+    top:140px !important;
+    width:min(88vw,320px) !important;
+    height:calc(100dvh - 140px) !important;
+    z-index:1800 !important;
+    box-shadow:12px 0 28px rgba(32,34,53,.18) !important;
+    transition:transform .25s ease !important;
+  }
+  #sidebar.-translate-x-full{transform:translateX(-105%) !important;}
+  #sidebar:not(.-translate-x-full){transform:translateX(0) !important;}
+  .module-main{padding:1rem !important;}
+}
+@media(max-width:600px){
+  .module-brand-logo{width:38px;height:38px;min-width:38px;}
+  .module-brand span{font-size:.88rem;}
+  .module-headline-nav{font-size:.82rem;gap:.28rem;}
+  .module-progress-top{top:104px;padding:.5rem .65rem;}
+  .module-progress-inner{gap:.55rem;}
+  .module-progress-inner strong{font-size:.72rem;white-space:normal;line-height:1.2;}
+  .module-shell{height:calc(100vh - 152px);}
+  #sidebar{top:152px !important;height:calc(100dvh - 152px) !important;}
+  .module-main{padding:.7rem !important;}
+  #sec-start > div:first-child{padding:1.45rem !important;}
+}
+</style>
+<style id="module3-hero-match-module1">
+/* =========================================================
+   MODULE 3 HOME — VISUAL MATCH TO MODULE 1 / MODULE 2
+   Content and learning sequence are unchanged.
+   ========================================================= */
+
+#sec-start{
+  max-width:100% !important;
+}
+
+#sec-start > .playbook-card{
+  max-width:1120px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.module3-dashboard-hero{
+  min-height:500px;
+  margin:0 auto 28px;
+  padding:48px 54px;
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(310px,.72fr);
+  gap:42px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+  color:white;
+  background:
+    radial-gradient(circle at 88% 10%,rgba(216,205,220,.18),transparent 28%),
+    linear-gradient(125deg,var(--maroon) 0%,var(--purple) 48%,var(--royal) 100%);
+  box-shadow:0 22px 55px rgba(37,64,143,.14);
+}
+
+.module3-dashboard-hero::after{
+  content:"";
+  width:360px;
+  height:360px;
+  position:absolute;
+  right:-120px;
+  bottom:-230px;
+  border-radius:50%;
+  background:rgba(170,177,209,.18);
+}
+
+.module3-hero-content{
+  position:relative;
+  z-index:2;
+  min-width:0;
+}
+
+.module3-pill{
+  display:inline-flex;
+  align-items:center;
+  padding:.48rem .82rem;
+  border-radius:999px;
+  color:var(--purple);
+  background:rgba(255,255,255,.88);
+  font-size:.78rem;
+  font-weight:850;
+  letter-spacing:.01em;
+}
+
+.module3-wow-title{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  width:max-content;
+  max-width:100%;
+  position:relative;
+  margin:1rem 0 1.15rem;
+  isolation:isolate;
+  line-height:.9;
+}
+
+.module3-title-kicker{
+  display:block;
+  margin-left:.15rem;
+  margin-bottom:.55rem;
+  font-family:"Trebuchet MS","Aptos Display","Segoe UI",sans-serif;
+  font-size:clamp(1.05rem,1.8vw,1.55rem);
+  font-weight:800;
+  letter-spacing:.24em;
+  color:#F4D8E3;
+}
+
+.module3-title-main{
+  display:block;
+  position:relative;
+  font-family:"Arial Black","Trebuchet MS","Aptos Display","Segoe UI Black",sans-serif;
+  font-size:clamp(3rem,5.8vw,5.55rem);
+  font-weight:900;
+  letter-spacing:-.055em;
+  line-height:.88;
+  background:linear-gradient(100deg,#FFFFFF 0%,#F7EAF2 34%,#E5D8FF 70%,#DCE8FF 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 8px 18px rgba(15,17,48,.28));
+}
+
+.module3-title-main::after{
+  content:"";
+  display:block;
+  width:64%;
+  height:7px;
+  margin-top:.72rem;
+  border-radius:999px;
+  background:linear-gradient(90deg,#F8D66D 0%,#FF9EB8 42%,#AAB8FF 100%);
+  box-shadow:0 5px 18px rgba(255,215,115,.25);
+}
+
+.module3-wow-title::before{
+  content:"Σ";
+  position:absolute;
+  right:-2rem;
+  top:.6rem;
+  z-index:-1;
+  font-family:Georgia,serif;
+  font-size:clamp(5rem,8vw,7.4rem);
+  font-weight:700;
+  color:rgba(255,255,255,.075);
+  transform:rotate(-7deg);
+  pointer-events:none;
+}
+
+.module3-hero-description{
+  max-width:850px;
+  margin:.7rem 0 0;
+  color:rgba(255,255,255,.93);
+  font-size:1.06rem;
+  line-height:1.65;
+}
+
+.module3-hero-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.62rem;
+  margin:1.45rem 0 0;
+}
+
+.module3-chip{
+  padding:.48rem .75rem;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:10px;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  font-size:.82rem;
+  font-weight:650;
+}
+
+.module3-dashboard-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.75rem;
+  margin-top:1.6rem;
+}
+
+.module3-btn{
+  min-height:48px;
+  padding:.76rem 1.2rem;
+  border:0;
+  border-radius:999px;
+  font-weight:800;
+  cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+
+.module3-btn:hover{
+  transform:translateY(-1px);
+}
+
+.module3-btn-primary{
+  color:var(--maroon);
+  background:#fff;
+  box-shadow:0 9px 20px rgba(23,28,62,.16);
+}
+
+.module3-btn-light{
+  color:var(--ink);
+  background:#EFF0F6;
+}
+
+.module3-progress-card{
+  position:relative;
+  z-index:2;
+  padding:32px 28px;
+  border:1px solid rgba(255,255,255,.23);
+  border-radius:24px;
+  text-align:center;
+  background:rgba(255,255,255,.115);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.module3-progress-card strong{
+  display:block;
+  color:#fff;
+  font-size:1.05rem;
+}
+
+.module3-progress-card p{
+  margin:.7rem auto 0;
+  color:rgba(255,255,255,.86);
+  font-size:.95rem;
+}
+
+.module3-progress-ring{
+  --progress:0;
+  width:150px;
+  height:150px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  margin:0 auto 1.25rem;
+  border-radius:50%;
+  background:conic-gradient(#fff calc(var(--progress)*1%),rgba(255,255,255,.17) 0);
+}
+
+.module3-progress-ring::after{
+  content:"";
+  width:118px;
+  height:118px;
+  position:absolute;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--purple),var(--royal));
+}
+
+.module3-progress-ring span{
+  position:relative;
+  z-index:2;
+  color:#fff;
+  font-size:2rem;
+  font-weight:900;
+}
+
+/* Remove the old "prepared by" visual spacing if any blank container remains. */
+#sec-start .module3-dashboard-hero + .playbook-card{
+  margin-top:0;
+}
+
+/* Make the lower Learning Outcomes card visually consistent with Module 1/2. */
+#sec-start > .playbook-card{
+  border:1px solid var(--border) !important;
+  border-radius:22px !important;
+  background:#fff !important;
+  box-shadow:var(--shadow-small) !important;
+}
+
+/* Dark mode */
+html[data-theme="dark"] #sec-start > .playbook-card{
+  background:#151A28 !important;
+}
+html[data-theme="dark"] .module3-btn-light{
+  color:#F2F4FA;
+  background:#252B3A;
+}
+
+/* Tablet */
+@media(max-width:980px){
+  .module3-dashboard-hero{
+    grid-template-columns:1fr;
+    gap:24px;
+    padding:36px 30px;
+  }
+  .module3-progress-card{
+    width:100%;
+    max-width:520px;
+    margin:0 auto;
+  }
+}
+
+/* Mobile */
+@media(max-width:600px){
+  .module3-dashboard-hero{
+    min-height:auto;
+    padding:26px 18px;
+    border-radius:22px;
+  }
+  .module3-title-kicker{
+    font-size:.92rem;
+    letter-spacing:.16em;
+  }
+  .module3-title-main{
+    font-size:clamp(2.3rem,11vw,3.3rem);
+    line-height:.93;
+    letter-spacing:-.04em;
+  }
+  .module3-title-main::after{
+    width:72%;
+    height:5px;
+    margin-top:.55rem;
+  }
+  .module3-wow-title::before{
+    right:0;
+    top:.2rem;
+    font-size:4.6rem;
+  }
+  .module3-hero-description{
+    font-size:.94rem;
+    line-height:1.55;
+  }
+  .module3-hero-meta{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .module3-dashboard-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .module3-btn{
+    width:100%;
+  }
+  .module3-progress-card{
+    padding:22px 16px;
+  }
+  .module3-progress-ring{
+    width:118px;
+    height:118px;
+  }
+  .module3-progress-ring::after{
+    width:92px;
+    height:92px;
+  }
+}
+</style>
+<style id="module3-unlocked-navigation">
+.nav-item{
+  opacity:1 !important;
+  filter:none !important;
+  cursor:pointer !important;
+  pointer-events:auto !important;
+}
+.nav-item.nav-locked,
+.nav-item.nav-completed{
+  opacity:1 !important;
+  filter:none !important;
+  cursor:pointer !important;
+  pointer-events:auto !important;
+}
+.nav-item.nav-locked:hover,
+.nav-item.nav-completed:hover{
+  transform:none !important;
+}
+.nav-status,
+.requirement-note{
+  display:none !important;
+}
+</style>
+<style id="module3-free-navigation-final">
+.section-complete-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:50px;
+  padding:.8rem 1.25rem !important;
+  background:linear-gradient(90deg,var(--maroon),var(--purple)) !important;
+  color:#fff !important;
+  opacity:1 !important;
+  cursor:pointer !important;
+}
+.section-complete-btn:disabled{
+  opacity:1 !important;
+  cursor:pointer !important;
+}
+.nav-item{
+  opacity:1 !important;
+  filter:none !important;
+  cursor:pointer !important;
+  pointer-events:auto !important;
+}
+.nav-status,
+.requirement-note{
+  display:none !important;
+}
+</style>
+</head>
+<body class="module3-body">
+<div aria-live="polite" class="reset-success-toast" id="reset-success-toast" role="status">✓ Progress reset successfully</div>
+<!-- MODULE 3 TOP BAR · MATCHED TO MODULE 1 & 2 -->
+<header class="module-topbar">
+<div class="module-topbar-inner">
+<div class="module-brand">
+<div class="module-brand-logo">
+<img alt="Statistics &amp; Probability logo" src="data:image/jpeg;base64,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"/>
+</div>
+<span>Statistics &amp; Probability</span>
+</div>
+<nav aria-label="Main navigation" class="module-headline-nav">
+<a class="module-headline-link" href="https://suhailabahrom86.github.io/statxplore/" rel="noopener noreferrer" target="_blank">← Back to StatXplore</a>
+<span aria-hidden="true" class="module-headline-sep">|</span>
+<button class="module-headline-link" onclick="navigateTo('sec-start'); updateNav('nav-start')" type="button">Module Home</button>
+<span aria-hidden="true" class="module-headline-sep">|</span>
+<button aria-label="Switch to dark mode" class="module-headline-link module-theme-toggle" id="moduleThemeToggle" onclick="toggleModuleTheme()" title="Switch to dark mode" type="button">
+<span aria-hidden="true" id="moduleThemeIcon">🌙</span>
+</button>
+</nav>
+</div>
+</header>
+<div class="module-progress-top">
+<div class="module-progress-inner">
+<button aria-label="Open or close navigation menu" class="module-menu-toggle" onclick="toggleSidebar()" title="Navigation menu" type="button">‹</button>
+<strong>Module 3 · Discrete Probability Distributions</strong>
+<div class="module-progress-track"><div class="module-progress-fill" id="moduleProgressFill"></div></div>
+<span id="moduleProgressLabel">0%</span>
+</div>
+</div>
+<div class="module-shell">
+<!-- Sidebar Navigation -->
+<div class="bg-white w-full md:w-72 flex-shrink-0 border-r border-gray-100 flex flex-col h-[calc(100vh-60px)] md:h-full absolute md:relative z-40 transition-transform transform -translate-x-full md:translate-x-0 shadow-xl md:shadow-none top-[60px] md:top-0" id="sidebar">
+<div class="p-5 border-b border-gray-100 hidden md:block">
+<span class="text-[10px] font-bold text-[#7A4B92] uppercase tracking-wider mb-1 block">PRE-CLASS INTERACTIVE WORKBOOK</span>
+<h1 class="text-xl font-bold text-[#512E5F] leading-tight">Chapter 3<br/>Discrete Probability Distributions</h1>
+</div>
+<nav class="flex-1 overflow-y-auto p-3 md:p-4 space-y-1">
+<button class="nav-item nav-active w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-start" onclick="navigateTo('sec-start'); updateNav('nav-start')">
+<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                START HERE
+                
+            </button>
+<div class="my-2 border-t border-gray-100"></div>
+<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-3-1" onclick="navigateTo('sec-3-1'); updateNav('nav-3-1')">
+<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                3.1 DISTRIBUTIONS
+                
+            </button>
+<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-3-2" onclick="return goToModule3Section('sec-3-2','nav-3-2')">
+<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                3.2 MEAN &amp; VAR
+                
+            </button>
+<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-3-3" onclick="return goToModule3Section('sec-3-3','nav-3-3')">
+<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                3.3 BINOMIAL
+                
+            </button>
+<div class="my-2 border-t border-gray-100"></div>
+<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-obt" onclick="return goToModule3Section('sec-obt','nav-obt')" type="button">
+<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                OPEN BOOK TEST
+                
+            </button>
+<div class="my-2 border-t border-gray-100"></div>
+<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-try" onclick="navigateTo('sec-try'); updateNav('nav-try')">
+<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                TRY
+                
+            </button>
+<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-check" onclick="navigateTo('sec-check'); updateNav('nav-check')">
+<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                CHECK
+                
+            </button>
+</nav>
+<div class="p-5 border-t border-gray-100 bg-gray-50">
+<div class="flex justify-between text-xs font-bold text-gray-500 mb-2">
+<span>PROGRESS</span>
+<span class="text-[#8B0E2D]" id="progress-text">0%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-[#8B0E2D] transition-all duration-500" id="progress-bar" style="width: 0%"></div>
+</div>
+<button aria-controls="reset-progress-modal" aria-haspopup="dialog" class="reset-progress-btn" id="reset-progress-btn" onclick="return resetModule3Progress(event)" type="button">
+<span aria-hidden="true">↻</span> Reset Progress
+            </button>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="module-main flex-1 overflow-y-auto bg-transparent p-4 md:p-8 relative scroll-smooth" id="moduleMain">
+<div class="module-content-wrap max-w-3xl mx-auto pb-20 md:pb-24">
+<!-- START HERE -->
+<section class="page-section active" id="sec-start">
+<div class="module3-dashboard-hero">
+<div class="module3-hero-content">
+<span class="module3-pill">MODULE 3 · TOPICS 3.1, 3.2 &amp; 3.3</span>
+<h1 aria-label="Chapter 3 Discrete Probability Distributions" class="module3-wow-title">
+<span class="module3-title-kicker">CHAPTER 3</span>
+<span class="module3-title-main">Discrete Probability<br/>Distributions</span>
+</h1>
+<p class="module3-hero-description">
+                            Use this digital workbook before class to review the essential concepts of discrete probability.
+                            Work through the sections progressively to build your understanding.
+                        </p>
+<div aria-label="Module 3 topics" class="module3-hero-meta">
+<span class="module3-chip">3.1 Probability Distributions</span>
+<span class="module3-chip">3.2 Mean, Variance &amp; Expectation</span>
+<span class="module3-chip">3.3 Binomial Distribution</span>
+<span class="module3-chip">TRY &amp; CHECK</span>
+</div>
+<div class="module3-dashboard-actions">
+<button class="module3-btn module3-btn-primary" onclick="navigateTo('sec-3-1'); updateNav('nav-3-1')" type="button">
+                                START LEARNING →
+                            </button>
+<button class="module3-btn module3-btn-light" onclick="return resetModule3Progress(event)" type="button">
+                                Reset Progress
+                            </button>
+</div>
+</div>
+<div class="module3-progress-card">
+<div class="module3-progress-ring" id="module3DashboardRing" style="--progress:0">
+<span id="module3DashboardPercent">0%</span>
+</div>
+<strong>Module Progress</strong>
+<p id="module3DashboardStatus">Begin with Topic 3.1.</p>
+</div>
+</div>
+<div class="playbook-card p-5 md:p-6">
+<h3 class="text-lg font-bold text-[#512E5F] mb-4 flex items-center">
+<svg class="w-5 h-5 mr-2 ui-icon text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Learning Outcomes
+                    </h3>
+<div class="grid md:grid-cols-2 gap-3 md:gap-4">
+<div class="p-4 bg-[#F5F6FA] rounded-xl border border-[#E1E3ED]">
+<div class="font-bold text-[#512E5F] text-sm mb-1">3.1 Distributions</div>
+<ul class="text-sm text-gray-700 space-y-1.5 list-disc pl-4">
+<li>Construct a probability distribution table.</li>
+<li>Show probability distributions graphically.</li>
+</ul>
+</div>
+<div class="p-4 bg-[#F5F6FA] rounded-xl border border-[#E1E3ED]">
+<div class="font-bold text-[#512E5F] text-sm mb-1">3.2 Mean &amp; Variance</div>
+<ul class="text-sm text-gray-700 space-y-1.5 list-disc pl-4">
+<li>Find the mean, variance and expected value.</li>
+</ul>
+</div>
+<div class="p-4 bg-[#F5F6FA] rounded-xl border border-[#E1E3ED] md:col-span-2">
+<div class="font-bold text-[#512E5F] text-sm mb-1">3.3 Binomial Distribution</div>
+<ul class="text-sm text-gray-700 space-y-1.5 list-disc pl-4">
+<li>Use the binomial distribution as a model for solving problems.</li>
+<li>Use formulas for the mean, variance and expectation.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- LEARN: 3.1 -->
+<section class="page-section" id="sec-3-1">
+<!-- Section Header -->
+<div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+<div class="relative z-10">
+<span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">LEARN</span>
+<h2 class="text-2xl md:text-3xl font-bold mb-1">3.1 Probability Distributions</h2>
+<p class="text-[#F7F2F8] text-[14px] md:text-[15px] opacity-95">Understand discrete random variables and construct probability distribution tables.</p>
+</div>
+<svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+</div>
+<!-- OPENING HOOK: WHY DO WE NEED A PROBABILITY DISTRIBUTION? -->
+<div class="pd-hook" id="pd-hook">
+<div class="pd-hook-inner">
+<span class="pd-hook-kicker">🎯 Quick Decision Challenge</span>
+<h3>Which Game Would You Choose?</h3>
+<p class="pd-hook-intro">
+                            Before learning the definition, imagine that you are choosing between two simple games.
+                            Look at the possible rewards first — but do not calculate anything yet.
+                        </p>
+<div class="pd-game-grid">
+<div class="pd-game-card">
+<div class="pd-game-label">Game A</div>
+<p class="text-sm text-gray-700 leading-relaxed">
+                                    You could win <strong>RM2</strong>, <strong>RM5</strong> or <strong>RM10</strong>.
+                                </p>
+</div>
+<div class="pd-game-card">
+<div class="pd-game-label">Game B</div>
+<p class="text-sm text-gray-700 leading-relaxed">
+                                    You could also win <strong>RM2</strong>, <strong>RM5</strong> or <strong>RM10</strong>.
+                                </p>
+</div>
+</div>
+<div class="pd-choice-title">Which game is better?</div>
+<div class="pd-choice-grid">
+<button class="pd-choice-btn" onclick="choosePDHook(this,'A')" type="button">🎮 Game A</button>
+<button class="pd-choice-btn" onclick="choosePDHook(this,'B')" type="button">🎮 Game B</button>
+<button class="pd-choice-btn" onclick="choosePDHook(this,'info')" type="button">🤔 Not enough information</button>
+</div>
+<div class="pd-hook-feedback" id="pd-hook-feedback">
+                            You know the possible rewards, but that is still not enough to make a good decision.
+                        </div>
+<div class="pd-hook-reveal" id="pd-hook-reveal">
+<h4>💡 What information is missing?</h4>
+<p class="text-sm leading-relaxed">
+                                We also need to know <strong>how likely each possible reward is</strong>.
+                                A probability distribution connects every possible value of a random variable with its corresponding probability.
+                            </p>
+</div>
+<div aria-label="Probability distribution learning flow" class="pd-hook-flow" id="pd-hook-flow">
+<div class="pd-hook-step">1️⃣ Define \(X\)</div>
+<div class="pd-hook-step">2️⃣ List possible values</div>
+<div class="pd-hook-step">3️⃣ Assign probabilities</div>
+<div class="pd-hook-step">4️⃣ Build the distribution</div>
+</div>
+<button class="pd-hook-cta" id="pd-hook-cta" onclick="continueFromPDHook()" type="button">
+                            🚀 Let’s Learn How Probability Distributions Work
+                        </button>
+</div>
+</div>
+<!-- Concept 1 -->
+<div class="card-concept">
+<div class="card-concept-header">
+<svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Discrete Random Variable
+                    </div>
+<div class="p-4 md:p-5">
+<p class="text-body mb-3">A discrete random variable is a random variable which takes a <strong>fixed number of countable values</strong>.</p>
+<p class="text-body mb-3">The <strong>probability distribution</strong> of a discrete random variable \( X \) is a list of all possible values of the random variable \( X \) and their corresponding probabilities.</p>
+<div class="bg-[#F5F6FA] border border-[#E1E3ED] rounded-lg p-3 text-sm text-[#512E5F]">
+<strong>Example:</strong>The number of defective sensors detected during a quality check.</div>
+</div>
+</div>
+<!-- Example 1 -->
+<div class="card-example">
+<span class="text-[10px] font-bold text-[#8B0E2D] bg-[#F7F2F8] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Original Workbook Example</span>
+<h3 class="font-bold text-[#512E5F] text-lg mb-2">Rolling Two Dice: Counting Sixes</h3>
+<p class="text-body mb-4">Two fair dice are rolled once. Let \(X\) denote the number of dice that show a six. Construct the probability distribution of \(X\).</p>
+<div class="card-think" id="ex1-hint1">
+<div class="flex items-start">
+<span class="text-lg mr-2">💡</span>
+<div>
+<p class="font-bold text-sm text-[#25408F] mb-0.5">Step 1: Identify the possible values of \(X\).</p>
+<p class="text-sm text-gray-700">With two dice, the number of sixes can only be 0, 1 or 2.</p>
+</div>
+</div>
+<button class="mt-3 text-[13px] font-bold text-[#25408F] bg-white border border-[#AAB1D1] hover:bg-[#F0F9FF] px-4 py-1.5 rounded-lg transition-colors shadow-sm w-full md:w-auto text-center" onclick="revealStep('ex1-hint2', this)">Reveal Next Hint</button>
+</div>
+<div class="card-hint hidden" id="ex1-hint2">
+<div class="flex items-start">
+<span class="text-lg mr-2">💡</span>
+<div>
+<p class="font-bold text-sm text-[#7A4B92] mb-0.5">Step 2: Find the probability for each value.</p>
+<p class="text-sm text-gray-700">For each die, \(P(\text{six})=\frac16\) and \(P(\text{not six})=\frac56\).</p>
+</div>
+</div>
+<button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-[#512E5F] transition-colors w-full md:w-auto text-center" onclick="revealStep('ex1-solution', this)">Show Guided Solution</button>
+</div>
+<div class="card-solution hidden" id="ex1-solution">
+<h4 class="font-bold text-[#512E5F] border-b border-[#E1E3ED] pb-1.5 mb-3 text-sm uppercase tracking-wider">Solution</h4>
+<div class="overflow-x-auto mb-4">
+<table class="w-full max-w-md text-center border-collapse text-sm bg-white border border-[#D8CDDC] rounded-lg">
+<tbody>
+<tr class="border-b border-[#D8CDDC]">
+<th class="p-2 bg-[#F5F6FA]">\(X\)</th><td class="p-2">0</td><td class="p-2">1</td><td class="p-2">2</td>
+</tr>
+<tr>
+<th class="p-2 bg-[#F5F6FA]">\(P(X=x)\)</th><td class="p-2">\(\frac{25}{36}\)</td><td class="p-2">\(\frac{10}{36}\)</td><td class="p-2">\(\frac{1}{36}\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="math-display text-sm">
+      \[
+      P(X=0)=\left(\frac56\right)^2=\frac{25}{36},\quad
+      P(X=1)=2\left(\frac16\right)\left(\frac56\right)=\frac{10}{36},\quad
+      P(X=2)=\left(\frac16\right)^2=\frac{1}{36}
+      \]
+    </div>
+<div class="card-takeaway mt-4 mb-0">
+<span class="text-xs font-bold uppercase tracking-wider mb-1 block">⭐ CHECK</span>
+<p class="text-sm">The probabilities add to 1: \(\frac{25}{36}+\frac{10}{36}+\frac{1}{36}=1\).</p>
+</div>
+</div>
+</div>
+<!-- Concept 2: Properties -->
+<div class="card-concept">
+<div class="card-concept-header">
+<svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Properties of Discrete Probability Distributions
+                    </div>
+<div class="p-4 md:p-5">
+<p class="text-body mb-4">Every probability distribution must satisfy two mathematical rules:</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+<!-- Rule 1 -->
+<div class="formula-card">
+<div class="formula-bg-pattern"><span class="text-3xl font-serif">Σ</span><span class="text-4xl font-serif">P</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Sum of Probabilities</h3>
+<div class="math-display text-[#512E5F] font-bold formula-primary">
+                                    \[ \sum P(X=x) = 1 \]
+                                </div>
+</div>
+<!-- Rule 2 -->
+<div class="formula-card">
+<div class="formula-bg-pattern"><span class="text-3xl font-serif">≤</span><span class="text-4xl font-serif">1</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Valid Range</h3>
+<div class="math-display text-[#512E5F] font-bold formula-primary">
+                                    \[ 0 \le P(X=x) \le 1 \]
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Example 2 -->
+<div class="card-example">
+<span class="text-[10px] font-bold text-[#8B0E2D] bg-[#F7F2F8] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Original Workbook Example</span>
+<p class="text-body mb-2">A discrete random variable \(X\) has probability function</p>
+<div class="math-display bg-[#F5F6FA] p-3 rounded-lg border border-[#E1E3ED] mb-3 text-sm">
+    \[
+      P(X=x)=kx,\qquad x=1,2,3,4
+    \]
+  </div>
+<p class="font-bold text-[#512E5F] mb-2 text-sm">(a) Determine the value of the constant \(k\).</p>
+<div class="card-think" id="ex2a-hint1">
+<div class="flex items-start">
+<span class="text-lg mr-2">💡</span>
+<div>
+<p class="font-bold text-sm text-[#25408F] mb-0.5">Think First</p>
+<p class="text-sm text-gray-700">Which probability-distribution property allows us to determine \(k\)?</p>
+</div>
+</div>
+<button class="mt-3 text-[13px] font-bold text-[#25408F] bg-white border border-[#AAB1D1] px-4 py-1.5 rounded-lg w-full md:w-auto text-center" onclick="revealStep('ex2a-hint2', this)">Reveal Next Hint</button>
+</div>
+<div class="card-hint hidden" id="ex2a-hint2">
+<p class="font-bold text-sm text-[#7A4B92] mb-1">Hint: The probabilities must sum to 1.</p>
+<div class="text-sm text-gray-700">\[ \sum P(X=x)=1 \]</div>
+<button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold w-full md:w-auto text-center" onclick="revealStep('ex2a-solution', this)">Show Solution (a)</button>
+</div>
+<div class="card-solution hidden" id="ex2a-solution">
+<h4 class="font-bold text-[#512E5F] border-b border-[#E1E3ED] pb-1 mb-2 text-sm uppercase tracking-wider">Solution (a)</h4>
+<div class="math-display text-sm">
+      \[
+      \begin{aligned}
+      k(1)+k(2)+k(3)+k(4)&amp;=1\\
+      10k&amp;=1\\
+      k&amp;=\frac{1}{10}
+      \end{aligned}
+      \]
+    </div>
+<div class="mt-4 border-t border-gray-100 pt-3">
+<p class="font-bold text-[#512E5F] mb-2 text-sm">(b) Find \(P(X\ge 3)\).</p>
+<div class="card-think" id="ex2b-hint1">
+<p class="font-bold text-sm text-[#25408F] mb-1">💡 Think First</p>
+<p class="text-sm text-gray-700">Which values of \(X\) satisfy \(X\ge3\)?</p>
+<button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold w-full md:w-auto text-center" onclick="revealStep('ex2b-solution', this)">Show Solution (b)</button>
+</div>
+<div class="hidden mt-3" id="ex2b-solution">
+<div class="math-display bg-[#F5F6FA] p-3 rounded-lg text-sm">
+          \[
+          \begin{aligned}
+          P(X\ge3)&amp;=P(X=3)+P(X=4)\\
+          &amp;=3\left(\frac{1}{10}\right)+4\left(\frac{1}{10}\right)\\
+          &amp;=\frac{7}{10}=0.7
+          \end{aligned}
+          \]
+        </div>
+</div>
+</div>
+</div>
+</div>
+<div class="section-complete-wrap">
+<button class="section-complete-btn" id="complete-sec-3-1" onclick="return goToModule3Section('sec-3-2','nav-3-2')" type="button">Next: 3.2 Mean &amp; Variance →</button>
+</div>
+</section>
+<!-- LEARN: 3.2 -->
+<section class="page-section" id="sec-3-2">
+<!-- Section Header -->
+<div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+<div class="relative z-10">
+<span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">LEARN</span>
+<h2 class="text-2xl md:text-3xl font-bold mb-1">3.2 Mean, Variance &amp; Expectation</h2>
+<p class="text-[#F7F2F8] text-[14px] md:text-[15px] opacity-95">Find the expected value, variance and standard deviation of a discrete random variable.</p>
+</div>
+<svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewbox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+</div>
+<!-- OPENING HOOK: WHY MEAN AND VARIANCE MATTER -->
+<div class="mv-hook" id="mv-hook">
+<div class="mv-hook-inner">
+<span class="mv-hook-kicker">🎯 Quick Decision Challenge</span>
+<h3>Same Average — Same Choice?</h3>
+<p class="mv-hook-intro">
+                            Imagine that you can choose one of two reward games.
+                            Both games have the <strong>same average reward</strong>, but they behave very differently.
+                            Which one would you prefer?
+                        </p>
+<div class="mv-choice-cards">
+<div class="mv-card">
+<div class="mv-card-label">Game A — Stable</div>
+<p class="text-sm text-gray-700 leading-relaxed">
+                                    You receive <strong>RM5 every time</strong>.
+                                </p>
+<p class="mv-small">Possible reward: RM5 only.</p>
+</div>
+<div class="mv-card">
+<div class="mv-card-label">Game B — Risky</div>
+<p class="text-sm text-gray-700 leading-relaxed">
+                                    You receive <strong>RM0</strong> with probability 0.5 or
+                                    <strong>RM10</strong> with probability 0.5.
+                                </p>
+<p class="mv-small">Possible rewards: RM0 or RM10.</p>
+</div>
+</div>
+<div class="mv-question">
+                            Both games have mean reward RM5. Are they really the same?
+                        </div>
+<div class="mv-choice-grid">
+<button class="mv-choice-btn" onclick="chooseMVHook(this,'A')" type="button">
+                                🛡️ Choose Game A
+                            </button>
+<button class="mv-choice-btn" onclick="chooseMVHook(this,'B')" type="button">
+                                🎲 Choose Game B
+                            </button>
+<button class="mv-choice-btn" onclick="chooseMVHook(this,'depends')" type="button">
+                                🤔 It depends
+                            </button>
+</div>
+<div class="mv-hook-feedback" id="mv-hook-feedback">
+                            Your choice tells us something important: the average is useful, but it does not describe everything about a distribution.
+                        </div>
+<div class="mv-reveal" id="mv-hook-reveal">
+<h4>💡 Why do these games feel different?</h4>
+<p class="text-sm leading-relaxed">
+                                They have the same <strong>mean</strong>, but Game B is much more spread out.
+                                To describe a probability distribution properly, we often need both its
+                                <strong>centre</strong> and its <strong>variability</strong>.
+                            </p>
+</div>
+<div class="mv-compare" id="mv-hook-compare">
+<div class="mv-stat">
+<div class="mv-stat-title">Game A</div>
+<div class="mv-stat-main">Mean = RM5<br/>Variance = 0</div>
+</div>
+<div class="mv-stat">
+<div class="mv-stat-title">Game B</div>
+<div class="mv-stat-main">Mean = RM5<br/>Variance = 25</div>
+</div>
+</div>
+<div class="mv-big-idea" id="mv-hook-big-idea">
+<p class="text-sm text-gray-700 leading-relaxed">
+                                ⭐ <strong>Big idea:</strong>
+                                The <strong>mean / expected value</strong> tells us the long-run centre,
+                                while the <strong>variance</strong> tells us how much the possible values
+                                spread around that centre.
+                            </p>
+</div>
+<button class="mv-hook-cta" id="mv-hook-cta" onclick="continueFromMVHook()" type="button">
+                            🚀 Let’s Learn How to Measure Centre and Variability
+                        </button>
+</div>
+</div>
+<div class="card-concept">
+<div class="card-concept-header">
+<svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Important Formulas
+                    </div>
+<div class="p-4 md:p-5">
+<div class="important-formula-grid grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+<!-- Mean -->
+<div class="formula-card">
+<div class="formula-bg-pattern"><span class="text-3xl font-serif">μ</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Mean / Expectation</h3>
+<div class="math-display text-[#512E5F] font-bold formula-secondary">
+                                    \[ \mu = E(X) = \sum xP(X=x) \]
+                                </div>
+</div>
+<!-- Variance -->
+<div class="formula-card">
+<div class="formula-bg-pattern"><span class="text-3xl font-serif">σ²</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Variance</h3>
+<div class="math-display text-[#512E5F] font-bold formula-secondary">
+                                    \[ \sigma^2 = \sum x^2 P(X=x) - \mu^2 \]
+                                </div>
+</div>
+<!-- Standard Deviation -->
+<div class="formula-card md:col-span-2">
+<div class="formula-bg-pattern"><span class="text-3xl font-serif">σ</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Standard Deviation</h3>
+<div class="math-display text-[#512E5F] font-bold formula-secondary">
+                                    \[ \sigma = \sqrt{\operatorname{Var}(X)} \]
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Example 1: 3 Coins -->
+<div class="card-example">
+<span class="text-[10px] font-bold text-[#8B0E2D] bg-[#F7F2F8] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Original Workbook Example</span>
+<p class="text-body mb-3 font-medium">A discrete random variable \(X\) has the probability distribution below. Find the mean, variance and standard deviation.</p>
+<div class="overflow-x-auto mb-3">
+<table class="w-full max-w-md text-center border-collapse text-sm bg-white border border-[#D8CDDC] rounded-lg">
+<tbody>
+<tr class="border-b border-[#D8CDDC]"><th class="p-2 bg-[#F5F6FA]">\(X\)</th><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+<tr><th class="p-2 bg-[#F5F6FA]">\(P(X=x)\)</th><td>0.10</td><td>0.30</td><td>0.40</td><td>0.20</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card-hint" id="ex3-hint1">
+<p class="font-bold text-sm text-[#7A4B92] mb-1">💡 Hint 1</p>
+<p class="text-sm text-gray-700">Start with \(E(X)=\sum xP(X=x)\).</p>
+<button class="mt-2 text-[13px] font-bold text-[#8B0E2D] hover:underline" onclick="revealStep('ex3-hint2', this)">Show Next Hint →</button>
+</div>
+<div class="card-hint hidden mt-2" id="ex3-hint2">
+<p class="font-bold text-sm text-[#7A4B92] mb-1">💡 Hint 2</p>
+<p class="text-sm text-gray-700">Then calculate \(E(X^2)=\sum x^2P(X=x)\).</p>
+<button class="mt-2 text-[13px] font-bold text-[#8B0E2D] hover:underline" onclick="revealStep('ex3-hint3', this)">Show Final Hint →</button>
+</div>
+<div class="card-hint hidden mt-2" id="ex3-hint3">
+<p class="font-bold text-sm text-[#7A4B92] mb-1">💡 Hint 3</p>
+<p class="text-sm text-gray-700">Use \(\operatorname{Var}(X)=E(X^2)-[E(X)]^2\).</p>
+<button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold w-full md:w-auto text-center" onclick="revealStep('ex3-solution', this)">Show Guided Solution</button>
+</div>
+<div class="card-solution hidden mt-3" id="ex3-solution">
+<h4 class="font-bold text-[#512E5F] border-b border-[#E1E3ED] pb-1 mb-3 text-sm uppercase tracking-wider">Solution Steps</h4>
+<div class="math-display text-sm">
+      \[
+      \begin{aligned}
+      E(X)&amp;=0(0.10)+1(0.30)+2(0.40)+3(0.20)=1.70\\[3pt]
+      E(X^2)&amp;=0^2(0.10)+1^2(0.30)+2^2(0.40)+3^2(0.20)=3.70\\[3pt]
+      \operatorname{Var}(X)&amp;=3.70-(1.70)^2=0.81\\[3pt]
+      \sigma&amp;=\sqrt{0.81}=0.90
+      \end{aligned}
+      \]
+    </div>
+</div>
+</div>
+<!-- Example 2: Table with C -->
+<div class="card-example">
+<span class="text-[10px] font-bold text-[#8B0E2D] bg-[#F7F2F8] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Original Workbook Example</span>
+<p class="text-body mb-3">The probability distribution of \(X\) is given below:</p>
+<div class="overflow-x-auto mb-3">
+<table class="w-full max-w-md text-center border-collapse text-sm bg-white border border-[#D8CDDC] rounded-lg">
+<tbody>
+<tr class="border-b border-[#D8CDDC]"><th class="p-2 bg-[#F5F6FA]">\(X\)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+<tr><th class="p-2 bg-[#F5F6FA]">\(P(X=x)\)</th><td>0.15</td><td class="font-bold text-[#8B0E2D]">C</td><td>0.25</td><td>0.20</td><td>0.10</td></tr>
+</tbody>
+</table>
+</div>
+<p class="font-bold text-[#512E5F] mb-3 text-sm">Determine \(C\), then find \(E(X)\).</p>
+<div class="card-think" id="ex4-hint">
+<p class="font-bold text-sm text-[#25408F] mb-1">💡 Think First</p>
+<p class="text-sm text-gray-700">Before calculating \(E(X)\), use the fact that all probabilities sum to 1.</p>
+<button class="mt-2 text-[13px] font-bold text-[#25408F] hover:underline" onclick="revealStep('ex4-hint2', this)">Show Hint →</button>
+</div>
+<div class="card-hint hidden mt-2" id="ex4-hint2">
+<p class="text-sm text-gray-700">Solve \(0.15+C+0.25+0.20+0.10=1\).</p>
+<button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold w-full md:w-auto text-center" onclick="revealStep('ex4-solution', this)">Reveal Solution</button>
+</div>
+<div class="card-solution hidden mt-3" id="ex4-solution">
+<div class="math-display text-sm">
+      \[
+      0.70+C=1\quad\Rightarrow\quad C=0.30
+      \]
+      \[
+      \begin{aligned}
+      E(X)&amp;=0(0.15)+1(0.30)+2(0.25)+3(0.20)+4(0.10)\\
+      &amp;=1.80
+      \end{aligned}
+      \]
+    </div>
+</div>
+</div>
+<!-- Example 3: Sofia -->
+<div class="card-example mb-0">
+<span class="text-[10px] font-bold text-[#8B0E2D] bg-[#F7F2F8] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Expected Monetary Value</span>
+<p class="text-body mb-3">A sales representative receives an RM80 commission from a special promotion with probability 0.08. If no commission is earned, an RM3 administrative cost is incurred. Let \(X\) be the net monetary outcome. Find \(E(X)\) and interpret the result.</p>
+<button class="bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-[#512E5F] w-full md:w-auto text-center" onclick="revealStep('ex5-solution', this)">Show Solution</button>
+<div class="card-solution hidden mt-3" id="ex5-solution">
+<div class="math-display mb-2 text-sm">
+      \[
+      \begin{aligned}
+      E(X)&amp;=(80)(0.08)+(-3)(0.92)\\
+      &amp;=6.40-2.76\\
+      &amp;=3.64
+      \end{aligned}
+      \]
+    </div>
+<div class="card-takeaway mt-3 mb-0">
+<span class="text-xs font-bold uppercase tracking-wider mb-1 block">🧠 Interpret Your Answer</span>
+<p class="text-sm">Over many similar promotions, the expected net outcome is a <strong>gain of RM3.64 per promotion</strong>.</p>
+</div>
+</div>
+</div>
+<div class="section-complete-wrap">
+<button class="section-complete-btn" id="complete-sec-3-2" onclick="return goToModule3Section('sec-3-3','nav-3-3')" type="button">Next: 3.3 Binomial →</button>
+</div>
+</section>
+<!-- LEARN: 3.3 -->
+<section class="page-section" id="sec-3-3">
+<!-- Section Header -->
+<div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+<div class="relative z-10">
+<span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">LEARN</span>
+<h2 class="text-2xl md:text-3xl font-bold mb-1">3.3 Binomial Distribution</h2>
+<p class="text-[#F7F2F8] text-[14px] md:text-[15px] opacity-95">Use the binomial distribution as a model for solving problems.</p>
+</div>
+<svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+</div>
+<!-- OPENING HOOK: CREATE A NEED FOR BINOMIAL DISTRIBUTION -->
+<div class="binomial-hook" id="binomial-hook">
+<div aria-hidden="true" class="binomial-hook-decor"></div>
+<div class="binomial-hook-inner">
+<span class="binomial-hook-kicker">🎯 Decision Challenge</span>
+<h3 class="binomial-hook-title">Would You Be Worried?</h3>
+<p class="binomial-hook-subtitle">
+                            Before learning any formula, make a judgement from a real situation. There is no penalty for your choice — the purpose is to make you think.
+                        </p>
+<div class="binomial-hook-scenario">
+<p class="text-sm leading-relaxed">
+                                🏭 A factory normally produces a defective item with probability <strong>0.05</strong>.
+                                Today, a quality manager randomly inspects <strong>10 items</strong> and finds <strong>3 defective items</strong>.
+                            </p>
+<div class="binomial-hook-prompt">What would you conclude?</div>
+<div class="binomial-hook-options">
+<button class="binomial-hook-option" onclick="chooseBinomialHook(this,'normal')" type="button">
+                                    🟢 No<br/><span class="font-medium">This can happen normally.</span>
+</button>
+<button class="binomial-hook-option" onclick="chooseBinomialHook(this,'unsure')" type="button">
+                                    🟠 Not sure<br/><span class="font-medium">I need more information.</span>
+</button>
+<button class="binomial-hook-option" onclick="chooseBinomialHook(this,'worried')" type="button">
+                                    🔴 Yes<br/><span class="font-medium">This seems unusually high.</span>
+</button>
+</div>
+<div class="binomial-hook-feedback neutral" id="binomial-hook-feedback">
+                                Good — you have made a prediction. But a judgement alone does not tell us <strong>how unusual</strong> 3 defective items really are.
+                            </div>
+<div class="binomial-hook-curiosity" id="binomial-hook-curiosity">
+<h4>🤔 So how can we know?</h4>
+<p class="text-sm leading-relaxed">
+                                    We need a way to calculate the probability of getting 3 or more defective items out of 10 when the defect probability is 0.05.
+                                    <strong>This is exactly the type of uncertainty that Binomial Distribution can model.</strong>
+</p>
+</div>
+<button class="binomial-hook-cta" id="binomial-hook-cta" onclick="continueFromBinomialHook()" type="button">
+                                🚀 Let’s Find Out Why Binomial Distribution Matters
+                            </button>
+<div class="binomial-hook-remember" id="binomial-hook-remember">
+                                📌 Remember your first judgement. After learning the topic, you should be able to return to this situation and make a more informed decision using probability rather than intuition alone.
+                            </div>
+</div>
+</div>
+</div>
+<!-- WHY BINOMIAL MATTERS IN REAL LIFE -->
+<div class="real-life-hero">
+<span class="text-[10px] font-bold text-[#8B0E2D] bg-white border border-[#AAB1D1] px-2 py-1 rounded uppercase tracking-wider inline-block mb-3">🌍 Why This Matters</span>
+<h3>Why Are We Learning Binomial Distribution?</h3>
+<p class="text-sm text-gray-700 leading-relaxed">
+                        Binomial Distribution is not just another formula in Statistics. It is a way to
+                        <strong>model repeated yes/no outcomes</strong>, measure uncertainty, and support decisions in real situations.
+                        Whenever we repeatedly observe an outcome such as <em>success/failure</em>, <em>respond/not respond</em>,
+                        <em>defective/not defective</em> or <em>pass/fail</em>, a binomial model may be useful if its assumptions are satisfied.
+                    </p>
+<div aria-label="Binomial problem-solving flow" class="real-life-flow">
+<div class="real-life-step">1️⃣ REAL SITUATION<br/><span class="font-medium text-gray-500">What is happening?</span></div>
+<div class="real-life-step">2️⃣ RECOGNISE<br/><span class="font-medium text-gray-500">Is it binomial?</span></div>
+<div class="real-life-step">3️⃣ MODEL<br/><span class="font-medium text-gray-500">Identify \(n,p,X\)</span></div>
+<div class="real-life-step">4️⃣ DECIDE<br/><span class="font-medium text-gray-500">What does the probability mean?</span></div>
+</div>
+</div>
+<div class="card-concept">
+<div class="card-concept-header">
+<svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0c2.2 2.7 3.3 6 3.3 10S14.2 19.3 12 22m0-20C9.8 4.7 8.7 8 8.7 12S9.8 19.3 12 22M2 12h20" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+                        Real-Life Applications of Binomial Distribution
+                    </div>
+<div class="p-4 md:p-5">
+<p class="text-sm text-gray-700 mb-4">
+                            Click each situation. Focus first on the <strong>question being answered</strong>, then notice how the real situation becomes a binomial model.
+                        </p>
+<div class="application-grid">
+<div class="application-card">
+<button class="application-trigger" onclick="toggleApplicationCard(this)" type="button">
+<span class="application-icon">🏭</span>
+<span class="min-w-0">
+<span class="application-title block">Quality Control</span>
+<span class="application-question block">How likely is a production sample to contain too many defective items?</span>
+</span>
+<span class="application-chevron">⌄</span>
+</button>
+<div class="application-detail">
+<div class="application-model">
+                                        Suppose 20 components are inspected and each component has probability \(p=0.03\) of being defective.<br/>
+<strong>\(X\):</strong> number of defective components<br/>
+<strong>Model:</strong> \(X \sim B(20,0.03)\)
+                                    </div>
+<div class="application-decision">
+<strong>Why it matters:</strong> The calculated probability can help a quality team judge whether the observed number of defects is unusual and whether further investigation may be needed.
+                                    </div>
+</div>
+</div>
+<div class="application-card">
+<button class="application-trigger" onclick="toggleApplicationCard(this)" type="button">
+<span class="application-icon">💊</span>
+<span class="min-w-0">
+<span class="application-title block">Treatment Response</span>
+<span class="application-question block">How many patients in a group may respond to a treatment?</span>
+</span>
+<span class="application-chevron">⌄</span>
+</button>
+<div class="application-detail">
+<div class="application-model">
+                                        Suppose 12 patients independently receive a treatment and the response probability is \(p=0.70\).<br/>
+<strong>\(X\):</strong> number of patients who respond<br/>
+<strong>Model:</strong> \(X \sim B(12,0.70)\)
+                                    </div>
+<div class="application-decision">
+<strong>Why it matters:</strong> The model can quantify how likely different response counts are under the stated probability.
+                                    </div>
+</div>
+</div>
+<div class="application-card">
+<button class="application-trigger" onclick="toggleApplicationCard(this)" type="button">
+<span class="application-icon">📣</span>
+<span class="min-w-0">
+<span class="application-title block">Marketing Response</span>
+<span class="application-question block">How many customers may respond to a campaign?</span>
+</span>
+<span class="application-chevron">⌄</span>
+</button>
+<div class="application-detail">
+<div class="application-model">
+                                        Suppose a campaign is sent to 30 independently selected customers and each has probability \(p=0.20\) of responding.<br/>
+<strong>\(X\):</strong> number of customers who respond<br/>
+<strong>Model:</strong> \(X \sim B(30,0.20)\)
+                                    </div>
+<div class="application-decision">
+<strong>Why it matters:</strong> The probability distribution helps describe the range of response counts that could reasonably occur.
+                                    </div>
+</div>
+</div>
+<div class="application-card">
+<button class="application-trigger" onclick="toggleApplicationCard(this)" type="button">
+<span class="application-icon">⚙️</span>
+<span class="min-w-0">
+<span class="application-title block">Reliability &amp; Failure</span>
+<span class="application-question block">How many components may fail during repeated operation?</span>
+</span>
+<span class="application-chevron">⌄</span>
+</button>
+<div class="application-detail">
+<div class="application-model">
+                                        Suppose 15 similar independent components are used and each has failure probability \(p=0.05\).<br/>
+<strong>\(X\):</strong> number of failed components<br/>
+<strong>Model:</strong> \(X \sim B(15,0.05)\)
+                                    </div>
+<div class="application-decision">
+<strong>Why it matters:</strong> The model can quantify the probability of seeing zero, one or several failures under the assumed conditions.
+                                    </div>
+</div>
+</div>
+<div class="application-card">
+<button class="application-trigger" onclick="toggleApplicationCard(this)" type="button">
+<span class="application-icon">🎓</span>
+<span class="min-w-0">
+<span class="application-title block">Education &amp; Assessment</span>
+<span class="application-question block">How many students may answer a question correctly?</span>
+</span>
+<span class="application-chevron">⌄</span>
+</button>
+<div class="application-detail">
+<div class="application-model">
+                                        Suppose 25 students independently answer a particular item and each has probability \(p=0.60\) of answering correctly.<br/>
+<strong>\(X\):</strong> number of correct responses<br/>
+<strong>Model:</strong> \(X \sim B(25,0.60)\)
+                                    </div>
+<div class="application-decision">
+<strong>Why it matters:</strong> The model illustrates how probability can describe the expected spread of correct-response counts across a class.
+                                    </div>
+</div>
+</div>
+<div class="application-card">
+<button class="application-trigger" onclick="toggleApplicationCard(this)" type="button">
+<span class="application-icon">🛒</span>
+<span class="min-w-0">
+<span class="application-title block">Customer Purchase</span>
+<span class="application-question block">How many visitors may make a purchase?</span>
+</span>
+<span class="application-chevron">⌄</span>
+</button>
+<div class="application-detail">
+<div class="application-model">
+                                        Suppose 10 independently observed visitors each have purchase probability \(p=0.30\).<br/>
+<strong>\(X\):</strong> number of visitors who purchase<br/>
+<strong>Model:</strong> \(X \sim B(10,0.30)\)
+                                    </div>
+<div class="application-decision">
+<strong>Why it matters:</strong> The binomial model converts an uncertain customer outcome into probabilities for different purchase counts.
+                                    </div>
+</div>
+</div>
+</div>
+<div class="binomial-big-idea">
+<div class="eyebrow">⭐ BIG IDEA</div>
+<p>
+<strong>Binomial Distribution is a decision-support model for repeated binary outcomes.</strong>
+                                The calculation is important, but the deeper skill is recognising the situation,
+                                defining the random variable, checking the assumptions, and interpreting what the probability means in context.
+                            </p>
+</div>
+<div class="real-life-check">
+<div class="real-life-check-title">🧠 Quick Appreciation Check</div>
+<p class="text-sm text-gray-700">
+                                A factory inspects 10 items and records whether each item is defective or not. Why might Binomial Distribution be useful?
+                            </p>
+<button onclick="toggleRealLifeAnswer(this)" type="button">Show Answer</button>
+<div class="real-life-answer">
+                                Because the variable of interest can be the <strong>number of defective items</strong> among a fixed number of inspections.
+                                If the inspections are appropriately independent and the defect probability is approximately constant, the number of defects can be modelled using a binomial distribution.
+                                The resulting probabilities help describe how likely different defect counts are.
+                            </div>
+</div>
+</div>
+</div>
+<div class="card-concept">
+<div class="card-concept-header">
+<svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Requirements &amp; Formula
+                    </div>
+<div class="p-4 md:p-5">
+<p class="font-bold text-gray-800 mb-2 text-sm">A binomial experiment satisfies 4 requirements:</p>
+<ol class="list-decimal pl-5 space-y-1 text-sm text-gray-700 mb-4">
+<li>Fixed number of trials (\( n \)).</li>
+<li>Only 2 possible outcomes (Success or Failure).</li>
+<li>Independent trials.</li>
+<li>Constant probability of success (\( p \)).</li>
+</ol>
+<div class="formula-card">
+<div class="formula-bg-pattern"><span class="text-4xl font-serif">B</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1.5 text-[#512E5F] text-center">Binomial Probability Formula</h3>
+<div class="binomial-formula-stack flex flex-col items-center justify-center mt-0">
+<div class="math-display text-[#512E5F] font-bold formula-secondary">
+                                    \[ X \sim B(n, p) \]
+                                </div>
+<div class="math-display text-[#512E5F] font-bold formula-primary">
+                                    \[ P(X=r) = \binom{n}{r} p^r q^{n-r} \]
+                                </div>
+<div class="math-display text-[#512E5F] font-bold text-sm">
+                                    \[ q = 1 - p \]
+                                </div>
+</div>
+</div>
+<div class="text-sm text-left text-gray-700 bg-[#F5F6FA] p-3 rounded-lg border border-[#E1E3ED]">
+<div class="grid grid-cols-2 gap-y-1.5">
+<div>\( n = \) number of trials</div>
+<div>\( p = \) probability of success</div>
+<div>\( q = \) probability of failure</div>
+<div>\( r = \) number of successes</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Example 1: Dice -->
+<div class="card-example">
+<span class="text-[10px] font-bold text-[#8B0E2D] bg-[#F7F2F8] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Original Workbook Example</span>
+<p class="text-body mb-3">A seed has probability 0.80 of germinating. Four seeds are planted independently. Find the probability that exactly three seeds germinate.</p>
+<div class="card-think" id="ex6-hint1">
+<p class="font-bold text-sm text-[#25408F] uppercase tracking-wider mb-2">Identify the parameters</p>
+<div class="grid grid-cols-4 gap-2 text-center font-mono text-sm font-bold mb-3">
+<div class="bg-white py-1.5 rounded border border-[#AAB1D1] text-[#25408F]">n=?</div>
+<div class="bg-white py-1.5 rounded border border-[#AAB1D1] text-[#25408F]">p=?</div>
+<div class="bg-white py-1.5 rounded border border-[#AAB1D1] text-[#25408F]">q=?</div>
+<div class="bg-white py-1.5 rounded border border-[#AAB1D1] text-[#25408F]">r=?</div>
+</div>
+<button class="text-[13px] font-bold text-[#25408F] hover:underline" onclick="revealStep('ex6-hint2', this)">Show Hint 1 →</button>
+</div>
+<div class="card-hint hidden mt-2" id="ex6-hint2">
+<p class="text-sm text-gray-700"><strong>Hint 1:</strong> There are four independent trials, so \(n=4\).</p>
+<button class="mt-2 text-[13px] font-bold text-[#7A4B92] hover:underline" onclick="revealStep('ex6-hint3', this)">Show Hint 2 →</button>
+</div>
+<div class="card-hint hidden mt-2" id="ex6-hint3">
+<p class="text-sm text-gray-700"><strong>Hint 2:</strong> Germination is the success, so \(p=0.80\) and \(q=0.20\).</p>
+<button class="mt-2 text-[13px] font-bold text-[#7A4B92] hover:underline" onclick="revealStep('ex6-hint4', this)">Show Hint 3 →</button>
+</div>
+<div class="card-hint hidden mt-2" id="ex6-hint4">
+<p class="text-sm text-gray-700"><strong>Hint 3:</strong> “Exactly three” means \(r=3\).</p>
+<button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold w-full md:w-auto text-center" onclick="revealStep('ex6-solution', this)">Show Guided Solution</button>
+</div>
+<div class="card-solution hidden mt-3" id="ex6-solution">
+<div class="grid grid-cols-4 gap-2 text-center text-sm font-bold mb-4">
+<div class="bg-[#F7F2F8] text-[#512E5F] py-1.5 rounded">n=4</div>
+<div class="bg-[#F7F2F8] text-[#512E5F] py-1.5 rounded">p=0.80</div>
+<div class="bg-[#F7F2F8] text-[#512E5F] py-1.5 rounded">q=0.20</div>
+<div class="bg-[#F7F2F8] text-[#512E5F] py-1.5 rounded">r=3</div>
+</div>
+<div class="math-display bg-[#F5F6FA] p-3 rounded-lg text-sm">
+      \[
+      \begin{aligned}
+      P(X=3)&amp;=\binom{4}{3}(0.80)^3(0.20)^1\\
+      &amp;=4(0.512)(0.20)\\
+      &amp;=0.4096
+      \end{aligned}
+      \]
+    </div>
+</div>
+</div>
+<!-- Concept: Probability Language -->
+<div class="card-concept">
+<div class="card-concept-header">
+<svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Probability Language Translation
+                    </div>
+<div class="p-4 md:p-5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 text-sm">
+<div class="flex justify-between items-center border-b border-[#E1E3ED] pb-1.5"><span class="font-bold text-gray-600">Exactly \( r \)</span> <span class="text-[#8B0E2D] font-bold bg-[#F7F2F8] px-2 py-0.5 rounded">\( P(X=r) \)</span></div>
+<div class="flex justify-between items-center border-b border-[#E1E3ED] pb-1.5"><span class="font-bold text-gray-600">At most \( r \)</span> <span class="text-[#8B0E2D] font-bold bg-[#F7F2F8] px-2 py-0.5 rounded">\( P(X \le r) \)</span></div>
+<div class="flex justify-between items-center border-b border-[#E1E3ED] pb-1.5"><span class="font-bold text-gray-600">At least \( r \)</span> <span class="text-[#8B0E2D] font-bold bg-[#F7F2F8] px-2 py-0.5 rounded">\( P(X \ge r) \)</span></div>
+<div class="flex justify-between items-center border-b border-[#E1E3ED] pb-1.5"><span class="font-bold text-gray-600">Fewer than \( r \)</span> <span class="text-[#8B0E2D] font-bold bg-[#F7F2F8] px-2 py-0.5 rounded">\( P(X &lt; r) \)</span></div>
+<div class="flex justify-between items-center border-b border-[#E1E3ED] pb-1.5 md:col-span-2"><span class="font-bold text-gray-600">More than \( r \)</span> <span class="text-[#8B0E2D] font-bold bg-[#F7F2F8] px-2 py-0.5 rounded">\( P(X &gt; r) \)</span></div>
+</div>
+</div>
+</div>
+<!-- Example 2: Petaling Jaya -->
+<div class="card-example">
+<span class="text-[10px] font-bold text-[#8B0E2D] bg-[#F7F2F8] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Original Workbook Example</span>
+<p class="text-body mb-3">A digital campaign has a 30% response rate. Six independently selected customers receive the campaign. Let \(X\) be the number who respond.</p>
+<div class="bg-[#F5F6FA] p-2 rounded-lg border border-[#AAB1D1] mb-4 text-center text-sm font-bold text-[#512E5F]">
+    \(X\sim B(6,0.30)\)
+  </div>
+<div class="space-y-4">
+<div>
+<p class="font-bold text-gray-800 mb-1.5 text-sm">(a) exactly 2 customers respond</p>
+<button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded px-3 py-1" onclick="revealStep('ex7a-solution', this)">Translate &amp; Solve</button>
+<div class="hidden mt-2 pl-3 border-l-2 border-[#8B0E2D]" id="ex7a-solution">
+<p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \(P(X=2)\)</p>
+<div class="math-display text-sm">\[P(X=2)=\binom62(0.3)^2(0.7)^4\approx0.3241\]</div>
+</div>
+</div>
+<div>
+<p class="font-bold text-gray-800 mb-1.5 text-sm">(b) at most 3 customers respond</p>
+<button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded px-3 py-1" onclick="revealStep('ex7b-solution', this)">Translate &amp; Solve</button>
+<div class="hidden mt-2 pl-3 border-l-2 border-[#8B0E2D]" id="ex7b-solution">
+<p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \(P(X\le3)\)</p>
+<div class="math-display text-sm">\[P(X\le3)\approx0.9295\]</div>
+</div>
+</div>
+<div>
+<p class="font-bold text-gray-800 mb-1.5 text-sm">(c) at least 2 customers respond</p>
+<button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded px-3 py-1" onclick="revealStep('ex7c-solution', this)">Translate &amp; Solve</button>
+<div class="hidden mt-2 pl-3 border-l-2 border-[#8B0E2D]" id="ex7c-solution">
+<p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \(P(X\ge2)\)</p>
+<div class="math-display text-sm">\[P(X\ge2)=1-[P(X=0)+P(X=1)]\approx0.5798\]</div>
+</div>
+</div>
+<div>
+<p class="font-bold text-gray-800 mb-1.5 text-sm">(d) fewer than 3 customers respond</p>
+<button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded px-3 py-1" onclick="revealStep('ex7d-solution', this)">Translate &amp; Solve</button>
+<div class="hidden mt-2 pl-3 border-l-2 border-[#8B0E2D]" id="ex7d-solution">
+<p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \(P(X&lt;3)=P(X\le2)\)</p>
+<div class="math-display text-sm">\[P(X&lt;3)\approx0.7443\]</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Concept: Binomial Mean & Variance -->
+<div class="card-concept mb-0">
+<div class="card-concept-header">
+<svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Mean &amp; Variance of Binomial Distribution
+                    </div>
+<div class="p-4 md:p-5">
+<div class="binomial-mv-compact grid grid-cols-1 md:grid-cols-2 gap-3">
+<!-- Mean -->
+<div class="formula-card">
+<div class="formula-bg-pattern"><span class="text-4xl font-serif">μ</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Mean</h3>
+<div class="math-display text-[#512E5F] font-bold formula-primary">
+                                    \[ \mu = np \]
+                                </div>
+</div>
+<!-- Variance -->
+<div class="formula-card">
+<div class="formula-bg-pattern"><span class="text-4xl font-serif">σ²</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Variance</h3>
+<div class="math-display text-[#512E5F] font-bold formula-primary">
+                                    \[ \sigma^2 = npq \]
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<div class="section-complete-wrap">
+<button class="section-complete-btn" id="complete-sec-3-3" onclick="return goToModule3Section('sec-obt','nav-obt')" type="button">Next: Open Book Test →</button>
+</div>
+</section>
+<!-- OPEN BOOK TEST -->
+<section class="page-section" id="sec-obt">
+<div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+<div class="relative z-10">
+<span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">OPEN BOOK TEST</span>
+<h2 class="text-2xl md:text-3xl font-bold mb-1">Chapter 3 Open Book Test</h2>
+<p class="text-[#F7F2F8] text-[14px] md:text-[15px] opacity-95">
+                            Complete the Open Book Test before proceeding to TRY.
+                        </p>
+</div>
+</div>
+<div class="playbook-card p-5 md:p-6">
+<div class="bg-[#F5F6FA] border border-[#D8CDDC] rounded-xl p-5 md:p-6 text-center">
+<div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#F7F2F8] text-[#8B0E2D] mb-3">
+<svg class="w-7 h-7 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-lg font-bold text-[#512E5F] mb-2">Ready for the Open Book Test?</h3>
+<p class="text-sm text-gray-700 max-w-xl mx-auto mb-4">
+                            The test will open in this same browser tab. After submitting it, use your browser's
+                            <strong>Back</strong> button to return to this workbook.
+                        </p>
+<a class="inline-flex items-center justify-center w-full md:w-auto bg-[#8B0E2D] hover:bg-[#512E5F] text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors shadow-sm" href="https://quiz-quest-eight.lovable.app/" id="btn-start-obt" onclick="prepareOpenBookTestLaunch()" target="_self">
+                            Start Open Book Test →
+                        </a>
+</div>
+<div class="mt-4 bg-white border border-[#AAB1D1] rounded-xl p-4 hidden" id="obt-return-panel">
+<p class="text-sm text-gray-700 mb-3">
+                            Have you completed and submitted the Open Book Test?
+                        </p>
+<button class="w-full md:w-auto bg-[#8B0E2D] hover:bg-[#512E5F] text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors shadow-sm" id="btn-complete-obt" onclick="return window.completeOpenBookTest(event)" type="button">
+                            ✓ Yes, I Have Completed the Test
+                        </button>
+<p class="text-xs text-gray-500 mt-2" id="obt-completion-note">
+                            You may proceed to TRY after completing the Open Book Test.
+                        </p>
+</div>
+</div>
+</section>
+<!-- TRY SECTION (FORMATIVE QUIZ) -->
+<section class="page-section" id="sec-try">
+<!-- Section Header -->
+<div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+<div class="relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-3">
+<div>
+<span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider" id="try-q-badge">Question 1</span>
+<h2 class="text-2xl md:text-3xl font-bold mt-1">Formative Practice</h2>
+</div>
+<div class="text-xs font-bold text-[#512E5F] bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap" id="try-q-tracker">1 OF 8</div>
+</div>
+<svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewbox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+</div>
+<div class="flex justify-center space-x-1.5 mb-5" id="try-progress-dots">
+<!-- Dots dynamically added -->
+</div>
+<div class="playbook-card p-4 md:p-6 mb-4" id="try-quiz-content">
+<div class="text-body mb-5 font-medium" id="try-q-text">
+<!-- Question Text Here -->
+</div>
+<div class="space-y-3" id="try-options-container">
+<!-- Options Here -->
+</div>
+<div class="hidden mt-4 transition-all duration-300" id="try-feedback-area">
+<!-- Feedback Here -->
+</div>
+<div class="flex flex-col md:flex-row justify-end gap-2 mt-5">
+<button class="w-full md:w-auto bg-[#8B0E2D] hover:bg-[#512E5F] disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm text-sm" disabled="" id="btn-try-check">
+                            Check Answer
+                        </button>
+<button class="hidden w-full md:w-auto bg-[#172033] hover:bg-black text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm text-sm flex items-center justify-center" id="btn-try-next">
+                            Next Question <svg class="w-4 h-4 ml-2 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+<!-- Try Quiz End Screen -->
+<div class="hidden playbook-card p-6 md:p-10 text-center mt-3" id="try-end-screen">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#F7F2F8] text-[#8B0E2D] mb-4">
+<svg class="w-8 h-8 large-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h2 class="text-2xl font-bold text-[#512E5F] mb-2">TRY COMPLETED</h2>
+<div class="bg-[#F5F6FA] rounded-xl p-6 inline-block min-w-[200px] border border-[#E1E3ED] mb-6 shadow-sm">
+<div class="text-xs text-gray-500 font-bold mb-1 uppercase tracking-wide">Score</div>
+<div class="text-4xl font-bold text-[#8B0E2D] mb-1" id="try-final-score">0 / 8</div>
+<div class="text-sm font-medium text-gray-500" id="try-final-accuracy">Accuracy: 0%</div>
+</div>
+<div class="flex flex-col sm:flex-row justify-center gap-3">
+<button class="px-6 py-3 rounded-xl font-bold text-[#8B0E2D] bg-[#F7F2F8] hover:bg-[#D8CDDC] transition-colors border border-[#AAB1D1] text-sm" onclick="resetTryQuiz()">
+                            Try Again
+                        </button>
+<button class="px-6 py-3 rounded-xl font-bold text-white bg-[#8B0E2D] hover:bg-[#512E5F] transition-colors shadow-sm text-sm" onclick="navigateTo('sec-check'); updateNav('nav-check')">
+                            Proceed to Check →
+                        </button>
+</div>
+</div>
+</section>
+<!-- CHECK SECTION (MASTERY ASSESSMENT) -->
+<section class="page-section" id="sec-check">
+<!-- Section Header -->
+<div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+<div class="relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-3">
+<div>
+<span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider">CHECK</span>
+<h2 class="text-2xl md:text-3xl font-bold mt-1">Mastery Assessment</h2>
+<p class="text-[#F7F2F8] text-[14px] opacity-95 mt-1">Test your full understanding of Chapter 3.</p>
+</div>
+<div class="text-xs font-bold text-[#512E5F] bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap" id="check-q-tracker">1 OF 8</div>
+</div>
+<svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+</div>
+<div class="playbook-card p-4 md:p-6 mb-4" id="check-quiz-content">
+<div class="text-body mb-5 font-medium" id="check-q-text">
+<!-- Question Text Here -->
+</div>
+<div class="space-y-3" id="check-options-container">
+<!-- Options Here -->
+</div>
+<div class="hidden mt-4 transition-all duration-300" id="check-feedback-area">
+<!-- Dynamic Feedback Here -->
+</div>
+<div class="flex flex-col md:flex-row justify-end gap-2 mt-5">
+<button class="w-full md:w-auto bg-[#8B0E2D] hover:bg-[#512E5F] disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm text-sm" disabled="" id="btn-check-submit">
+                            Check Answer
+                        </button>
+<button class="hidden w-full md:w-auto bg-[#172033] hover:bg-black text-white px-6 py-3 rounded-xl font-bold transition-colors shadow-sm text-sm flex items-center justify-center" id="btn-check-next">
+                            Next Question <svg class="w-4 h-4 ml-2 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+<!-- Check Results Screen -->
+<div class="hidden mt-4" id="check-results-screen">
+<div class="playbook-card p-6 md:p-8 mb-6">
+<div class="text-center mb-6">
+<h2 class="text-2xl font-bold text-[#512E5F] mb-2">Mastery Assessment Complete</h2>
+<p class="text-gray-600 text-sm">Here is how you performed across the chapter topics.</p>
+<div class="bg-[#F5F6FA] rounded-xl p-6 inline-block min-w-[240px] border border-[#E1E3ED] mt-4 shadow-sm">
+<div class="text-xs text-gray-500 font-bold mb-1 uppercase tracking-wide">FINAL SCORE</div>
+<div class="text-4xl font-bold text-[#8B0E2D] mb-1" id="check-final-score">0 / 8</div>
+<div class="text-sm font-bold text-gray-700 mb-3" id="check-final-accuracy">0%</div>
+<div class="flex justify-center gap-4 text-xs font-medium">
+<div class="text-green-600"><span id="check-count-correct">0</span> Correct</div>
+<div class="text-red-600"><span id="check-count-incorrect">0</span> Incorrect</div>
+</div>
+</div>
+</div>
+<!-- Topic Breakdown -->
+<div class="mb-6 border-t border-gray-100 pt-5">
+<h3 class="text-sm font-bold text-[#512E5F] mb-3 uppercase tracking-wider">Topic Summary</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="check-topic-breakdown">
+<!-- Breakdown populated here -->
+</div>
+</div>
+<!-- Mistakes List -->
+<div class="mb-6 hidden border-t border-gray-100 pt-5" id="check-mistakes-container">
+<h3 class="text-sm font-bold text-red-700 mb-3 uppercase tracking-wider">Review Your Mistakes</h3>
+<div class="space-y-4" id="check-mistakes-list">
+<!-- Mistakes populated here -->
+</div>
+</div>
+<div class="text-center w-full mx-auto pt-5 border-t border-gray-100">
+<button class="w-full md:w-auto bg-[#8B0E2D] hover:bg-[#512E5F] text-white px-8 py-3 rounded-xl font-bold text-sm transition-colors shadow-md inline-flex items-center justify-center" onclick="completeWorkbook()">
+                                Complete Workbook <svg class="w-4 h-4 ml-2 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</div>
+<!-- Final Completion Message -->
+<div class="hidden text-center py-8 playbook-card mt-4" id="completion-message">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-4 shadow-inner">
+<svg class="w-8 h-8 large-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg>
+</div>
+<h3 class="text-2xl font-bold text-[#512E5F] mb-2">Pre-Class Preparation Complete 🎉</h3>
+<p class="text-gray-600 text-sm">You are now ready for Chapter 3.</p>
+</div>
+</section>
+</div>
+</div>
+</div><!-- /.module-shell -->
+<!-- JavaScript Logic -->
+<script>
+        // Safe MathJax rendering helper
+        function safeMathJaxTypeset() {
+            if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+                MathJax.typesetPromise().catch((err) => console.log('MathJax typeset failed: ', err));
+            }
+        }
+
+
+        // ==========================================
+        // 3.1 PROBABILITY DISTRIBUTION OPENING HOOK
+        // ==========================================
+        window.choosePDHook = function(button, choice) {
+            document.querySelectorAll('.pd-choice-btn').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+
+            const feedback = document.getElementById('pd-hook-feedback');
+            const reveal = document.getElementById('pd-hook-reveal');
+            const flow = document.getElementById('pd-hook-flow');
+            const cta = document.getElementById('pd-hook-cta');
+
+            if (feedback) {
+                feedback.classList.add('show');
+                if (choice === 'info') {
+                    feedback.innerHTML = 'Exactly. <strong>Possible values alone are not enough.</strong> We also need the probability attached to each value.';
+                } else {
+                    feedback.innerHTML = 'That is a reasonable first guess, but there is a problem: <strong>both games have the same possible rewards.</strong> We still do not know how likely each reward is.';
+                }
+            }
+
+            if (reveal) reveal.classList.add('show');
+            if (flow) flow.classList.add('show');
+            if (cta) cta.classList.add('show');
+            safeMathJaxTypeset();
+        };
+
+        window.continueFromPDHook = function() {
+            const target = document.querySelector('#sec-3-1 .card-concept');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            safeMathJaxTypeset();
+        };
+
+
+
+        // ==========================================
+        // 3.2 MEAN & VARIANCE OPENING HOOK
+        // ==========================================
+        window.chooseMVHook = function(button, choice) {
+            document.querySelectorAll('.mv-choice-btn').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+
+            const feedback = document.getElementById('mv-hook-feedback');
+            const reveal = document.getElementById('mv-hook-reveal');
+            const compare = document.getElementById('mv-hook-compare');
+            const bigIdea = document.getElementById('mv-hook-big-idea');
+            const cta = document.getElementById('mv-hook-cta');
+
+            if (feedback) {
+                feedback.classList.add('show');
+
+                if (choice === 'A') {
+                    feedback.innerHTML =
+                        'You chose the more predictable option. That suggests that <strong>variability matters</strong>, not just the average.';
+                } else if (choice === 'B') {
+                    feedback.innerHTML =
+                        'You chose the riskier option. Even though the mean is the same, you are willing to accept <strong>greater variability</strong>.';
+                } else {
+                    feedback.innerHTML =
+                        'Exactly — the “better” choice can depend on how much variability or risk a person is willing to accept.';
+                }
+            }
+
+            if (reveal) reveal.classList.add('show');
+            if (compare) compare.classList.add('show');
+            if (bigIdea) bigIdea.classList.add('show');
+            if (cta) cta.classList.add('show');
+
+            safeMathJaxTypeset();
+        };
+
+        window.continueFromMVHook = function() {
+            const target = document.querySelector('#sec-3-2 .card-concept');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            safeMathJaxTypeset();
+        };
+
+
+        // Progress tracking
+        let visitedSections = new Set(['sec-start']);
+        const allSections = ['sec-start', 'sec-3-1', 'sec-3-2', 'sec-3-3', 'sec-try', 'sec-check'];
+        const navMap = {
+            'nav-start': 'sec-start',
+            'nav-3-1': 'sec-3-1',
+            'nav-3-2': 'sec-3-2',
+            'nav-3-3': 'sec-3-3',
+            'nav-try': 'sec-try',
+            'nav-check': 'sec-check'
+        };
+
+        function closeSidebarOnMobile() {
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+            }
+        }
+
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll to top
+            const moduleMain = document.getElementById('moduleMain'); if (moduleMain) moduleMain.scrollTop = 0;
+            
+            // Update progress calculation based on active sequence
+            const currentIndex = allSections.indexOf(sectionId);
+            for(let i=0; i<=currentIndex; i++) {
+                visitedSections.add(allSections[i]);
+            }
+            updateProgressBar();
+            
+            // Re-render MathJax if present
+            safeMathJaxTypeset();
+        }
+
+        function updateNav(navId) {
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('nav-active'));
+            document.getElementById(navId).classList.add('nav-active');
+            
+            // Show completion ticks
+            document.querySelectorAll('.nav-item').forEach(nav => {
+                const mappedSectionId = navMap[nav.id];
+                if (visitedSections.has(mappedSectionId) && nav.id !== navId) {
+                    nav.querySelector('.completion-tick').classList.remove('hidden');
+                }
+            });
+            
+            closeSidebarOnMobile();
+        }
+
+        function updateProgressBar() {
+            const percentage = Math.round((visitedSections.size / allSections.length) * 100);
+            const sideBar = document.getElementById('progress-bar');
+            const sideText = document.getElementById('progress-text');
+            const topBar = document.getElementById('moduleProgressFill');
+            const topText = document.getElementById('moduleProgressLabel');
+            if (sideBar) sideBar.style.width = `${percentage}%`;
+            if (sideText) sideText.innerText = `${percentage}%`;
+            if (topBar) topBar.style.width = `${percentage}%`;
+            if (topText) topText.innerText = `${percentage}%`;
+
+            const dashRing = document.getElementById('module3DashboardRing');
+            const dashPercent = document.getElementById('module3DashboardPercent');
+            const dashStatus = document.getElementById('module3DashboardStatus');
+            if (dashRing) dashRing.style.setProperty('--progress', percentage);
+            if (dashPercent) dashPercent.innerText = `${percentage}%`;
+            if (dashStatus) {
+                dashStatus.innerText = percentage === 0
+                    ? 'Begin with Topic 3.1.'
+                    : percentage >= 100
+                    ? 'Module completed.'
+                    : 'Continue your learning journey.';
+            }
+        }
+
+        function revealStep(stepId, btnRef) {
+            document.getElementById(stepId).classList.remove('hidden');
+            if (btnRef) btnRef.style.display = 'none';
+            safeMathJaxTypeset();
+        }
+
+        function completeWorkbook() {
+            visitedSections = new Set(allSections);
+            updateProgressBar();
+            document.getElementById('check-results-screen').style.display = 'none';
+            document.getElementById('completion-message').classList.remove('hidden');
+            
+            // Update ticks
+            document.querySelectorAll('.completion-tick').forEach(tick => tick.classList.remove('hidden'));
+        }
+
+
+
+        // ==========================================
+        // BINOMIAL OPENING HOOK
+        // ==========================================
+        window.chooseBinomialHook = function(button, choice) {
+            document.querySelectorAll('.binomial-hook-option').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+
+            const feedback = document.getElementById('binomial-hook-feedback');
+            const curiosity = document.getElementById('binomial-hook-curiosity');
+            const cta = document.getElementById('binomial-hook-cta');
+            const remember = document.getElementById('binomial-hook-remember');
+
+            if (feedback) {
+                feedback.classList.add('show');
+                if (choice === 'unsure') {
+                    feedback.innerHTML = 'Good thinking. <strong>“I need more information”</strong> is a sensible statistical response because we need to quantify how unusual the result is.';
+                } else {
+                    feedback.innerHTML = 'Good — you have made a prediction. But a judgement alone does not tell us <strong>how unusual</strong> 3 defective items really are.';
+                }
+            }
+
+            if (curiosity) curiosity.classList.add('show');
+            if (cta) cta.classList.add('show');
+            if (remember) remember.classList.add('show');
+        };
+
+        window.continueFromBinomialHook = function() {
+            const target = document.querySelector('#sec-3-3 .real-life-hero');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            safeMathJaxTypeset();
+        };
+
+
+        // ==========================================
+        // REAL-LIFE BINOMIAL APPLICATIONS
+        // ==========================================
+        window.toggleApplicationCard = function(button) {
+            const card = button.closest('.application-card');
+            if (!card) return;
+            card.classList.toggle('open');
+            safeMathJaxTypeset();
+        };
+
+        window.toggleRealLifeAnswer = function(button) {
+            const answer = button.nextElementSibling;
+            if (!answer) return;
+            const isOpen = answer.classList.toggle('show');
+            button.textContent = isOpen ? 'Hide Answer' : 'Show Answer';
+            safeMathJaxTypeset();
+        };
+
+        // ==========================================
+        // TRY SECTION LOGIC (Interactive Quiz)
+        // ==========================================
+        var tryQuestions = [
+            {
+                q: "The probability distribution of the discrete random variable \\( X \\) is given as follows:<br><div class='overflow-x-auto my-3'><table class='w-full max-w-sm mx-auto text-center border-collapse text-sm bg-white border border-[#D8CDDC] shadow-sm rounded-lg overflow-hidden'><tbody><tr class='border-b border-[#D8CDDC]'><th class='p-1.5 border-r border-[#D8CDDC] bg-[#F5F6FA] text-[#512E5F] font-bold'>\\( X \\)</th><td class='p-1.5 border-r border-[#E1E3ED]'>1</td><td class='p-1.5 border-r border-[#E1E3ED]'>2</td><td class='p-1.5 border-r border-[#E1E3ED]'>3</td><td class='p-1.5 border-r border-[#E1E3ED]'>4</td><td class='p-1.5'>5</td></tr><tr><th class='p-1.5 border-r border-[#D8CDDC] bg-[#F5F6FA] text-[#512E5F] font-bold'>\\( P(X=x) \\)</th><td class='p-1.5 border-r border-[#E1E3ED]'>0.4</td><td class='p-1.5 border-r border-[#E1E3ED] font-bold text-[#8B0E2D]'>C</td><td class='p-1.5 border-r border-[#E1E3ED]'>0.1</td><td class='p-1.5 border-r border-[#E1E3ED]'>0.09</td><td class='p-1.5'>0.06</td></tr></tbody></table></div>Find the value of \\( C \\).",
+                options: ["\\( 0.25 \\)", "\\( 0.35 \\)", "\\( 0.45 \\)", "\\( 0.55 \\)"],
+                ans: 1,
+                exp: "\\[ \\sum P(X=x) = 1 \\]\\[ 0.40 + C + 0.10 + 0.09 + 0.06 = 1 \\]\\[ 0.65 + C = 1 \\implies C = 0.35 \\]"
+            },
+            {
+                q: "If \\( P(X=x) = kx \\) for \\( x = 1, 2, 3, 4 \\), find the value of \\( k \\).",
+                options: ["\\( \\frac{1}{4} \\)", "\\( \\frac{1}{8} \\)", "\\( \\frac{1}{10} \\)", "\\( \\frac{1}{12} \\)"],
+                ans: 2,
+                exp: "\\[ \\sum P(X=x) = 1 \\]\\[ k(1) + k(2) + k(3) + k(4) = 1 \\]\\[ 10k = 1 \\implies k = \\frac{1}{10} \\]"
+            },
+            {
+                q: "Given \\( E(X) = 2 \\) and \\( E(X^2) = 5 \\), find \\( \\operatorname{Var}(X) \\).",
+                options: ["\\( 1 \\)", "\\( 3 \\)", "\\( 7 \\)", "\\( 9 \\)"],
+                ans: 0,
+                exp: "\\[ \\operatorname{Var}(X) = E(X^2) - [E(X)]^2 \\]\\[ = 5 - (2)^2 \\]\\[ = 5 - 4 = 1 \\]"
+            },
+            {
+                q: "A fair die is rolled. What is the expected value, \\( E(X) \\)?",
+                options: ["\\( 2.5 \\)", "\\( 3.0 \\)", "\\( 3.5 \\)", "\\( 4.0 \\)"],
+                ans: 2,
+                exp: "The outcomes are 1, 2, 3, 4, 5, 6, each with probability \\( \\frac{1}{6} \\).\\[ E(X) = \\sum xP(X=x) \\]\\[ = 1(\\frac{1}{6}) + 2(\\frac{1}{6}) + \\dots + 6(\\frac{1}{6}) = \\frac{21}{6} = 3.5 \\]"
+            },
+            {
+                q: "Which of the following is NOT a requirement for a binomial experiment?",
+                options: [
+                    "There is a fixed number of trials.",
+                    "The probability of success changes from trial to trial.",
+                    "Each trial has only two possible outcomes.",
+                    "The trials are independent."
+                ],
+                ans: 1,
+                exp: "In a binomial experiment, the probability of success \\( (p) \\) must remain <strong>constant</strong> for each trial."
+            },
+            {
+                q: "For a binomial distribution \\( X \\sim B(10, 0.2) \\), what is the mean?",
+                options: ["\\( 0.2 \\)", "\\( 2.0 \\)", "\\( 8.0 \\)", "\\( 10.0 \\)"],
+                ans: 1,
+                exp: "For a binomial distribution, the mean is \\( \\mu = np \\).\\[ \\mu = 10(0.2) = 2.0 \\]"
+            },
+            {
+                q: "For a binomial distribution \\( X \\sim B(10, 0.2) \\), what is the variance?",
+                options: ["\\( 1.6 \\)", "\\( 2.0 \\)", "\\( 8.0 \\)", "\\( 10.0 \\)"],
+                ans: 0,
+                exp: "For a binomial distribution, the variance is \\( \\sigma^2 = npq \\). Since \\( p = 0.2 \\), \\( q = 0.8 \\).\\[ \\sigma^2 = 10(0.2)(0.8) = 1.6 \\]"
+            },
+            {
+                q: "Translate the phrase 'at most 4 successes' into probability notation.",
+                options: [
+                    "\\( P(X = 4) \\)",
+                    "\\( P(X \\ge 4) \\)",
+                    "\\( P(X \\le 4) \\)",
+                    "\\( P(X < 4) \\)"
+                ],
+                ans: 2,
+                exp: "'At most 4' means 4 is the maximum possible value, which translates mathematically to \\( X \\le 4 \\)."
+            }
+        ];
+
+        let currentTryQ = 0;
+        let tryScore = 0;
+        let selectedTryOption = null;
+
+        function renderTryDots() {
+            let dotsHtml = '';
+            for(let i=0; i<tryQuestions.length; i++) {
+                if(i < currentTryQ) dotsHtml += '<div class="w-2.5 h-2.5 rounded-full bg-[#8B0E2D]"></div>';
+                else if(i === currentTryQ) dotsHtml += '<div class="w-2.5 h-2.5 rounded-full bg-[#7A4B92] border-2 border-[#F7F2F8]"></div>';
+                else dotsHtml += '<div class="w-2.5 h-2.5 rounded-full bg-[#D8CDDC]"></div>';
+            }
+            document.getElementById('try-progress-dots').innerHTML = dotsHtml;
+            document.getElementById('try-q-tracker').innerText = `${currentTryQ + 1} OF ${tryQuestions.length}`;
+            document.getElementById('try-q-badge').innerText = `Question ${currentTryQ + 1}`;
+        }
+
+        function renderTryQuestion() {
+            selectedTryOption = null;
+            const qData = tryQuestions[currentTryQ];
+            document.getElementById('try-q-text').innerHTML = qData.q;
+            
+            let optionsHtml = '';
+            qData.options.forEach((opt, idx) => {
+                optionsHtml += `
+                    <button class="quiz-opt-base w-full text-left px-4 py-3 font-medium flex items-center text-sm" onclick="window.selectTryOption(${idx})" id="try-opt-${idx}">
+                        <span class="mr-3 text-gray-400 font-bold w-5 shrink-0">${String.fromCharCode(65 + idx)}.</span> 
+                        <div class="flex-1 overflow-x-auto">${opt}</div>
+                    </button>
+                `;
+            });
+            document.getElementById('try-options-container').innerHTML = optionsHtml;
+            
+            document.getElementById('btn-try-check').style.display = 'block';
+            document.getElementById('btn-try-check').disabled = true;
+            document.getElementById('btn-try-next').style.display = 'none';
+            document.getElementById('try-feedback-area').classList.add('hidden');
+            
+            renderTryDots();
+            safeMathJaxTypeset();
+        }
+
+        window.selectTryOption = function(idx) {
+            selectedTryOption = idx;
+            document.querySelectorAll('#try-options-container button').forEach((btn, i) => {
+                btn.className = 'quiz-opt-base w-full text-left px-4 py-3 font-medium flex items-center text-sm';
+                if(i === idx) btn.classList.add('quiz-opt-selected');
+            });
+            document.getElementById('btn-try-check').disabled = false;
+        };
+
+        document.getElementById('btn-try-check').addEventListener('click', () => {
+            const qData = tryQuestions[currentTryQ];
+            const isCorrect = (selectedTryOption === qData.ans);
+            
+            if(isCorrect) tryScore++;
+            
+            // Disable all options
+            document.querySelectorAll('#try-options-container button').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('quiz-opt-selected');
+            });
+            
+            // Highlight Correct / Incorrect
+            const selectedBtn = document.getElementById(`try-opt-${selectedTryOption}`);
+            const correctBtn = document.getElementById(`try-opt-${qData.ans}`);
+            
+            if (isCorrect) {
+                selectedBtn.classList.add('quiz-opt-correct');
+                addStatusLabel(selectedBtn, true);
+            } else {
+                selectedBtn.classList.add('quiz-opt-incorrect');
+                correctBtn.classList.add('quiz-opt-correct');
+                addStatusLabel(selectedBtn, false);
+            }
+            
+            // Show Feedback
+            const feedbackArea = document.getElementById('try-feedback-area');
+            feedbackArea.classList.remove('hidden');
+            
+            if(isCorrect) {
+                feedbackArea.className = 'mt-4 p-4 rounded-xl border bg-[#F0FDF4] border-[#86EFAC] block';
+                feedbackArea.innerHTML = `
+                    <div class="flex flex-col">
+                        <span class="text-[#166534] font-bold text-lg mb-2 flex items-center"><svg class="w-5 h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Correct!</span>
+                        <div class="border-t border-[#BBF7D0] pt-2 mt-1">
+                            <span class="font-bold text-[11px] uppercase tracking-wider mb-1 block text-[#15803D]">💡 Why?</span>
+                            <div class="text-sm text-gray-800">${qData.exp}</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                feedbackArea.className = 'mt-4 p-4 rounded-xl border bg-[#FEF2F2] border-[#FCA5A5] block';
+                feedbackArea.innerHTML = `
+                    <div class="flex flex-col">
+                        <span class="text-[#991B1B] font-bold text-lg mb-2 flex items-center"><svg class="w-5 h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> Not quite.</span>
+                        <div class="border-t border-[#FECACA] pt-2 mt-1">
+                            <span class="font-bold text-[11px] uppercase tracking-wider mb-1 block text-[#B91C1C]">💡 Let's review</span>
+                            <div class="text-sm text-gray-800">${qData.exp}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('btn-try-check').style.display = 'none';
+            document.getElementById('btn-try-next').style.display = 'flex';
+            safeMathJaxTypeset();
+        });
+
+        function addStatusLabel(btn, isCorrect) {
+            const span = document.createElement('span');
+            span.className = 'absolute right-3 top-1/2 transform -translate-y-1/2 font-bold flex items-center bg-white bg-opacity-90 px-2 py-0.5 rounded shadow-sm text-xs';
+            if(isCorrect) {
+                span.innerHTML = '<svg class="w-3 h-3 mr-1 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> <span class="text-green-700">Correct</span>';
+            } else {
+                span.innerHTML = '<svg class="w-3 h-3 mr-1 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> <span class="text-red-700">Incorrect</span>';
+            }
+            btn.appendChild(span);
+        }
+
+        document.getElementById('btn-try-next').addEventListener('click', () => {
+            currentTryQ++;
+            if(currentTryQ < tryQuestions.length) {
+                renderTryQuestion();
+            } else {
+                document.getElementById('try-quiz-content').style.display = 'none';
+                document.getElementById('try-end-screen').style.display = 'block';
+                document.getElementById('try-final-score').innerText = `${tryScore} / ${tryQuestions.length}`;
+                document.getElementById('try-final-accuracy').innerText = `Accuracy: ${Math.round((tryScore/tryQuestions.length)*100)}%`;
+            }
+        });
+
+        function resetTryQuiz() {
+            currentTryQ = 0;
+            tryScore = 0;
+            document.getElementById('try-quiz-content').style.display = 'block';
+            document.getElementById('try-end-screen').style.display = 'none';
+            renderTryQuestion();
+        }
+
+        // ==========================================
+        // CHECK SECTION LOGIC (Mastery Assessment)
+        // ==========================================
+        const masteryQuestions = [
+            {
+                topic: "3.1 Probability Distributions",
+                q: "If \\( P(X=x) = kx \\) for \\( x = 1, 2, 3, 4 \\), find the value of \\( k \\).",
+                options: ["\\( 0.1 \\)", "\\( 0.2 \\)", "\\( 0.3 \\)", "\\( 0.4 \\)"],
+                ans: 0,
+                solution: "\\[ \\sum P(X=x) = 1 \\]\\[ k(1) + k(2) + k(3) + k(4) = 1 \\]\\[ 10k = 1 \\implies k = 0.1 \\]",
+                why: "The probabilities of all possible values of a discrete random variable must add up to 1. We sum all probabilities and equate to 1 to find the unknown constant.",
+                error: "You might have calculated the expected value \\( E(X) \\) instead of using the property \\( \\sum P(X=x) = 1 \\).",
+                idea: "For a valid discrete probability distribution: \\( \\sum P(X=x) = 1 \\)"
+            },
+            {
+                topic: "3.1 Probability Distributions",
+                q: "Which of the following conditions must be true for a discrete probability distribution?",
+                options: [
+                    "\\( P(X=x) > 1 \\) for all \\( x \\)",
+                    "\\( \\sum P(X=x) = 0 \\)",
+                    "\\( 0 \\le P(X=x) \\le 1 \\) for all \\( x \\)",
+                    "\\( P(X=x) \\) can be negative."
+                ],
+                ans: 2,
+                solution: "A probability distribution must satisfy:\n1. \\( \\sum P(X=x) = 1 \\)\n2. \\( 0 \\le P(X=x) \\le 1 \\)",
+                why: "Probabilities represent the likelihood of an event occurring, which must be between 0% (impossible) and 100% (certain), corresponding to values between 0 and 1.",
+                error: "You might have confused the rules of probabilities with properties of general variables.",
+                idea: "Probabilities are always bounded: \\( 0 \\le P(X=x) \\le 1 \\)."
+            },
+            {
+                topic: "3.1 Probability Distributions",
+                q: "Given a discrete variable \\( X \\) takes values 1, 2, 3. If \\( P(X=1) = 0.2 \\) and \\( P(X=2) = 0.5 \\), find \\( P(X=3) \\).",
+                options: ["\\( 0.1 \\)", "\\( 0.2 \\)", "\\( 0.3 \\)", "\\( 0.4 \\)"],
+                ans: 2,
+                solution: "\\[ \\sum P(X=x) = 1 \\]\\[ P(X=1) + P(X=2) + P(X=3) = 1 \\]\\[ 0.2 + 0.5 + P(X=3) = 1 \\]\\[ 0.7 + P(X=3) = 1 \\implies P(X=3) = 0.3 \\]",
+                why: "Because \\( X \\) only takes the values 1, 2, and 3, their probabilities must sum to 1.",
+                error: "You may have added incorrectly or forgotten that the total sum must be exactly 1.",
+                idea: "The missing probability is always \\( 1 - \\) (sum of known probabilities)."
+            },
+            {
+                topic: "3.2 Mean & Variance",
+                q: "Find the mean (expected value) for the probability distribution:<br><div class='overflow-x-auto my-3'><table class='w-full max-w-xs mx-auto text-center border-collapse text-sm bg-white border border-[#D8CDDC] rounded-lg overflow-hidden'><tbody><tr class='border-b border-[#D8CDDC]'><th class='p-1.5 border-r border-[#D8CDDC] bg-[#F5F6FA]'>\\( X \\)</th><td class='p-1.5 border-r border-[#E1E3ED]'>0</td><td class='p-1.5'>1</td></tr><tr><th class='p-1.5 border-r border-[#D8CDDC] bg-[#F5F6FA]'>\\( P(X=x) \\)</th><td class='p-1.5 border-r border-[#E1E3ED]'>0.8</td><td class='p-1.5'>0.2</td></tr></tbody></table></div>",
+                options: ["\\( 0.1 \\)", "\\( 0.2 \\)", "\\( 0.8 \\)", "\\( 1.0 \\)"],
+                ans: 1,
+                solution: "\\[ E(X) = \\sum xP(X=x) \\]\\[ = (0)(0.8) + (1)(0.2) \\]\\[ = 0 + 0.2 = 0.2 \\]",
+                why: "The mean is calculated by multiplying each outcome by its probability and summing the results.",
+                error: "You might have just looked at the highest probability (0.8) instead of applying the formula \\( \\sum xP(X=x) \\).",
+                idea: "Mean \\( \\mu = E(X) = \\sum xP(X=x) \\)."
+            },
+            {
+                topic: "3.2 Mean & Variance",
+                q: "Given \\( E(X) = 3 \\) and \\( \\operatorname{Var}(X) = 4 \\), find \\( E(X^2) \\).",
+                options: ["\\( 5 \\)", "\\( 7 \\)", "\\( 10 \\)", "\\( 13 \\)"],
+                ans: 3,
+                solution: "\\[ \\operatorname{Var}(X) = E(X^2) - [E(X)]^2 \\]\\[ 4 = E(X^2) - (3)^2 \\]\\[ 4 = E(X^2) - 9 \\]\\[ E(X^2) = 4 + 9 = 13 \\]",
+                why: "We manipulate the variance formula to solve for \\( E(X^2) \\).",
+                error: "You likely subtracted instead of adding, or forgot to square \\( E(X) \\).",
+                idea: "Rearrange the variance formula: \\( E(X^2) = \\operatorname{Var}(X) + [E(X)]^2 \\)."
+            },
+            {
+                topic: "3.3 Binomial Distribution",
+                q: "For a binomial distribution, if the number of trials is \\( n=5 \\) and the probability of success is \\( p=0.4 \\), find the probability of exactly 2 successes.",
+                options: ["\\( 0.2304 \\)", "\\( 0.3456 \\)", "\\( 0.4000 \\)", "\\( 0.6826 \\)"],
+                ans: 1,
+                solution: "\\[ X \\sim B(5, 0.4) \\]\\[ P(X=2) = \\binom{5}{2} (0.4)^2 (0.6)^3 \\]\\[ = 10(0.16)(0.216) \\]\\[ = 0.3456 \\]",
+                why: "We substitute \\( n=5, p=0.4, q=0.6, r=2 \\) into the binomial probability formula.",
+                error: "You may have used the wrong value for \\( q \\) or miscalculated the combination \\( \\binom{5}{2} \\).",
+                idea: "Binomial Formula: \\( P(X=r) = \\binom{n}{r} p^r q^{n-r} \\)."
+            },
+            {
+                topic: "3.3 Binomial Distribution",
+                q: "If \\( X \\sim B(20, 0.3) \\), what is the mean of \\( X \\)?",
+                options: ["\\( 0.3 \\)", "\\( 3.0 \\)", "\\( 6.0 \\)", "\\( 14.0 \\)"],
+                ans: 2,
+                solution: "\\[ \\mu = np \\]\\[ \\mu = 20(0.3) \\]\\[ = 6.0 \\]",
+                why: "For a binomial distribution, the expected value (mean) is simply the number of trials multiplied by the probability of success.",
+                error: "You may have calculated the variance \\( (npq) \\) or used \\( q \\) instead of \\( p \\).",
+                idea: "Binomial Mean: \\( \\mu = np \\)."
+            },
+            {
+                topic: "3.3 Binomial Distribution",
+                q: "If \\( X \\sim B(10, 0.5) \\), find the variance of \\( X \\).",
+                options: ["\\( 2.5 \\)", "\\( 5.0 \\)", "\\( 7.5 \\)", "\\( 10.0 \\)"],
+                ans: 0,
+                solution: "\\[ \\sigma^2 = npq \\]\\[ p = 0.5, \\quad q = 1 - 0.5 = 0.5 \\]\\[ \\sigma^2 = 10(0.5)(0.5) \\]\\[ = 2.5 \\]",
+                why: "The variance of a binomial distribution takes into account the number of trials, the probability of success, and the probability of failure.",
+                error: "You may have calculated the mean \\( (np = 5) \\) instead of the variance.",
+                idea: "Binomial Variance: \\( \\sigma^2 = npq \\)."
+            }
+        ];
+
+        let currentCheckQ = 0;
+        let checkSelectedOpt = null;
+        let checkAnswers = []; // Store { isCorrect, qData, selectedOpt }
+        
+        function renderCheckQuestion() {
+            checkSelectedOpt = null;
+            const qData = masteryQuestions[currentCheckQ];
+            document.getElementById('check-q-text').innerHTML = qData.q;
+            
+            let optionsHtml = '';
+            qData.options.forEach((opt, idx) => {
+                optionsHtml += `
+                    <button class="quiz-opt-base w-full text-left px-4 py-3 font-medium flex items-center text-sm" onclick="window.selectCheckOption(${idx})" id="check-opt-${idx}">
+                        <span class="mr-3 text-gray-400 font-bold w-5 shrink-0">${String.fromCharCode(65 + idx)}.</span> 
+                        <div class="flex-1 overflow-x-auto">${opt}</div>
+                    </button>
+                `;
+            });
+            document.getElementById('check-options-container').innerHTML = optionsHtml;
+            document.getElementById('check-q-tracker').innerText = `${currentCheckQ + 1} OF ${masteryQuestions.length}`;
+            
+            document.getElementById('btn-check-submit').style.display = 'block';
+            document.getElementById('btn-check-submit').disabled = true;
+            document.getElementById('btn-check-next').style.display = 'none';
+            document.getElementById('check-feedback-area').classList.add('hidden');
+            
+            safeMathJaxTypeset();
+        }
+
+        window.selectCheckOption = function(idx) {
+            checkSelectedOpt = idx;
+            document.querySelectorAll('#check-options-container button').forEach((btn, i) => {
+                btn.className = 'quiz-opt-base w-full text-left px-4 py-3 font-medium flex items-center text-sm';
+                if(i === idx) btn.classList.add('quiz-opt-selected');
+            });
+            document.getElementById('btn-check-submit').disabled = false;
+        };
+
+        document.getElementById('btn-check-submit').addEventListener('click', () => {
+            const qData = masteryQuestions[currentCheckQ];
+            const isCorrect = (checkSelectedOpt === qData.ans);
+            
+            checkAnswers.push({
+                isCorrect: isCorrect,
+                qData: qData,
+                selectedOptionIdx: checkSelectedOpt
+            });
+            
+            // Disable buttons
+            document.querySelectorAll('#check-options-container button').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('quiz-opt-selected');
+            });
+            
+            // Highlight Correct/Incorrect
+            const selectedBtn = document.getElementById(`check-opt-${checkSelectedOpt}`);
+            const correctBtn = document.getElementById(`check-opt-${qData.ans}`);
+            
+            if (isCorrect) {
+                selectedBtn.classList.add('quiz-opt-correct');
+                addStatusLabel(selectedBtn, true);
+            } else {
+                selectedBtn.classList.add('quiz-opt-incorrect');
+                correctBtn.classList.add('quiz-opt-correct');
+                addStatusLabel(selectedBtn, false);
+            }
+            
+            // Construct Explanation Card
+            const feedbackArea = document.getElementById('check-feedback-area');
+            feedbackArea.classList.remove('hidden');
+            
+            if(isCorrect) {
+                feedbackArea.className = 'mt-4 playbook-card p-5 border border-[#86EFAC] bg-[#F0FDF4] shadow-sm block';
+                feedbackArea.innerHTML = `
+                    <div class="mb-3">
+                        <span class="text-[#166534] font-bold text-lg flex items-center uppercase tracking-wider"><svg class="w-5 h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> Correct</span>
+                    </div>
+                    
+                    <div class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Correct Answer</div>
+                    <div class="bg-white px-3 py-2 rounded-lg border border-gray-200 mb-4 text-sm inline-block">${qData.options[qData.ans]}</div>
+                    
+                    <div class="border-t border-[#BBF7D0] pt-4 mb-4">
+                        <div class="text-xs font-bold text-[#15803D] uppercase tracking-wider mb-2">How to solve it</div>
+                        <div class="math-display text-sm bg-white p-3 rounded-lg border border-[#BBF7D0]">${qData.solution}</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-xs font-bold text-[#15803D] uppercase tracking-wider mb-1">Why?</div>
+                        <p class="text-sm text-gray-800">${qData.why}</p>
+                    </div>
+                    
+                    <div class="bg-[#DCFCE7] border border-[#86EFAC] p-3 rounded-lg">
+                        <div class="text-xs font-bold text-[#166534] uppercase tracking-wider mb-1 flex items-center">⭐ Key Idea</div>
+                        <p class="text-sm text-[#166534] font-medium">${qData.idea}</p>
+                    </div>
+                `;
+            } else {
+                feedbackArea.className = 'mt-4 playbook-card p-5 border border-[#FCA5A5] bg-[#FEF2F2] shadow-sm block';
+                feedbackArea.innerHTML = `
+                    <div class="mb-3">
+                        <span class="text-[#991B1B] font-bold text-lg flex items-center uppercase tracking-wider"><svg class="w-5 h-5 mr-1.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> Not quite</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div>
+                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Your Answer</div>
+                            <div class="bg-white px-2 py-1.5 rounded border border-red-200 text-sm opacity-80">${qData.options[checkSelectedOpt]}</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Correct Answer</div>
+                            <div class="bg-white px-2 py-1.5 rounded border border-gray-200 text-sm font-medium">${qData.options[qData.ans]}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-[#FECACA] pt-4 mb-4">
+                        <div class="text-xs font-bold text-[#991B1B] uppercase tracking-wider mb-2">Let's work through it</div>
+                        <div class="math-display text-sm bg-white p-3 rounded-lg border border-[#FECACA]">${qData.solution}</div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-xs font-bold text-[#991B1B] uppercase tracking-wider mb-1">Why?</div>
+                        <p class="text-sm text-gray-800">${qData.why}</p>
+                    </div>
+                    
+                    <div class="bg-red-50 border border-red-200 p-3 rounded-lg mb-4">
+                        <div class="text-xs font-bold text-[#991B1B] uppercase tracking-wider mb-1 flex items-center">⚠️ Common Error</div>
+                        <p class="text-sm text-gray-800">${qData.error}</p>
+                    </div>
+                    
+                    <div class="bg-[#FEE2E2] border border-[#FCA5A5] p-3 rounded-lg">
+                        <div class="text-xs font-bold text-[#991B1B] uppercase tracking-wider mb-1 flex items-center">⭐ Remember</div>
+                        <p class="text-sm text-[#7F1D1D] font-medium">${qData.idea}</p>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('btn-check-submit').style.display = 'none';
+            document.getElementById('btn-check-next').style.display = 'flex';
+            safeMathJaxTypeset();
+        });
+
+        document.getElementById('btn-check-next').addEventListener('click', () => {
+            currentCheckQ++;
+            if(currentCheckQ < masteryQuestions.length) {
+                renderCheckQuestion();
+            } else {
+                showCheckResults();
+            }
+        });
+
+        function showCheckResults() {
+            document.getElementById('check-quiz-content').style.display = 'none';
+            document.getElementById('check-results-screen').style.display = 'block';
+            
+            let correctCount = checkAnswers.filter(a => a.isCorrect).length;
+            document.getElementById('check-final-score').innerText = `${correctCount} / ${masteryQuestions.length}`;
+            document.getElementById('check-final-accuracy').innerText = `${Math.round((correctCount/masteryQuestions.length)*100)}%`;
+            document.getElementById('check-count-correct').innerText = correctCount;
+            document.getElementById('check-count-incorrect').innerText = masteryQuestions.length - correctCount;
+            
+            // Topic Breakdown
+            const topicsStats = {};
+            checkAnswers.forEach(ans => {
+                const topic = ans.qData.topic;
+                if(!topicsStats[topic]) topicsStats[topic] = { total: 0, correct: 0 };
+                topicsStats[topic].total++;
+                if(ans.isCorrect) topicsStats[topic].correct++;
+            });
+            
+            let breakdownHtml = '';
+            for (const [topic, stats] of Object.entries(topicsStats)) {
+                breakdownHtml += `
+                    <div class="bg-white border border-gray-200 p-3 rounded-xl shadow-sm">
+                        <div class="font-bold text-xs text-[#512E5F] mb-1.5 leading-tight h-8">${topic}</div>
+                        <div class="text-lg font-bold text-gray-800">${stats.correct}/${stats.total}</div>
+                    </div>
+                `;
+            }
+            document.getElementById('check-topic-breakdown').innerHTML = breakdownHtml;
+            
+            // Mistakes Review
+            const mistakesList = checkAnswers.filter(a => !a.isCorrect).map((a, i) => {
+                const actualIndex = checkAnswers.indexOf(a) + 1;
+                return { ...a, questionNumber: actualIndex };
+            });
+            
+            if (mistakesList.length > 0) {
+                document.getElementById('check-mistakes-container').classList.remove('hidden');
+                let mistakesHtml = '';
+                mistakesList.forEach(m => {
+                    mistakesHtml += `
+                        <div class="bg-white border border-red-100 p-4 rounded-xl shadow-sm">
+                            <div class="flex items-center text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">
+                                <span class="bg-red-50 text-red-700 border border-red-200 px-1.5 py-0.5 rounded mr-2">Question ${m.questionNumber}</span>
+                                <span>${m.qData.topic}</span>
+                            </div>
+                            <div class="text-sm font-medium mb-3">${m.qData.q}</div>
+                            
+                            <div class="grid grid-cols-2 gap-2 mb-3 text-xs">
+                                <div class="bg-red-50 border border-red-200 p-2 rounded">
+                                    <div class="font-bold text-red-700 uppercase mb-1 text-[9px]">Your Answer</div>
+                                    <div class="opacity-80">${m.qData.options[m.selectedOptionIdx]}</div>
+                                </div>
+                                <div class="bg-green-50 border border-green-200 p-2 rounded">
+                                    <div class="font-bold text-green-700 uppercase mb-1 text-[9px]">Correct Answer</div>
+                                    <div class="font-medium">${m.qData.options[m.qData.ans]}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 border border-gray-200 p-3 rounded-lg text-xs">
+                                <div class="font-bold text-gray-600 uppercase mb-1 text-[10px]">Review</div>
+                                <div>${m.qData.idea}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                document.getElementById('check-mistakes-list').innerHTML = mistakesHtml;
+            }
+            
+            safeMathJaxTypeset();
+        }
+
+        // Initialize First Quiz Questions
+        renderTryQuestion();
+        renderCheckQuestion();
+    </script>
+<script id="progressive-locking-system">
+(function(){
+  const KEY='chapter3InteractiveWorkbookProgressFreeNavV1';
+  const sections=['sec-start','sec-3-1','sec-3-2','sec-3-3','sec-obt','sec-try','sec-check'];
+
+  let visited=new Set(['sec-start']);
+
+  function loadProgress(){
+    try{
+      const saved=JSON.parse(localStorage.getItem(KEY) || '[]');
+      if(Array.isArray(saved) && saved.length){
+        visited=new Set(saved);
+      }else{
+        visited=new Set(['sec-start']);
+      }
+    }catch(e){
+      visited=new Set(['sec-start']);
+    }
+  }
+
+  function saveProgress(){
+    try{
+      localStorage.setItem(KEY,JSON.stringify(Array.from(visited)));
+    }catch(e){}
+  }
+
+  function updateProgressUI(){
+    const completed=sections.filter(id=>id!=='sec-start' && visited.has(id)).length;
+    const total=sections.length-1;
+    const pct=Math.round((completed/total)*100);
+
+    const sideBar=document.getElementById('progress-bar');
+    const sideText=document.getElementById('progress-text');
+    const topBar=document.getElementById('moduleProgressFill');
+    const topText=document.getElementById('moduleProgressLabel');
+    const ring=document.getElementById('module3DashboardRing');
+    const ringText=document.getElementById('module3DashboardPercent');
+    const status=document.getElementById('module3DashboardStatus');
+
+    if(sideBar) sideBar.style.width=pct+'%';
+    if(sideText) sideText.textContent=pct+'%';
+    if(topBar) topBar.style.width=pct+'%';
+    if(topText) topText.textContent=pct+'%';
+    if(ring) ring.style.setProperty('--progress',pct);
+    if(ringText) ringText.textContent=pct+'%';
+
+    if(status){
+      status.textContent=pct===0
+        ? 'Begin with Topic 3.1.'
+        : pct>=100
+        ? 'Module completed.'
+        : 'Continue your learning journey.';
+    }
+  }
+
+  function activateSection(sectionId,navId,recordVisit){
+    document.querySelectorAll('.page-section').forEach(sec=>sec.classList.remove('active'));
+    const target=document.getElementById(sectionId);
+    if(target) target.classList.add('active');
+
+    document.querySelectorAll('.nav-item').forEach(nav=>{
+      nav.classList.remove('nav-active','nav-locked','nav-completed');
+      nav.removeAttribute('disabled');
+      nav.removeAttribute('aria-disabled');
+      nav.style.pointerEvents='auto';
+      nav.style.opacity='1';
+    });
+
+    const activeNav=document.getElementById(navId);
+    if(activeNav) activeNav.classList.add('nav-active');
+
+    if(recordVisit){
+      visited.add(sectionId);
+      saveProgress();
+      updateProgressUI();
+    }
+
+    const main=document.getElementById('moduleMain');
+    if(main) main.scrollTop=0;
+
+    if(typeof window.safeMathJaxTypeset==='function'){
+      try{window.safeMathJaxTypeset();}catch(e){}
+    }
+
+    if(typeof window.closeSidebarOnMobile==='function'){
+      try{window.closeSidebarOnMobile();}catch(e){}
+    }
+  }
+
+  window.navigateTo=function(sectionId){
+    const navMap={
+      'sec-start':'nav-start',
+      'sec-3-1':'nav-3-1',
+      'sec-3-2':'nav-3-2',
+      'sec-3-3':'nav-3-3',
+      'sec-obt':'nav-obt',
+      'sec-try':'nav-try',
+      'sec-check':'nav-check'
+    };
+    activateSection(sectionId,navMap[sectionId],true);
+    return false;
+  };
+
+  window.updateNav=function(navId){
+    document.querySelectorAll('.nav-item').forEach(nav=>{
+      nav.classList.remove('nav-active','nav-locked','nav-completed');
+      nav.removeAttribute('disabled');
+      nav.removeAttribute('aria-disabled');
+      nav.style.pointerEvents='auto';
+      nav.style.opacity='1';
+    });
+    const activeNav=document.getElementById(navId);
+    if(activeNav) activeNav.classList.add('nav-active');
+
+    document.querySelectorAll('.nav-status').forEach(el=>el.remove());
+    document.querySelectorAll('.completion-tick').forEach(el=>el.classList.add('hidden'));
+    return false;
+  };
+
+  window.resetModule3Progress=function(event){
+    if(event && typeof event.preventDefault==='function') event.preventDefault();
+
+    // Reset saved progress.
+    visited=new Set(['sec-start']);
+    try{
+      localStorage.removeItem(KEY);
+      localStorage.removeItem('chapter3InteractiveWorkbookProgress');
+      localStorage.removeItem('STATXPLORE_MODULE3_PROGRESS');
+    }catch(e){}
+
+    try{
+      sessionStorage.removeItem('chapter3ReturnSection');
+    }catch(e){}
+
+    saveProgress();
+
+    // Reset quizzes if those functions exist.
+    try{
+      if(typeof window.resetTryQuiz==='function') window.resetTryQuiz();
+    }catch(e){}
+
+    try{
+      if(typeof currentCheckQ!=='undefined') currentCheckQ=0;
+      if(typeof checkScore!=='undefined') checkScore=0;
+      if(typeof selectedCheckOption!=='undefined') selectedCheckOption=null;
+      if(typeof window.renderCheckQuestion==='function') window.renderCheckQuestion();
+    }catch(e){}
+
+    const checkResults=document.getElementById('check-results-screen');
+    const checkQuiz=document.getElementById('check-quiz-content');
+    const completion=document.getElementById('completion-message');
+    if(checkResults) checkResults.classList.add('hidden');
+    if(checkQuiz) checkQuiz.classList.remove('hidden');
+    if(completion) completion.classList.add('hidden');
+
+    updateProgressUI();
+
+    // Return directly to START HERE without counting it as progress.
+    activateSection('sec-start','nav-start',false);
+
+    // Small confirmation message.
+    let toast=document.getElementById('module3-reset-toast');
+    if(!toast){
+      toast=document.createElement('div');
+      toast.id='module3-reset-toast';
+      toast.textContent='✓ Progress reset successfully';
+      toast.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;background:#EDF8F3;color:#174F40;border:1px solid #9ED5BD;border-radius:12px;padding:10px 16px;font-weight:800;font-size:13px;box-shadow:0 12px 28px rgba(0,0,0,.12);';
+      document.body.appendChild(toast);
+    }else{
+      toast.style.display='block';
+    }
+
+    clearTimeout(window.__module3ResetToast);
+    window.__module3ResetToast=setTimeout(()=>{
+      if(toast) toast.style.display='none';
+    },1600);
+
+    return false;
+  };
+
+  // Compatibility with any old button handlers still present.
+  window.openResetProgressModal=window.resetModule3Progress;
+  window.confirmResetProgress=window.resetModule3Progress;
+
+  window.prepareOpenBookTestLaunch=function(){
+    try{sessionStorage.setItem('chapter3ReturnSection','sec-obt');}catch(e){}
+    return true;
+  };
+
+  window.completeOpenBookTest=function(event){
+    if(event) event.preventDefault();
+    activateSection('sec-try','nav-try',true);
+    return false;
+  };
+
+  document.addEventListener('DOMContentLoaded',function(){
+    loadProgress();
+
+    document.querySelectorAll('.nav-item').forEach(nav=>{
+      nav.classList.remove('nav-locked','nav-completed');
+      nav.removeAttribute('disabled');
+      nav.removeAttribute('aria-disabled');
+      nav.style.pointerEvents='auto';
+      nav.style.opacity='1';
+    });
+
+    document.querySelectorAll('.nav-status').forEach(el=>el.remove());
+    document.querySelectorAll('.requirement-note').forEach(el=>el.style.display='none');
+    document.querySelectorAll('.section-complete-btn').forEach(btn=>btn.disabled=false);
+
+    // Bind both Reset Progress buttons directly.
+    const sideReset=document.getElementById('reset-progress-btn');
+    if(sideReset){
+      sideReset.onclick=window.resetModule3Progress;
+      sideReset.removeAttribute('aria-haspopup');
+      sideReset.removeAttribute('aria-controls');
+    }
+
+    document.querySelectorAll('.module3-btn-light').forEach(btn=>{
+      if((btn.textContent||'').toLowerCase().includes('reset progress')){
+        btn.onclick=window.resetModule3Progress;
+      }
+    });
+
+    updateProgressUI();
+  });
+})();
+</script>
+<script id="github-obt-return-restore">
+window.addEventListener('pageshow', function () {
+    try {
+        const section = sessionStorage.getItem('chapter3ReturnSection');
+        if (section === 'sec-obt') {
+            sessionStorage.removeItem('chapter3ReturnSection');
+            setTimeout(function () {
+                if (typeof navigateTo === 'function') navigateTo('sec-obt');
+                if (typeof updateNav === 'function') updateNav('nav-obt');
+            }, 120);
+        }
+    } catch (e) {}
+});
+</script>
+<script id="obt-completion-button-final-binding">
+window.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('btn-complete-obt');
+    if (!btn) return;
+
+    btn.addEventListener('click', function (event) {
+        // If already completed, go directly to TRY.
+        try {
+            if (typeof state !== 'undefined' && state.obtCompleted) {
+                event.preventDefault();
+                if (typeof window.navigateTo === 'function') window.navigateTo('sec-try');
+                if (typeof window.updateNav === 'function') window.updateNav('nav-try');
+                return;
+            }
+        } catch (e) {}
+
+        // Otherwise complete OBT.
+        if (typeof window.completeOpenBookTest === 'function') {
+            event.preventDefault();
+            window.completeOpenBookTest(event);
+        }
+    });
+});
+
+        // ==========================================
+        // MODULE 3 THEME TOGGLE · MATCHES MODULE 1 & 2
+        // ==========================================
+        function applyModuleTheme(theme) {
+            const isDark = theme === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            const icon = document.getElementById('moduleThemeIcon');
+            const btn = document.getElementById('moduleThemeToggle');
+            if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+            if (btn) {
+                btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                btn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+            }
+            try { localStorage.setItem('STATXPLORE_MODULE3_THEME', isDark ? 'dark' : 'light'); } catch(e) {}
+        }
+
+        function toggleModuleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            applyModuleTheme(current === 'dark' ? 'light' : 'dark');
+        }
+
+        try {
+            applyModuleTheme(localStorage.getItem('STATXPLORE_MODULE3_THEME') === 'dark' ? 'dark' : 'light');
+        } catch(e) {
+            applyModuleTheme('light');
+        }
+</script>
+<script id="module3-next-button-fallback">
+window.goToModule3Section = function(sectionId, navId){
+  if (typeof window.navigateTo === 'function') {
+    window.navigateTo(sectionId);
+  } else {
+    document.querySelectorAll('.page-section').forEach(function(sec){
+      sec.classList.remove('active');
+    });
+    var target = document.getElementById(sectionId);
+    if (target) target.classList.add('active');
+    var main = document.getElementById('moduleMain');
+    if (main) main.scrollTop = 0;
+  }
+
+  if (typeof window.updateNav === 'function') {
+    window.updateNav(navId);
+  } else {
+    document.querySelectorAll('.nav-item').forEach(function(nav){
+      nav.classList.remove('nav-active');
+    });
+    var activeNav = document.getElementById(navId);
+    if (activeNav) activeNav.classList.add('nav-active');
+  }
+
+  if (typeof window.safeMathJaxTypeset === 'function') {
+    window.safeMathJaxTypeset();
+  }
+  return false;
+};
+</script>
+</body>
+</html>

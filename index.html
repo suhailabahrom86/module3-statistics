@@ -1673,6 +1673,1276 @@ html[data-theme="dark"] .module3-btn-light{
   display:none !important;
 }
 </style>
+
+<style id="module3-certificate-styles">
+.module3-cert-note{
+  margin-top:.8rem;
+  color:rgba(255,255,255,.9);
+  font-size:.86rem;
+}
+.module3-cert-btn.locked{
+  opacity:.62;
+  cursor:not-allowed;
+}
+.module3-cert-backdrop{
+  position:fixed; inset:0; z-index:5000;
+  display:none; align-items:center; justify-content:center;
+  padding:18px; background:rgba(18,22,35,.66);
+  backdrop-filter:blur(5px);
+}
+.module3-cert-backdrop.show{display:flex;}
+.module3-cert-modal{
+  width:min(96vw,1180px);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 28px 80px rgba(20,24,45,.32);
+  padding:18px;
+}
+.module3-cert-toolbar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; flex-wrap:wrap; margin-bottom:14px;
+}
+.module3-cert-toolbar h3{margin:0;color:#512E5F;font-size:1.2rem}
+.module3-cert-actions{display:flex;gap:10px;flex-wrap:wrap}
+.module3-cert-action{
+  border:0;border-radius:999px;padding:.72rem 1rem;font-weight:850;cursor:pointer;
+}
+.module3-cert-action.primary{
+  color:#fff;background:linear-gradient(90deg,#8B0E2D,#512E5F);
+}
+.module3-cert-action.light{color:#202235;background:#EEF0F6}
+.module3-cert-form{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;
+}
+.module3-cert-form label{font-weight:800;color:#512E5F;font-size:.9rem}
+.module3-cert-form input{
+  margin-top:6px;width:100%;padding:.8rem .9rem;border:1px solid #AAB1D1;
+  border-radius:12px;font:inherit;color:#202235;background:#fff;
+}
+.module3-cert-preview{
+  position:relative;
+  overflow:hidden;
+  min-height:650px;
+  border:7px solid #512E5F;
+  outline:3px solid #25408F;
+  outline-offset:-17px;
+  border-radius:20px;
+  background:linear-gradient(145deg,#fff 0%,#FBF7FC 52%,#F3F6FF 100%);
+  padding:56px 64px 44px;
+  text-align:center;
+}
+.module3-cert-preview::before,
+.module3-cert-preview::after{
+  content:"";position:absolute;border-radius:50%;pointer-events:none;
+}
+.module3-cert-preview::before{
+  width:210px;height:210px;right:-65px;top:-65px;background:rgba(139,14,45,.09);
+}
+.module3-cert-preview::after{
+  width:240px;height:240px;left:-90px;bottom:-110px;background:rgba(37,64,143,.10);
+}
+.module3-cert-logo{
+  width:86px;height:86px;border-radius:50%;object-fit:cover;
+  box-shadow:0 8px 24px rgba(37,64,143,.18);
+}
+.module3-cert-kicker{
+  margin-top:18px;color:#8B0E2D;font-size:.82rem;font-weight:900;letter-spacing:.16em;
+}
+.module3-cert-title{
+  margin:18px 0 10px;color:#512E5F;
+  font-family:Georgia,serif;font-size:clamp(2.5rem,5vw,4.7rem);line-height:1;
+}
+.module3-cert-copy{color:#686B7C;font-size:1rem}
+.module3-cert-name{
+  margin:22px auto 10px;max-width:850px;padding-bottom:10px;
+  border-bottom:2px solid #AAB1D1;color:#202235;
+  font-family:Georgia,serif;font-size:clamp(2rem,4vw,3.25rem);font-weight:800;
+}
+.module3-cert-pill{
+  display:inline-flex;margin:14px auto;padding:.7rem 1.2rem;border-radius:999px;
+  color:#512E5F;font-weight:900;
+  background:linear-gradient(90deg,#F6EAF0,#EFEAF5,#E9EEFA);
+}
+.module3-cert-desc{max-width:760px;margin:8px auto;color:#686B7C;line-height:1.55}
+.module3-cert-meta{
+  max-width:760px;margin:28px auto 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.module3-cert-meta div{
+  padding:.75rem;border-radius:12px;background:rgba(255,255,255,.75);
+  border:1px solid #E1E3ED;color:#202235;
+}
+.module3-cert-meta strong{color:#512E5F}
+.module3-cert-signatures{
+  margin:48px auto 0;max-width:760px;
+  display:grid;grid-template-columns:1fr 1fr;gap:70px;
+}
+.module3-cert-signatures div{
+  padding-top:10px;border-top:1.5px solid #7B8195;color:#686B7C;font-size:.9rem;
+}
+html[data-theme="dark"] .module3-cert-modal{background:#121724}
+html[data-theme="dark"] .module3-cert-form input{background:#151A28;color:#F2F4FA;border-color:#4A5874}
+html[data-theme="dark"] .module3-cert-toolbar h3,
+html[data-theme="dark"] .module3-cert-form label{color:#E9DFF0}
+@media(max-width:700px){
+  .module3-cert-form,.module3-cert-meta,.module3-cert-signatures{grid-template-columns:1fr}
+  .module3-cert-signatures{gap:32px}
+  .module3-cert-preview{padding:38px 22px;min-height:620px}
+  .module3-cert-actions{width:100%}
+  .module3-cert-action{flex:1}
+}
+</style>
+
+
+<style id="module3-leftnav-redesign">
+#sidebar{
+  background:#fff !important;
+}
+
+#sidebar nav{
+  padding:1.05rem 1rem 1.3rem !important;
+}
+
+.sidebar-section-title{
+  margin:0 0 .55rem;
+  padding:.2rem .15rem;
+  color:#5C6780;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.035em;
+  text-transform:uppercase;
+}
+
+.sidebar-plain-link{
+  padding:.72rem .65rem;
+  margin:.1rem 0;
+  border-radius:9px;
+  color:var(--ink);
+  font-size:.94rem;
+  cursor:pointer;
+  transition:.18s ease;
+}
+
+.sidebar-plain-link:hover{
+  background:var(--soft-blue);
+  color:var(--royal);
+}
+
+#sidebar .nav-item{
+  display:block !important;
+  width:100%;
+  min-height:auto;
+  padding:.7rem .65rem !important;
+  margin:.08rem 0 !important;
+  border:0 !important;
+  border-radius:9px !important;
+  background:transparent !important;
+  color:var(--ink) !important;
+  font-size:.94rem !important;
+  font-weight:500 !important;
+  text-align:left !important;
+  box-shadow:none !important;
+}
+
+#sidebar .nav-item:hover:not(.nav-active){
+  background:var(--soft-blue) !important;
+  color:var(--royal) !important;
+}
+
+#sidebar .nav-item.nav-active{
+  padding:.72rem .7rem !important;
+  background:linear-gradient(90deg,var(--royal),var(--slate)) !important;
+  color:#fff !important;
+  font-weight:800 !important;
+  box-shadow:none !important;
+}
+
+#sidebar .nav-item svg{
+  display:none !important;
+}
+
+#sidebar .my-4{
+  margin-top:1rem !important;
+  margin-bottom:.55rem !important;
+}
+
+html[data-theme="dark"] .sidebar-section-title{
+  color:#AEB7CB;
+}
+
+html[data-theme="dark"] .sidebar-plain-link{
+  color:var(--ink);
+}
+
+html[data-theme="dark"] #sidebar .nav-item{
+  color:var(--ink) !important;
+}
+
+html[data-theme="dark"] #sidebar .nav-item:hover:not(.nav-active),
+html[data-theme="dark"] .sidebar-plain-link:hover{
+  background:#182239 !important;
+  color:#B9C7FF !important;
+}
+</style>
+
+
+<style id="module3-binomial-table-guide">
+.binom-table-guide{margin:1rem 0 1.1rem;border:1px solid #D8DEEF;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#FFF,#FBFBFE);box-shadow:0 12px 26px rgba(57,67,109,.08);} 
+.binom-table-guide-head{padding:1rem 1rem .85rem;background:linear-gradient(90deg,rgba(139,14,45,.06),rgba(81,46,95,.06),rgba(37,64,143,.06));border-bottom:1px solid #E3E7F3;}
+.binom-table-guide-head .eyebrow{display:block;font-size:.73rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#8B0E2D;margin-bottom:.35rem;}
+.binom-table-guide-head h4{margin:0;color:#512E5F;font-size:1.15rem;font-weight:900;}
+.binom-table-guide-head p{margin:.35rem 0 0;color:#5F667B;font-size:.92rem;line-height:1.55;}
+.binom-table-guide-body{padding:1rem;display:grid;grid-template-columns:1.06fr .94fr;gap:1rem;align-items:start;}
+.binom-table-card,.binom-steps-card{background:#fff;border:1px solid #E3E7F3;border-radius:16px;padding:.95rem;}
+.binom-table-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.7rem;}
+.binom-pill{display:inline-flex;align-items:center;padding:.38rem .7rem;border-radius:999px;background:#F6F0F5;color:#512E5F;font-size:.8rem;font-weight:850;}
+.binom-prompt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;margin-bottom:.85rem;}
+.binom-qbtn{appearance:none;border:1px solid #CBD3EA;background:#fff;color:#512E5F;border-radius:12px;padding:.75rem .8rem;text-align:left;font-size:.88rem;font-weight:800;cursor:pointer;transition:.18s ease;line-height:1.35;}
+.binom-qbtn:hover,.binom-qbtn:focus-visible{transform:translateY(-1px);box-shadow:0 8px 16px rgba(57,67,109,.08);border-color:#AAB1D1;outline:none;}
+.binom-qbtn.active{background:linear-gradient(135deg,#8B0E2D,#512E5F,#25408F);color:#fff;border-color:transparent;box-shadow:0 10px 20px rgba(57,67,109,.16);}
+.binom-table-wrap{overflow-x:auto;}
+.binom-guide-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.9rem;min-width:360px;}
+.binom-guide-table th,.binom-guide-table td{padding:.62rem .55rem;border-bottom:1px solid #E6EAF5;text-align:center;}
+.binom-guide-table thead th{background:#F6F7FB;color:#512E5F;font-size:.82rem;font-weight:900;}
+.binom-guide-table tbody tr:last-child td{border-bottom:0;}
+.binom-guide-table td:first-child,.binom-guide-table th:first-child{position:sticky;left:0;background:#FCFCFE;z-index:1;font-weight:900;color:#512E5F;}
+.binom-guide-table thead th:first-child{z-index:2;background:#F6F7FB;}
+.binom-guide-table tbody tr.highlight td{background:rgba(139,14,45,.07);} 
+.binom-guide-table tbody tr.highlight-secondary td{background:rgba(37,64,143,.08);} 
+.binom-guide-table tbody tr.result-row td{box-shadow:inset 0 0 0 2px rgba(81,46,95,.2);} 
+.binom-legend{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.75rem;}
+.binom-legend span{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;color:#5F667B;}
+.binom-swatch{display:inline-block;width:14px;height:14px;border-radius:4px;}
+.binom-steps-card h5{margin:0 0 .7rem;color:#512E5F;font-size:1rem;font-weight:900;}
+.binom-step-list{display:grid;gap:.75rem;}
+.binom-step{display:flex;gap:.7rem;align-items:flex-start;padding:.75rem .8rem;border-radius:14px;background:#FAFBFE;border:1px solid #E6EAF5;}
+.binom-step-num{flex:0 0 1.8rem;width:1.8rem;height:1.8rem;border-radius:50%;background:linear-gradient(135deg,#8B0E2D,#512E5F);color:#fff;font-weight:900;font-size:.82rem;display:grid;place-items:center;}
+.binom-step-text{font-size:.9rem;color:#2A3042;line-height:1.58;}
+.binom-step-text .math-inline{font-weight:800;color:#512E5F;}
+.binom-answer-box{margin-top:.85rem;padding:.9rem 1rem;border-radius:16px;background:linear-gradient(135deg,rgba(139,14,45,.08),rgba(37,64,143,.08));border:1px solid #D5DDF0;}
+.binom-answer-box .label{display:block;font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#8B0E2D;margin-bottom:.25rem;}
+.binom-answer-box .value{font-size:1.08rem;font-weight:900;color:#202235;}
+html[data-theme="dark"] .binom-table-guide,html[data-theme="dark"] .binom-table-card,html[data-theme="dark"] .binom-steps-card,html[data-theme="dark"] .binom-step{background:#151A28;border-color:#2B344A;}
+html[data-theme="dark"] .binom-table-guide-head{background:linear-gradient(90deg,rgba(139,14,45,.14),rgba(81,46,95,.14),rgba(37,64,143,.14));border-color:#2B344A;}
+html[data-theme="dark"] .binom-table-guide-head h4,html[data-theme="dark"] .binom-steps-card h5,html[data-theme="dark"] .binom-guide-table td:first-child,html[data-theme="dark"] .binom-guide-table th,html[data-theme="dark"] .binom-qbtn,html[data-theme="dark"] .binom-step-text .math-inline{color:#EDE9F5;}
+html[data-theme="dark"] .binom-table-guide-head p,html[data-theme="dark"] .binom-step-text,html[data-theme="dark"] .binom-legend span{color:#C5CCDB;}
+html[data-theme="dark"] .binom-qbtn{background:#101524;border-color:#39445E;}
+html[data-theme="dark"] .binom-guide-table thead th,html[data-theme="dark"] .binom-guide-table td:first-child{background:#101524;}
+html[data-theme="dark"] .binom-guide-table th,html[data-theme="dark"] .binom-guide-table td{border-color:#2B344A;}
+html[data-theme="dark"] .binom-guide-table tbody tr.highlight td{background:rgba(139,14,45,.16);} 
+html[data-theme="dark"] .binom-guide-table tbody tr.highlight-secondary td{background:rgba(37,64,143,.18);} 
+html[data-theme="dark"] .binom-answer-box{background:linear-gradient(135deg,rgba(139,14,45,.17),rgba(37,64,143,.16));border-color:#39445E;}
+@media(max-width:900px){.binom-table-guide-body{grid-template-columns:1fr;}.binom-prompt-grid{grid-template-columns:1fr;}}
+</style>
+
+
+<style id="module3-binomial-table-reading-enhancements">
+.binom-read-guide{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:.55rem;
+  margin:.75rem 0 .9rem;
+}
+.binom-read-step{
+  position:relative;
+  padding:.8rem .75rem .75rem 2.9rem;
+  border:1px solid #E2E7F3;
+  border-radius:13px;
+  background:#FAFBFE;
+  min-height:76px;
+}
+.binom-read-step>span{
+  position:absolute;left:.7rem;top:.72rem;
+  width:1.65rem;height:1.65rem;border-radius:50%;
+  display:grid;place-items:center;
+  color:#fff;font-size:.78rem;font-weight:900;
+  background:linear-gradient(135deg,#8B0E2D,#512E5F);
+}
+.binom-read-step strong{display:block;color:#512E5F;font-size:.84rem;margin-bottom:.18rem}
+.binom-read-step small{display:block;color:#687087;font-size:.72rem;line-height:1.35}
+.binom-full-table{min-width:660px}
+.binom-full-table .binom-n-head,
+.binom-full-table .binom-n-cell{
+  background:#F3F0F6!important;color:#512E5F!important;font-weight:900;
+}
+.binom-full-table .binom-n-cell{vertical-align:middle;font-size:1.05rem}
+.binom-full-table th[data-p="0.30"],
+.binom-full-table td[data-p="0.30"]{
+  border-left:2px solid rgba(37,64,143,.35);
+  border-right:2px solid rgba(37,64,143,.35);
+}
+.binom-full-table th.binom-p-selected{
+  color:#fff!important;
+  background:linear-gradient(135deg,#512E5F,#25408F)!important;
+}
+.binom-full-table tbody tr.highlight td{background:rgba(139,14,45,.08)!important}
+.binom-full-table tbody tr.highlight-secondary td{background:rgba(37,64,143,.09)!important}
+.binom-full-table tbody tr.highlight td[data-p="0.30"]{
+  background:#F8DDE7!important;
+  color:#7A102A!important;
+  font-weight:900;
+  box-shadow:inset 0 0 0 3px #8B0E2D;
+}
+.binom-full-table tbody tr.highlight-secondary td[data-p="0.30"]{
+  background:#E5EBFA!important;
+  color:#25408F!important;
+  font-weight:900;
+  box-shadow:inset 0 0 0 3px #25408F;
+}
+.binom-table-caption{
+  margin-top:.7rem;
+  padding:.72rem .8rem;
+  border-radius:12px;
+  background:#F5F6FA;
+  border-left:4px solid #25408F;
+  color:#384157;
+  font-size:.82rem;
+  line-height:1.5;
+}
+html[data-theme="dark"] .binom-read-step,
+html[data-theme="dark"] .binom-table-caption{background:#101524;border-color:#34405B;color:#D3D8E5}
+html[data-theme="dark"] .binom-read-step strong{color:#E9DFF0}
+html[data-theme="dark"] .binom-read-step small{color:#B5BECE}
+html[data-theme="dark"] .binom-full-table .binom-n-head,
+html[data-theme="dark"] .binom-full-table .binom-n-cell{background:#1B2131!important;color:#E9DFF0!important}
+@media(max-width:800px){.binom-read-guide{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:520px){.binom-read-guide{grid-template-columns:1fr;}}
+</style>
+
+
+<style id="module3-binomial-current-cell-styles">
+.binom-current-main{
+  background:#F8DDE7!important;
+  color:#7A102A!important;
+  font-weight:900!important;
+  box-shadow:inset 0 0 0 3px #8B0E2D!important;
+}
+.binom-current-secondary{
+  background:#E5EBFA!important;
+  color:#25408F!important;
+  font-weight:900!important;
+  box-shadow:inset 0 0 0 3px #25408F!important;
+}
+</style>
+
+<style id="module3-desktop-sidebar-collapse">
+.module-shell{
+  position:relative;
+  transition:grid-template-columns .28s ease;
+}
+
+.desktop-sidebar-toggle{
+  position:absolute;
+  left:270px;
+  top:14px;
+  z-index:1750;
+  width:47px;
+  height:47px;
+  display:grid;
+  place-items:center;
+  border:1px solid #D8CDDC;
+  border-radius:14px;
+  background:#fff;
+  color:#6D28D9;
+  font-size:1.75rem;
+  line-height:1;
+  font-weight:500;
+  cursor:pointer;
+  box-shadow:0 7px 18px rgba(37,64,143,.10);
+  transition:left .28s ease,transform .18s ease,box-shadow .18s ease;
+}
+
+.desktop-sidebar-toggle:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 22px rgba(37,64,143,.16);
+}
+
+.module-shell.sidebar-collapsed{
+  grid-template-columns:0 minmax(0,1fr) !important;
+}
+
+.module-shell.sidebar-collapsed #sidebar{
+  width:0 !important;
+  min-width:0 !important;
+  overflow:hidden !important;
+  border-right:0 !important;
+  opacity:0;
+  pointer-events:none;
+}
+
+.module-shell.sidebar-collapsed .desktop-sidebar-toggle{
+  left:18px;
+}
+
+.module-shell #sidebar{
+  transition:width .28s ease,opacity .22s ease,border-color .22s ease;
+}
+
+html[data-theme="dark"] .desktop-sidebar-toggle{
+  background:#151A28;
+  color:#C6B8FF;
+  border-color:#3A4257;
+}
+
+@media(max-width:900px){
+  .desktop-sidebar-toggle{
+    display:none !important;
+  }
+}
+</style>
+
+
+<style id="module3-binomial-notation-fix">
+.binom-math{
+  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
+  font-weight:700;
+  letter-spacing:.01em;
+  white-space:normal;
+}
+.binom-step-text .binom-math,
+.binom-answer-box .binom-math{
+  color:#512E5F;
+}
+html[data-theme="dark"] .binom-step-text .binom-math,
+html[data-theme="dark"] .binom-answer-box .binom-math{
+  color:#E9DFF0;
+}
+</style>
+
+
+<style id="module3-binomial-mobile-notation-layout">
+/* Keep mathematical notation visually intact and on the same line whenever possible. */
+.binom-step-text{
+  display:block;
+  min-width:0;
+  overflow-wrap:normal;
+  word-break:normal;
+  hyphens:none;
+}
+
+.binom-step-text .binom-math,
+.binom-answer-box .binom-math{
+  display:inline-block;
+  white-space:nowrap;
+  vertical-align:baseline;
+  line-height:1.35;
+  margin:0 .08em;
+  font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;
+  font-weight:700;
+  letter-spacing:0;
+}
+
+.binom-step{
+  align-items:flex-start;
+}
+
+.binom-step-text strong{
+  white-space:normal;
+}
+
+.binom-answer-box .value{
+  line-height:1.55;
+}
+
+/* Prevent very long equations from overflowing the card. */
+.binom-answer-box{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* Tablet/mobile: give the sentence more usable width and reduce crowding. */
+@media(max-width:700px){
+  .binom-table-guide-body{
+    padding:.75rem;
+  }
+
+  .binom-steps-card{
+    padding:.78rem;
+  }
+
+  .binom-steps-card h5{
+    font-size:1rem;
+    line-height:1.35;
+    margin-bottom:.65rem;
+  }
+
+  .binom-step{
+    display:grid;
+    grid-template-columns:2rem minmax(0,1fr);
+    gap:.6rem;
+    padding:.72rem;
+  }
+
+  .binom-step-num{
+    width:1.75rem;
+    height:1.75rem;
+    flex-basis:1.75rem;
+    font-size:.78rem;
+  }
+
+  .binom-step-text{
+    font-size:.88rem;
+    line-height:1.65;
+  }
+
+  .binom-step-text .binom-math,
+  .binom-answer-box .binom-math{
+    font-size:.98em;
+  }
+
+  .binom-answer-box{
+    padding:.8rem .85rem;
+  }
+
+  .binom-answer-box .value{
+    font-size:.98rem;
+  }
+}
+
+/* Small phones: allow the whole sentence to wrap naturally,
+   while each mathematical expression remains unbroken. */
+@media(max-width:430px){
+  .binom-table-guide-body{
+    padding:.55rem;
+  }
+
+  .binom-steps-card{
+    padding:.65rem;
+    border-radius:14px;
+  }
+
+  .binom-step{
+    grid-template-columns:1.8rem minmax(0,1fr);
+    gap:.5rem;
+    padding:.65rem;
+    border-radius:12px;
+  }
+
+  .binom-step-num{
+    width:1.6rem;
+    height:1.6rem;
+    font-size:.72rem;
+  }
+
+  .binom-step-text{
+    font-size:.84rem;
+    line-height:1.62;
+  }
+
+  .binom-step-text .binom-math{
+    font-size:.96em;
+    margin:0 .04em;
+  }
+
+  .binom-answer-box .value{
+    font-size:.9rem;
+  }
+}
+</style>
+
+
+<style id="module3-binomial-text-overflow-fix">
+/* Prevent guide text from being clipped or hidden on desktop/tablet/mobile. */
+.binom-table-guide,
+.binom-table-guide-body,
+.binom-steps-card,
+.binom-step,
+.binom-step-text,
+.binom-answer-box,
+.binom-answer-box .value{
+  min-width:0 !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+
+.binom-steps-card{
+  overflow:visible !important;
+}
+
+.binom-step{
+  width:100% !important;
+  overflow:visible !important;
+}
+
+.binom-step-text{
+  width:100% !important;
+  overflow:visible !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+}
+
+.binom-step-text .binom-math{
+  display:inline !important;
+  white-space:normal !important;
+  overflow-wrap:normal !important;
+  word-break:keep-all !important;
+}
+
+.binom-answer-box{
+  overflow:visible !important;
+}
+
+.binom-answer-box .value{
+  display:block !important;
+  white-space:normal !important;
+  overflow:visible !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+  line-height:1.6 !important;
+}
+
+.binom-answer-box .binom-math{
+  display:inline !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+}
+
+/* Give the step panel a little more room on wide screens. */
+@media(min-width:901px){
+  .binom-table-guide-body{
+    grid-template-columns:minmax(0,1fr) minmax(360px,.92fr) !important;
+  }
+}
+
+/* On tablet/mobile, stack the table and guide so no text is squeezed. */
+@media(max-width:900px){
+  .binom-table-guide-body{
+    grid-template-columns:1fr !important;
+  }
+
+  .binom-steps-card{
+    width:100% !important;
+  }
+}
+
+@media(max-width:600px){
+  .binom-step{
+    grid-template-columns:1.75rem minmax(0,1fr) !important;
+  }
+
+  .binom-step-text{
+    font-size:.86rem !important;
+    line-height:1.62 !important;
+  }
+
+  .binom-answer-box .value{
+    font-size:.9rem !important;
+  }
+}
+</style>
+
+
+<style id="module3-binomial-table-fullwidth-layout">
+/* Full-width binomial table with calculation details below it */
+.binom-table-guide-body{
+  display:block !important;
+  padding:1rem !important;
+}
+
+.binom-table-card{
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 !important;
+}
+
+.binom-steps-card{
+  width:100% !important;
+  max-width:100% !important;
+  margin-top:1rem !important;
+}
+
+/* Keep the complete table visible on desktop */
+.binom-table-wrap{
+  width:100% !important;
+  overflow-x:auto !important;
+  -webkit-overflow-scrolling:touch;
+}
+
+.binom-guide-table.binom-full-table{
+  width:100% !important;
+  min-width:0 !important;
+  table-layout:fixed !important;
+}
+
+.binom-guide-table.binom-full-table th,
+.binom-guide-table.binom-full-table td{
+  padding:.58rem .35rem !important;
+  font-size:.82rem !important;
+  white-space:nowrap !important;
+  overflow:hidden;
+  text-overflow:clip;
+}
+
+.binom-guide-table.binom-full-table .binom-n-head,
+.binom-guide-table.binom-full-table .binom-n-cell{
+  width:8% !important;
+}
+
+.binom-guide-table.binom-full-table th:nth-child(2),
+.binom-guide-table.binom-full-table td:nth-child(2){
+  width:8% !important;
+}
+
+/* Five probability columns share the remaining width */
+.binom-guide-table.binom-full-table th[data-p],
+.binom-guide-table.binom-full-table td[data-p]{
+  width:16.8% !important;
+}
+
+.binom-table-caption{
+  margin-top:.8rem !important;
+}
+
+/* Calculation panel below the table */
+.binom-steps-card{
+  display:block !important;
+  border-radius:18px !important;
+}
+
+.binom-step-list{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:.75rem !important;
+}
+
+.binom-step{
+  min-height:108px;
+}
+
+.binom-answer-box{
+  margin-top:1rem !important;
+}
+
+/* On small screens: allow horizontal table scrolling, but keep calculations stacked. */
+@media(max-width:700px){
+  .binom-guide-table.binom-full-table{
+    min-width:620px !important;
+    table-layout:auto !important;
+  }
+
+  .binom-guide-table.binom-full-table th,
+  .binom-guide-table.binom-full-table td{
+    padding:.55rem .5rem !important;
+    font-size:.8rem !important;
+  }
+
+  .binom-step-list{
+    grid-template-columns:1fr !important;
+  }
+
+  .binom-step{
+    min-height:auto !important;
+  }
+}
+</style>
+
+
+<style id="module3-compact-step-cards">
+/* Compact the step-by-step calculation cards without sacrificing readability. */
+.binom-steps-card{
+  padding:.82rem !important;
+}
+
+.binom-steps-card h5{
+  margin:0 0 .55rem !important;
+}
+
+.binom-step-list{
+  gap:.5rem !important;
+}
+
+.binom-step{
+  min-height:0 !important;
+  padding:.58rem .68rem !important;
+  gap:.5rem !important;
+  border-radius:12px !important;
+}
+
+.binom-step-num{
+  width:1.62rem !important;
+  height:1.62rem !important;
+  flex-basis:1.62rem !important;
+  font-size:.73rem !important;
+}
+
+.binom-step-text{
+  font-size:.84rem !important;
+  line-height:1.48 !important;
+}
+
+.binom-answer-box{
+  margin-top:.65rem !important;
+  padding:.72rem .82rem !important;
+}
+
+.binom-answer-box .label{
+  margin-bottom:.15rem !important;
+}
+
+.binom-answer-box .value{
+  font-size:.94rem !important;
+  line-height:1.45 !important;
+}
+
+/* Desktop/tablet: compact two-column step layout */
+@media(min-width:701px){
+  .binom-step-list{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+/* Mobile: stack steps vertically and keep touch/readability comfortable */
+@media(max-width:700px){
+  .binom-steps-card{
+    padding:.68rem !important;
+  }
+
+  .binom-step-list{
+    grid-template-columns:1fr !important;
+    gap:.45rem !important;
+  }
+
+  .binom-step{
+    grid-template-columns:1.65rem minmax(0,1fr) !important;
+    padding:.56rem .62rem !important;
+  }
+
+  .binom-step-num{
+    width:1.5rem !important;
+    height:1.5rem !important;
+    flex-basis:1.5rem !important;
+    font-size:.69rem !important;
+  }
+
+  .binom-step-text{
+    font-size:.82rem !important;
+    line-height:1.5 !important;
+  }
+
+  .binom-answer-box{
+    padding:.68rem .72rem !important;
+  }
+
+  .binom-answer-box .value{
+    font-size:.88rem !important;
+    line-height:1.48 !important;
+  }
+}
+</style>
+
+
+<style id="module3-binomial-formula-size-reduction">
+/* Reduce only the Mean and Variance formula size in the Binomial section. */
+.binomial-mv-compact .formula-primary{
+  font-size:clamp(.92rem,1.15vw,1.08rem) !important;
+}
+
+.binomial-mv-compact mjx-container{
+  font-size:92% !important;
+  margin-top:.05em !important;
+  margin-bottom:.05em !important;
+}
+
+.binomial-mv-compact .formula-card{
+  padding-top:.45rem !important;
+  padding-bottom:.45rem !important;
+}
+
+.binomial-mv-compact .formula-card h3{
+  font-size:.78rem !important;
+  margin-bottom:0 !important;
+}
+
+@media(max-width:600px){
+  .binomial-mv-compact .formula-primary{
+    font-size:clamp(.86rem,3.6vw,1rem) !important;
+  }
+
+  .binomial-mv-compact mjx-container{
+    font-size:88% !important;
+  }
+}
+</style>
+
+
+<style id="module3-binomial-mv-formula-size-match">
+/* Make Binomial Mean & Variance formulas visually match X ~ B(n,p) above. */
+.binomial-mv-compact .formula-primary{
+  font-size:clamp(1.08rem,1.55vw,1.32rem) !important;
+}
+.binomial-mv-compact mjx-container{
+  font-size:100% !important;
+  margin-top:.08em !important;
+  margin-bottom:.08em !important;
+}
+.binomial-mv-compact .formula-card{
+  padding-top:.52rem !important;
+  padding-bottom:.52rem !important;
+}
+.binomial-mv-compact .formula-card h3{
+  font-size:.82rem !important;
+  margin-bottom:.05rem !important;
+}
+@media(max-width:600px){
+  .binomial-mv-compact .formula-primary{
+    font-size:clamp(1rem,4.2vw,1.18rem) !important;
+  }
+  .binomial-mv-compact mjx-container{
+    font-size:96% !important;
+  }
+}
+</style>
+
+
+<style id="module3-32-subpage-nav">
+#sidebar .nav-subitem{
+  margin-top:.15rem !important;
+  padding-left:1.15rem !important;
+  font-size:.88rem !important;
+  color:#5F667B !important;
+  position:relative;
+}
+#sidebar .nav-subitem::before{
+  content:"";
+  position:absolute;
+  left:.55rem;
+  top:50%;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#AAB1D1;
+  transform:translateY(-50%);
+}
+#sidebar .nav-subitem.nav-active{
+  color:#fff !important;
+  padding-left:1.15rem !important;
+}
+#sidebar .nav-subitem.nav-active::before{
+  background:#fff;
+}
+html[data-theme="dark"] #sidebar .nav-subitem{
+  color:#B9C2D6 !important;
+}
+html[data-theme="dark"] #sidebar .nav-subitem.nav-active{
+  color:#fff !important;
+}
+</style>
+
+
+<style id="module3-cafe-part-hints">
+html[data-theme="dark"] #sec-3-2-cafe .border.rounded-2xl.bg-white{
+  background:#151A28 !important;
+  border-color:#39445E !important;
+}
+html[data-theme="dark"] #sec-3-2-cafe .text-gray-700{
+  color:#D4D9E5 !important;
+}
+</style>
+
+
+<style id="module3-variance-stack-fix">
+#ex32c-answer .variance-solution-stack{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  gap:.7rem !important;
+  width:100% !important;
+}
+
+#ex32c-answer .variance-calc-block{
+  display:block !important;
+  width:100% !important;
+  margin:0 !important;
+  text-align:center !important;
+}
+
+#ex32c-answer .variance-calc-block mjx-container[display="true"]{
+  display:block !important;
+  margin:.25rem auto !important;
+  width:100% !important;
+  max-width:100% !important;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+
+@media(max-width:600px){
+  #ex32c-answer .variance-solution-stack{
+    gap:.5rem !important;
+  }
+
+  #ex32c-answer .variance-calc-block mjx-container[display="true"]{
+    font-size:92% !important;
+  }
+}
+</style>
+
+
+<style id="module3-33-multipage-nav">
+#sidebar .nav-subitem{
+  margin-top:.12rem !important;
+  padding-left:1.15rem !important;
+  font-size:.86rem !important;
+  color:#5F667B !important;
+  position:relative;
+}
+#sidebar .nav-subitem::before{
+  content:"";
+  position:absolute;
+  left:.52rem;
+  top:50%;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#AAB1D1;
+  transform:translateY(-50%);
+}
+#sidebar .nav-subitem.nav-active{
+  color:#fff !important;
+}
+#sidebar .nav-subitem.nav-active::before{
+  background:#fff;
+}
+html[data-theme="dark"] #sidebar .nav-subitem{
+  color:#BAC3D6 !important;
+}
+html[data-theme="dark"] #sidebar .nav-subitem.nav-active{
+  color:#fff !important;
+}
+</style>
+
+
+<style id="module3-binomial-mv-example-dark">
+html[data-theme="dark"] #binomial-mv-guided-example .bg-white{
+  background:#151A28 !important;
+  border-color:#39445E !important;
+}
+html[data-theme="dark"] #binomial-mv-guided-example .text-gray-700{
+  color:#D4D9E5 !important;
+}
+</style>
+
+
+<style id="module3-try-check-solid-option-colours">
+/* TRY & CHECK: make the chosen option clearly solid-filled. */
+#try-options-container .quiz-opt-selected,
+#check-options-container .quiz-opt-selected{
+  background:linear-gradient(90deg,#25408F,#5B74B8) !important;
+  border-color:#25408F !important;
+  color:#FFFFFF !important;
+  box-shadow:0 7px 18px rgba(37,64,143,.22) !important;
+  transform:translateY(-1px);
+}
+
+#try-options-container .quiz-opt-selected *,
+#check-options-container .quiz-opt-selected *{
+  color:#FFFFFF !important;
+}
+
+/* After Check Answer: correct choice becomes solid green. */
+#try-options-container .quiz-opt-correct,
+#check-options-container .quiz-opt-correct{
+  background:#15803D !important;
+  border-color:#166534 !important;
+  color:#FFFFFF !important;
+  box-shadow:0 7px 18px rgba(21,128,61,.20) !important;
+}
+
+#try-options-container .quiz-opt-correct *,
+#check-options-container .quiz-opt-correct *{
+  color:#FFFFFF !important;
+}
+
+/* If the chosen answer is wrong, make it solid red. */
+#try-options-container .quiz-opt-incorrect,
+#check-options-container .quiz-opt-incorrect{
+  background:#B91C1C !important;
+  border-color:#991B1B !important;
+  color:#FFFFFF !important;
+  box-shadow:0 7px 18px rgba(185,28,28,.18) !important;
+}
+
+#try-options-container .quiz-opt-incorrect *,
+#check-options-container .quiz-opt-incorrect *{
+  color:#FFFFFF !important;
+}
+
+/* Preserve visibility in dark mode. */
+html[data-theme="dark"] #try-options-container .quiz-opt-selected,
+html[data-theme="dark"] #check-options-container .quiz-opt-selected{
+  background:linear-gradient(90deg,#25408F,#5B74B8) !important;
+  border-color:#8EA4E8 !important;
+}
+
+html[data-theme="dark"] #try-options-container .quiz-opt-correct,
+html[data-theme="dark"] #check-options-container .quiz-opt-correct{
+  background:#15803D !important;
+  border-color:#5CC889 !important;
+}
+
+html[data-theme="dark"] #try-options-container .quiz-opt-incorrect,
+html[data-theme="dark"] #check-options-container .quiz-opt-incorrect{
+  background:#B91C1C !important;
+  border-color:#F08A8A !important;
+}
+</style>
+
+
+<style id="module3-status-label-visibility-fix">
+/* Status badges must stay readable over solid green/red answer options. */
+#try-options-container .quiz-status-label,
+#check-options-container .quiz-status-label{
+  z-index:4 !important;
+  opacity:1 !important;
+  white-space:nowrap !important;
+  border:1px solid transparent !important;
+}
+
+#try-options-container .quiz-status-label *,
+#check-options-container .quiz-status-label *{
+  color:inherit !important;
+}
+
+#try-options-container .quiz-status-label.status-incorrect,
+#check-options-container .quiz-status-label.status-incorrect{
+  background:#FFFFFF !important;
+  color:#991B1B !important;
+  border-color:#FCA5A5 !important;
+}
+
+#try-options-container .quiz-status-label.status-correct,
+#check-options-container .quiz-status-label.status-correct{
+  background:#FFFFFF !important;
+  color:#166534 !important;
+  border-color:#86EFAC !important;
+}
+
+/* Dark mode: use dark badges with bright, high-contrast text. */
+html[data-theme="dark"] #try-options-container .quiz-status-label.status-incorrect,
+html[data-theme="dark"] #check-options-container .quiz-status-label.status-incorrect{
+  background:#2A1117 !important;
+  color:#FCA5A5 !important;
+  border-color:#EF4444 !important;
+}
+
+html[data-theme="dark"] #try-options-container .quiz-status-label.status-correct,
+html[data-theme="dark"] #check-options-container .quiz-status-label.status-correct{
+  background:#10261A !important;
+  color:#86EFAC !important;
+  border-color:#22C55E !important;
+}
+
+/* Give option text enough right-side space so the badge never overlaps it. */
+#try-options-container button,
+#check-options-container button{
+  padding-right:7.2rem !important;
+}
+
+@media(max-width:520px){
+  #try-options-container .quiz-status-label,
+  #check-options-container .quiz-status-label{
+    right:.55rem !important;
+    padding:.25rem .45rem !important;
+    font-size:.68rem !important;
+  }
+
+  #try-options-container button,
+  #check-options-container button{
+    padding-right:5.8rem !important;
+  }
+}
+</style>
+
+
+<style id="module3-full-review-styles">
+.quiz-review-card{border:1px solid #DDE2EF;border-left:5px solid #AAB1D1;border-radius:14px;background:#fff;padding:.9rem;text-align:left;}
+.quiz-review-card.review-correct{border-left-color:#15803D;}
+.quiz-review-card.review-incorrect{border-left-color:#B91C1C;}
+.quiz-review-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.7rem;margin-bottom:.6rem;}
+.quiz-review-qno{display:inline-block;padding:.22rem .5rem;border-radius:999px;background:#F1F4FB;color:#512E5F;font-size:.7rem;font-weight:900;text-transform:uppercase;}
+.quiz-review-topic{display:inline-block;margin-left:.35rem;color:#697086;font-size:.7rem;font-weight:700;}
+.quiz-review-status{flex:0 0 auto;padding:.25rem .55rem;border-radius:999px;font-size:.72rem;font-weight:900;}
+.review-correct .quiz-review-status{background:#DCFCE7;color:#166534;}
+.review-incorrect .quiz-review-status{background:#FEE2E2;color:#991B1B;}
+.quiz-review-question{color:#202235;font-weight:750;font-size:.9rem;line-height:1.5;margin-bottom:.7rem;}
+.quiz-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;margin-bottom:.65rem;}
+.quiz-review-answer{padding:.65rem .7rem;border-radius:10px;border:1px solid #E1E3ED;min-width:0;}
+.quiz-review-answer>span{display:block;margin-bottom:.25rem;font-size:.66rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;}
+.quiz-review-answer>div{font-size:.84rem;line-height:1.45;overflow-x:auto;}
+.quiz-review-answer.user-answer{background:#FFF7F7;}
+.quiz-review-answer.user-answer>span{color:#991B1B;}
+.review-correct .quiz-review-answer.user-answer{background:#F0FDF4;}
+.review-correct .quiz-review-answer.user-answer>span{color:#166534;}
+.quiz-review-answer.correct-answer{background:#F0FDF4;}
+.quiz-review-answer.correct-answer>span{color:#166534;}
+.quiz-review-explanation,.quiz-review-keyidea{padding:.65rem .72rem;border-radius:10px;font-size:.8rem;line-height:1.5;}
+.quiz-review-explanation{background:#F8F9FC;border:1px solid #E4E7F0;color:#3B4356;margin-bottom:.5rem;}
+.quiz-review-keyidea{background:#F7F2F8;color:#512E5F;border:1px solid #D8CDDC;}
+html[data-theme="dark"] .quiz-review-card{background:#151A28;border-color:#35405A;}
+html[data-theme="dark"] .quiz-review-question{color:#F1F3F8;}
+html[data-theme="dark"] .quiz-review-topic{color:#B5BED0;}
+html[data-theme="dark"] .quiz-review-answer{border-color:#39445E;}
+html[data-theme="dark"] .quiz-review-answer.user-answer{background:#2A171D;}
+html[data-theme="dark"] .review-correct .quiz-review-answer.user-answer,
+html[data-theme="dark"] .quiz-review-answer.correct-answer{background:#12271B;}
+html[data-theme="dark"] .quiz-review-explanation{background:#101524;border-color:#35405A;color:#D7DCE7;}
+html[data-theme="dark"] .quiz-review-keyidea{background:#21182A;border-color:#4C3D5A;color:#E9DFF0;}
+@media(max-width:650px){
+  .quiz-review-grid{grid-template-columns:1fr;}
+  .quiz-review-top{align-items:center;}
+  .quiz-review-topic{display:block;margin:.3rem 0 0;}
+  .quiz-review-card{padding:.75rem;}
+}
+</style>
+
+
+<style id="module3-review-toggle-styles">
+.quiz-review-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  padding:.82rem 1rem;
+  margin-bottom:.8rem;
+  border:1px solid #D8CDDC;
+  border-radius:12px;
+  background:linear-gradient(90deg,#F7F2F8,#F1F4FB);
+  color:#512E5F;
+  font-size:.86rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.quiz-review-toggle:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(57,67,109,.08);
+}
+.quiz-review-toggle-icon{
+  font-size:1.1rem;
+  line-height:1;
+}
+.quiz-review-list-collapsed{
+  display:none !important;
+}
+html[data-theme="dark"] .quiz-review-toggle{
+  background:linear-gradient(90deg,#21182A,#182239);
+  border-color:#43506A;
+  color:#E9DFF0;
+}
+@media(max-width:600px){
+  .quiz-review-toggle{
+    padding:.72rem .82rem;
+    font-size:.8rem;
+  }
+}
+</style>
+
 </head>
 <body class="module3-body">
 <div aria-live="polite" class="reset-success-toast" id="reset-success-toast" role="status">✓ Progress reset successfully</div>
@@ -1704,54 +2974,68 @@ html[data-theme="dark"] .module3-btn-light{
 <span id="moduleProgressLabel">0%</span>
 </div>
 </div>
-<div class="module-shell">
+<div class="module-shell" id="moduleShell">
+<button aria-label="Hide left navigation" aria-expanded="true" class="desktop-sidebar-toggle" id="desktopSidebarToggle" onclick="toggleDesktopSidebar()" title="Hide left navigation" type="button">
+  <span id="desktopSidebarToggleIcon">‹</span>
+</button>
 <!-- Sidebar Navigation -->
 <div class="bg-white w-full md:w-72 flex-shrink-0 border-r border-gray-100 flex flex-col h-[calc(100vh-60px)] md:h-full absolute md:relative z-40 transition-transform transform -translate-x-full md:translate-x-0 shadow-xl md:shadow-none top-[60px] md:top-0" id="sidebar">
-<div class="p-5 border-b border-gray-100 hidden md:block">
-<span class="text-[10px] font-bold text-[#7A4B92] uppercase tracking-wider mb-1 block">PRE-CLASS INTERACTIVE WORKBOOK</span>
-<h1 class="text-xl font-bold text-[#512E5F] leading-tight">Chapter 3<br/>Discrete Probability Distributions</h1>
-</div>
 <nav class="flex-1 overflow-y-auto p-3 md:p-4 space-y-1">
-<button class="nav-item nav-active w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-start" onclick="navigateTo('sec-start'); updateNav('nav-start')">
-<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-                START HERE
-                
-            </button>
-<div class="my-2 border-t border-gray-100"></div>
-<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-3-1" onclick="navigateTo('sec-3-1'); updateNav('nav-3-1')">
-<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-                3.1 DISTRIBUTIONS
-                
-            </button>
-<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-3-2" onclick="return goToModule3Section('sec-3-2','nav-3-2')">
-<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-                3.2 MEAN &amp; VAR
-                
-            </button>
-<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-3-3" onclick="return goToModule3Section('sec-3-3','nav-3-3')">
-<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-                3.3 BINOMIAL
-                
-            </button>
-<div class="my-2 border-t border-gray-100"></div>
-<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-obt" onclick="return goToModule3Section('sec-obt','nav-obt')" type="button">
-<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-                OPEN BOOK TEST
-                
-            </button>
-<div class="my-2 border-t border-gray-100"></div>
-<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-try" onclick="navigateTo('sec-try'); updateNav('nav-try')">
-<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-                TRY
-                
-            </button>
-<button class="nav-item w-full text-left px-4 py-3 font-medium flex items-center text-sm" id="nav-check" onclick="navigateTo('sec-check'); updateNav('nav-check')">
-<svg class="w-5 h-5 mr-3 ui-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-                CHECK
-                
-            </button>
+<div class="sidebar-section-title">GETTING STARTED</div>
+
+<button class="nav-item nav-active w-full text-left px-4 py-3 font-medium text-sm" id="nav-start" onclick="navigateTo('sec-start'); updateNav('nav-start')">
+    Orientation
+</button>
+
+<div class="sidebar-plain-link" onclick="navigateTo('sec-start'); updateNav('nav-start')">Learning Outcomes</div>
+
+<div class="my-4"></div>
+<div class="sidebar-section-title">3.1 PROBABILITY DISTRIBUTIONS</div>
+
+<button class="nav-item w-full text-left px-4 py-3 font-medium text-sm" id="nav-3-1" onclick="navigateTo('sec-3-1'); updateNav('nav-3-1')">
+    Probability Distributions
+</button>
+
+<div class="my-4"></div>
+<div class="sidebar-section-title">3.2 MEAN, VARIANCE &amp; EXPECTATION</div>
+
+<button class="nav-item w-full text-left px-4 py-3 font-medium text-sm" id="nav-3-2" onclick="return goToModule3Section('sec-3-2','nav-3-2')">
+    Mean, Variance &amp; Expectation
+</button>
+<button class="nav-item nav-subitem w-full text-left px-4 py-3 font-medium text-sm" id="nav-3-2-cafe" onclick="return goToModule3Section('sec-3-2-cafe','nav-3-2-cafe')">
+    Worked Example: Campus Café
+</button>
+
+<div class="my-4"></div>
+<div class="sidebar-section-title">3.3 BINOMIAL DISTRIBUTION</div>
+
+<button class="nav-item w-full text-left px-4 py-3 font-medium text-sm" id="nav-3-3" onclick="return goToModule3Section('sec-3-3','nav-3-3')">
+    Binomial Distribution
+</button>
+<button class="nav-item nav-subitem w-full text-left px-4 py-3 font-medium text-sm" id="nav-3-3-formula" onclick="return goToModule3Section('sec-3-3-formula','nav-3-3-formula')">
+    Requirements &amp; Formula
+</button>
+<button class="nav-item nav-subitem w-full text-left px-4 py-3 font-medium text-sm" id="nav-3-3-seed" onclick="return goToModule3Section('sec-3-3-seed','nav-3-3-seed')">
+    Guided Seed Example
+</button>
+<button class="nav-item nav-subitem w-full text-left px-4 py-3 font-medium text-sm" id="nav-3-3-language" onclick="return goToModule3Section('sec-3-3-language','nav-3-3-language')">
+    Probability Language &amp; Table
+</button>
+
+<div class="my-4"></div>
+<div class="sidebar-section-title">PRACTICE &amp; CHECK</div>
+
+<button class="nav-item w-full text-left px-4 py-3 font-medium text-sm" id="nav-obt" onclick="return goToModule3Section('sec-obt','nav-obt')" type="button">
+    Open Book Test
+</button>
+
+<button class="nav-item w-full text-left px-4 py-3 font-medium text-sm" id="nav-try" onclick="navigateTo('sec-try'); updateNav('nav-try')">
+    Try
+</button>
+
+<button class="nav-item w-full text-left px-4 py-3 font-medium text-sm" id="nav-check" onclick="navigateTo('sec-check'); updateNav('nav-check')">
+    Check
+</button>
 </nav>
 </div>
 <!-- Main Content Area -->
@@ -1783,7 +3067,11 @@ html[data-theme="dark"] .module3-btn-light{
 <button class="module3-btn module3-btn-light" onclick="return resetModule3Progress(event)" type="button">
                                 Reset Progress
                             </button>
+<button class="module3-btn module3-btn-light module3-cert-btn locked" id="module3CertificateBtn" onclick="openModule3Certificate()" type="button">
+                                🔒 Certificate
+                            </button>
 </div>
+<p class="module3-cert-note" id="module3CertificateNote">Complete 100% of Module 3 to unlock your certificate.</p>
 </div>
 <div class="module3-progress-card">
 <div class="module3-progress-ring" id="module3DashboardRing" style="--progress:0">
@@ -2235,7 +3523,8 @@ html[data-theme="dark"] .module3-btn-light{
     </div>
 </div>
 </div>
-<!-- Example 3: Sofia -->
+
+<!-- Example 4: Expected Monetary Value -->
 <div class="card-example mb-0">
 <span class="text-[10px] font-bold text-[#8B0E2D] bg-[#F7F2F8] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">📝 Expected Monetary Value</span>
 <p class="text-body mb-3">A sales representative receives an RM80 commission from a special promotion with probability 0.08. If no commission is earned, an RM3 administrative cost is incurred. Let \(X\) be the net monetary outcome. Find \(E(X)\) and interpret the result.</p>
@@ -2257,9 +3546,257 @@ html[data-theme="dark"] .module3-btn-light{
 </div>
 </div>
 <div class="section-complete-wrap">
-<button class="section-complete-btn" id="complete-sec-3-2" onclick="return goToModule3Section('sec-3-3','nav-3-3')" type="button">Next: 3.3 Binomial →</button>
+<button class="section-complete-btn" id="complete-sec-3-2" onclick="return goToModule3Section('sec-3-2-cafe','nav-3-2-cafe')" type="button">Next: 3.2 Worked Example →</button>
 </div>
 </section>
+
+<!-- 3.2 WORKED EXAMPLE PAGE -->
+<section class="page-section" id="sec-3-2-cafe">
+  <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#25408F] via-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+    <div class="relative z-10">
+      <span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">3.2 · WORKED EXAMPLE</span>
+      <h2 class="text-2xl md:text-3xl font-bold mb-1">From Frequency Data to a Probability Distribution</h2>
+      <p class="text-[#F7F2F8] text-[14px] md:text-[15px] opacity-95">
+        Apply the ideas of probability distribution, mean and variance in one guided example.
+      </p>
+    </div>
+  </div>
+
+  <div class="bg-[#F5F6FA] border border-[#E1E3ED] rounded-xl p-3 mb-4 text-sm text-gray-700">
+    <strong class="text-[#512E5F]">Before you begin:</strong>
+    This page is still part of <strong>3.2 Mean, Variance &amp; Expectation</strong>. Work through each part using its hints, then reveal only that part’s solution.
+  </div>
+
+  <!-- 3.2 WORKED EXAMPLE: FREQUENCY DATA TO PROBABILITY DISTRIBUTION -->
+<div class="card-example">
+  <span class="text-[10px] font-bold text-[#25408F] bg-[#F1F4FB] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">
+    📊 From Frequency Data to Probability Distribution
+  </span>
+
+  <h3 class="font-bold text-[#512E5F] text-lg mb-2">Campus Café Orders</h3>
+
+  <p class="text-body mb-3">
+    A campus café records the number of drinks ordered in <strong>20 randomly selected transactions</strong>.
+    The results are shown below. Let \(X\) represent the number of drinks ordered in one transaction.
+  </p>
+
+  <div class="overflow-x-auto mb-4">
+    <table class="w-full max-w-xl text-center border-collapse text-sm bg-white border border-[#D8CDDC] rounded-lg">
+      <tbody>
+        <tr class="border-b border-[#D8CDDC]">
+          <th class="p-2 bg-[#F5F6FA] text-[#512E5F]">Number of drinks, \(x\)</th>
+          <td class="p-2">1</td>
+          <td class="p-2">2</td>
+          <td class="p-2">3</td>
+          <td class="p-2">4</td>
+        </tr>
+        <tr>
+          <th class="p-2 bg-[#F5F6FA] text-[#512E5F]">Number of transactions</th>
+          <td class="p-2">8</td>
+          <td class="p-2">6</td>
+          <td class="p-2">4</td>
+          <td class="p-2">2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bg-[#F5F6FA] border border-[#E1E3ED] rounded-xl p-3 mb-4 text-sm text-gray-700">
+    <strong class="text-[#512E5F]">Tasks</strong>
+    <ol class="list-decimal pl-5 mt-2 space-y-1.5">
+      <li>Construct the probability distribution table of \(X\).</li>
+      <li>Find the mean of \(X\) and interpret the result.</li>
+      <li>Find the variance of \(X\).</li>
+    </ol>
+  </div>
+
+  
+<div class="space-y-5">
+
+  <!-- PART A -->
+  <div class="border border-[#D8CDDC] rounded-2xl p-4 bg-white">
+    <div class="font-bold text-[#512E5F] mb-2">(a) Construct the probability distribution table of \(X\)</div>
+
+    <button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded-lg px-3 py-2"
+            onclick="revealStep('ex32a-hint1', this)" type="button">
+      Show Hint 1
+    </button>
+
+    <div class="card-think hidden mt-3" id="ex32a-hint1">
+      <p class="font-bold text-sm text-[#25408F] mb-1">💡 Hint 1</p>
+      <p class="text-sm text-gray-700">
+        Add all frequencies first to find the total number of transactions.
+      </p>
+      <button class="mt-3 text-xs font-bold text-[#25408F] border border-[#AAB1D1] rounded-lg px-3 py-2"
+              onclick="revealStep('ex32a-hint2', this)" type="button">
+        Show Hint 2 →
+      </button>
+    </div>
+
+    <div class="card-hint hidden mt-3" id="ex32a-hint2">
+      <p class="font-bold text-sm text-[#7A4B92] mb-1">💡 Hint 2</p>
+      <p class="text-sm text-gray-700">
+        Use \(P(X=x)=\dfrac{\text{frequency}}{\text{total frequency}}\) for each value of \(x\).
+      </p>
+      <button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold"
+              onclick="revealStep('ex32a-answer', this)" type="button">
+        Show Part (a) Solution
+      </button>
+    </div>
+
+    <div class="card-solution hidden mt-3" id="ex32a-answer">
+      <div class="math-display text-sm mb-2">
+        \[
+        \text{Total frequency}=8+6+4+2=20
+        \]
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full max-w-xl text-center border-collapse text-sm bg-white border border-[#D8CDDC] rounded-lg">
+          <tbody>
+            <tr class="border-b border-[#D8CDDC]">
+              <th class="p-2 bg-[#F5F6FA]">\(X\)</th>
+              <td class="p-2">1</td>
+              <td class="p-2">2</td>
+              <td class="p-2">3</td>
+              <td class="p-2">4</td>
+            </tr>
+            <tr>
+              <th class="p-2 bg-[#F5F6FA]">\(P(X=x)\)</th>
+              <td class="p-2">\(\frac{8}{20}=0.40\)</td>
+              <td class="p-2">\(\frac{6}{20}=0.30\)</td>
+              <td class="p-2">\(\frac{4}{20}=0.20\)</td>
+              <td class="p-2">\(\frac{2}{20}=0.10\)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-takeaway mt-3 mb-0">
+        <span class="text-xs font-bold uppercase tracking-wider mb-1 block">✓ Check</span>
+        <p class="text-sm">\(0.40+0.30+0.20+0.10=1\).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="border border-[#D8CDDC] rounded-2xl p-4 bg-white">
+    <div class="font-bold text-[#512E5F] mb-2">(b) Find the mean of \(X\) and interpret the result</div>
+
+    <button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded-lg px-3 py-2"
+            onclick="revealStep('ex32b-hint1', this)" type="button">
+      Show Hint 1
+    </button>
+
+    <div class="card-think hidden mt-3" id="ex32b-hint1">
+      <p class="font-bold text-sm text-[#25408F] mb-1">💡 Hint 1</p>
+      <p class="text-sm text-gray-700">
+        Use the probability distribution from part (a) and calculate \(E(X)=\sum xP(X=x)\).
+      </p>
+      <button class="mt-3 text-xs font-bold text-[#25408F] border border-[#AAB1D1] rounded-lg px-3 py-2"
+              onclick="revealStep('ex32b-hint2', this)" type="button">
+        Show Hint 2 →
+      </button>
+    </div>
+
+    <div class="card-hint hidden mt-3" id="ex32b-hint2">
+      <p class="font-bold text-sm text-[#7A4B92] mb-1">💡 Hint 2</p>
+      <p class="text-sm text-gray-700">
+        Multiply each \(x\)-value by its probability, then add the products.
+      </p>
+      <button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold"
+              onclick="revealStep('ex32b-answer', this)" type="button">
+        Show Part (b) Solution
+      </button>
+    </div>
+
+    <div class="card-solution hidden mt-3" id="ex32b-answer">
+      <div class="math-display text-sm">
+        \[
+        \begin{aligned}
+        E(X)
+        &=1(0.40)+2(0.30)+3(0.20)+4(0.10)\\
+        &=0.40+0.60+0.60+0.40\\
+        &=2.00
+        \end{aligned}
+        \]
+      </div>
+      <div class="card-takeaway mt-3 mb-0">
+        <span class="text-xs font-bold uppercase tracking-wider mb-1 block">🧠 Interpretation</span>
+        <p class="text-sm">
+          Over many similar transactions, the café can expect an average of <strong>2 drinks per transaction</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART C -->
+  <div class="border border-[#D8CDDC] rounded-2xl p-4 bg-white">
+    <div class="font-bold text-[#512E5F] mb-2">(c) Find the variance of \(X\)</div>
+
+    <button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded-lg px-3 py-2"
+            onclick="revealStep('ex32c-hint1', this)" type="button">
+      Show Hint 1
+    </button>
+
+    <div class="card-think hidden mt-3" id="ex32c-hint1">
+      <p class="font-bold text-sm text-[#25408F] mb-1">💡 Hint 1</p>
+      <p class="text-sm text-gray-700">
+        First calculate \(E(X^2)=\sum x^2P(X=x)\).
+      </p>
+      <button class="mt-3 text-xs font-bold text-[#25408F] border border-[#AAB1D1] rounded-lg px-3 py-2"
+              onclick="revealStep('ex32c-hint2', this)" type="button">
+        Show Hint 2 →
+      </button>
+    </div>
+
+    <div class="card-hint hidden mt-3" id="ex32c-hint2">
+      <p class="font-bold text-sm text-[#7A4B92] mb-1">💡 Hint 2</p>
+      <p class="text-sm text-gray-700">
+        Then use \(\operatorname{Var}(X)=E(X^2)-[E(X)]^2\), with the mean from part (b).
+      </p>
+      <button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold"
+              onclick="revealStep('ex32c-answer', this)" type="button">
+        Show Part (c) Solution
+      </button>
+    </div>
+
+    <div class="card-solution hidden mt-3" id="ex32c-answer">
+      <div class="variance-solution-stack">
+        <div class="math-display text-sm variance-calc-block">
+          \[
+          \begin{aligned}
+          E(X^2)
+          &=1^2(0.40)+2^2(0.30)+3^2(0.20)+4^2(0.10)\\
+          &=0.40+1.20+1.80+1.60\\
+          &=5.00
+          \end{aligned}
+          \]
+        </div>
+
+        <div class="math-display text-sm variance-calc-block">
+          \[
+          \begin{aligned}
+          \operatorname{Var}(X)
+          &=E(X^2)-[E(X)]^2\\
+          &=5.00-(2.00)^2\\
+          &=1.00
+          \end{aligned}
+          \]
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+    </div>
+
+<div class="section-complete-wrap" style="display:flex;gap:.7rem;flex-wrap:wrap;justify-content:space-between;">
+    <button class="section-complete-btn" onclick="return goToModule3Section('sec-3-2','nav-3-2')" type="button">← Back to 3.2 Notes</button>
+    <button class="section-complete-btn" id="complete-sec-3-2-cafe" onclick="return goToModule3Section('sec-3-3','nav-3-3')" type="button">Next: 3.3 Binomial →</button>
+  </div>
+</section>
+
 <!-- LEARN: 3.3 -->
 <section class="page-section" id="sec-3-3">
 <!-- Section Header -->
@@ -2488,6 +4025,26 @@ html[data-theme="dark"] .module3-btn-light{
 </div>
 </div>
 </div>
+<div class="section-complete-wrap">
+  <button class="section-complete-btn" id="complete-sec-3-3"
+          onclick="return goToModule3Section('sec-3-3-formula','nav-3-3-formula')" type="button">
+    Next: Requirements &amp; Formula →
+  </button>
+</div>
+
+</section>
+
+<!-- 3.3 PAGE 2: REQUIREMENTS & FORMULA -->
+<section class="page-section" id="sec-3-3-formula">
+  <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#25408F] via-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+    <div class="relative z-10">
+      <span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">3.3 · BINOMIAL DISTRIBUTION</span>
+      <h2 class="text-2xl md:text-3xl font-bold mb-1">Requirements, Formula, Mean &amp; Variance</h2>
+      <p class="text-[#F7F2F8] text-[14px] md:text-[15px] opacity-95">
+        Check the binomial requirements, then learn the probability, mean and variance formulas.
+      </p>
+    </div>
+  </div>
 <div class="card-concept">
 <div class="card-concept-header">
 <svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
@@ -2527,6 +4084,222 @@ html[data-theme="dark"] .module3-btn-light{
 </div>
 </div>
 </div>
+<!-- Concept: Binomial Mean & Variance — placed before worked examples -->
+<div class="card-concept mb-0">
+<div class="card-concept-header">
+<svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Mean &amp; Variance of Binomial Distribution
+                    </div>
+<div class="p-4 md:p-5">
+<div class="binomial-mv-compact grid grid-cols-1 md:grid-cols-2 gap-3">
+<!-- Mean -->
+<div class="formula-card">
+<div class="formula-bg-pattern"><span class="text-4xl font-serif">μ</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Mean</h3>
+<div class="math-display text-[#512E5F] font-bold formula-primary">
+                                    \[ \mu = np \]
+                                </div>
+</div>
+<!-- Variance -->
+<div class="formula-card">
+<div class="formula-bg-pattern"><span class="text-4xl font-serif">σ²</span></div>
+<div class="formula-tag">FORMULA</div>
+<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Variance</h3>
+<div class="math-display text-[#512E5F] font-bold formula-primary">
+                                    \[ \sigma^2 = npq \]
+                                </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Guided Example: Mean, Variance & Standard Deviation of a Binomial Distribution -->
+<div class="card-example mt-4" id="binomial-mv-guided-example">
+  <span class="text-[10px] font-bold text-[#25408F] bg-[#F1F4FB] px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">
+    📘 Guided Example
+  </span>
+
+  <h3 class="font-bold text-[#512E5F] text-lg mb-2">Online Learning Satisfaction</h3>
+
+  <p class="text-body mb-3">
+    A survey shows that <strong>70% of students are satisfied</strong> with an online learning platform.
+    A random sample of <strong>12 students</strong> is selected.
+  </p>
+
+  <div class="bg-[#F5F6FA] border border-[#E1E3ED] rounded-xl p-3 mb-4 text-sm text-gray-700">
+    Calculate the <strong>mean</strong>, <strong>variance</strong> and <strong>standard deviation</strong> of the number of students who are:
+    <div class="mt-2 space-y-1">
+      <div><strong>(a)</strong> satisfied with the platform</div>
+      <div><strong>(b)</strong> not satisfied with the platform</div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="border border-[#D8CDDC] rounded-2xl p-4 bg-white mb-4">
+    <div class="font-bold text-[#512E5F] mb-2">(a) Students who are satisfied</div>
+
+    <button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded-lg px-3 py-2"
+            onclick="revealStep('mvex-a-hint1', this)" type="button">
+      Show Hint 1
+    </button>
+
+    <div class="card-think hidden mt-3" id="mvex-a-hint1">
+      <p class="font-bold text-sm text-[#25408F] mb-1">💡 Hint 1 — Identify the parameters</p>
+      <p class="text-sm text-gray-700">
+        Let \(X\) be the number of satisfied students. Here, \(n=12\), \(p=0.70\), and \(q=1-p=0.30\).
+      </p>
+      <button class="mt-3 text-xs font-bold text-[#25408F] border border-[#AAB1D1] rounded-lg px-3 py-2"
+              onclick="revealStep('mvex-a-hint2', this)" type="button">
+        Show Hint 2 →
+      </button>
+    </div>
+
+    <div class="card-hint hidden mt-3" id="mvex-a-hint2">
+      <p class="font-bold text-sm text-[#7A4B92] mb-1">💡 Hint 2 — Choose the formulas</p>
+      <p class="text-sm text-gray-700">
+        Use \(\mu=np\), \(\sigma^2=npq\), and \(\sigma=\sqrt{\sigma^2}\).
+      </p>
+      <button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold"
+              onclick="revealStep('mvex-a-answer', this)" type="button">
+        Show Part (a) Solution
+      </button>
+    </div>
+
+    <div class="card-solution hidden mt-3" id="mvex-a-answer">
+      <div class="math-display text-sm">
+        \[
+        \begin{aligned}
+        \mu &= np\\
+            &=12(0.70)\\
+            &=8.4
+        \end{aligned}
+        \]
+      </div>
+
+      <div class="math-display text-sm">
+        \[
+        \begin{aligned}
+        \sigma^2 &= npq\\
+                 &=12(0.70)(0.30)\\
+                 &=2.52
+        \end{aligned}
+        \]
+      </div>
+
+      <div class="math-display text-sm">
+        \[
+        \begin{aligned}
+        \sigma &= \sqrt{\sigma^2}\\
+               &=\sqrt{2.52}\\
+               &\approx1.587
+        \end{aligned}
+        \]
+      </div>
+
+      <div class="card-takeaway mt-3 mb-0">
+        <span class="text-xs font-bold uppercase tracking-wider mb-1 block">✓ Part (a)</span>
+        <p class="text-sm">
+          Mean \(=8.4\), variance \(=2.52\), standard deviation \(\approx1.587\).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="border border-[#D8CDDC] rounded-2xl p-4 bg-white">
+    <div class="font-bold text-[#512E5F] mb-2">(b) Students who are not satisfied</div>
+
+    <button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded-lg px-3 py-2"
+            onclick="revealStep('mvex-b-hint1', this)" type="button">
+      Show Hint 1
+    </button>
+
+    <div class="card-think hidden mt-3" id="mvex-b-hint1">
+      <p class="font-bold text-sm text-[#25408F] mb-1">💡 Hint 1 — Change the meaning of success</p>
+      <p class="text-sm text-gray-700">
+        Let \(Y\) be the number of students who are <strong>not satisfied</strong>.
+        Now the probability of success is \(p=0.30\), so \(q=0.70\).
+      </p>
+      <button class="mt-3 text-xs font-bold text-[#25408F] border border-[#AAB1D1] rounded-lg px-3 py-2"
+              onclick="revealStep('mvex-b-hint2', this)" type="button">
+        Show Hint 2 →
+      </button>
+    </div>
+
+    <div class="card-hint hidden mt-3" id="mvex-b-hint2">
+      <p class="font-bold text-sm text-[#7A4B92] mb-1">💡 Hint 2 — Apply the same formulas</p>
+      <p class="text-sm text-gray-700">
+        Use \(\mu=np\), \(\sigma^2=npq\), and \(\sigma=\sqrt{\sigma^2}\) with \(p=0.30\) and \(q=0.70\).
+      </p>
+      <button class="mt-3 bg-[#8B0E2D] text-white px-4 py-2 rounded-lg text-sm font-bold"
+              onclick="revealStep('mvex-b-answer', this)" type="button">
+        Show Part (b) Solution
+      </button>
+    </div>
+
+    <div class="card-solution hidden mt-3" id="mvex-b-answer">
+      <div class="math-display text-sm">
+        \[
+        \begin{aligned}
+        \mu &= np\\
+            &=12(0.30)\\
+            &=3.6
+        \end{aligned}
+        \]
+      </div>
+
+      <div class="math-display text-sm">
+        \[
+        \begin{aligned}
+        \sigma^2 &= npq\\
+                 &=12(0.30)(0.70)\\
+                 &=2.52
+        \end{aligned}
+        \]
+      </div>
+
+      <div class="math-display text-sm">
+        \[
+        \begin{aligned}
+        \sigma &= \sqrt{\sigma^2}\\
+               &=\sqrt{2.52}\\
+               &\approx1.587
+        \end{aligned}
+        \]
+      </div>
+
+      <div class="card-takeaway mt-3 mb-0">
+        <span class="text-xs font-bold uppercase tracking-wider mb-1 block">✓ Part (b)</span>
+        <p class="text-sm">
+          Mean \(=3.6\), variance \(=2.52\), standard deviation \(\approx1.587\).
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="section-complete-wrap" style="display:flex;gap:.7rem;flex-wrap:wrap;justify-content:space-between;">
+    <button class="section-complete-btn" onclick="return goToModule3Section('sec-3-3','nav-3-3')" type="button">← Back to 3.3 Overview</button>
+    <button class="section-complete-btn" id="complete-sec-3-3-formula"
+            onclick="return goToModule3Section('sec-3-3-seed','nav-3-3-seed')" type="button">
+      Next: Guided Seed Example →
+    </button>
+  </div>
+</section>
+
+<!-- 3.3 PAGE 3: GUIDED SEED EXAMPLE -->
+<section class="page-section" id="sec-3-3-seed">
+  <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#25408F] via-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+    <div class="relative z-10">
+      <span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">3.3 · WORKED EXAMPLE</span>
+      <h2 class="text-2xl md:text-3xl font-bold mb-1">Guided Binomial Example</h2>
+      <p class="text-[#F7F2F8] text-[14px] md:text-[15px] opacity-95">
+        Identify \(n\), \(p\), \(q\) and \(r\), then apply the binomial probability formula.
+      </p>
+    </div>
+  </div>
 <!-- Example 1: Dice -->
 <div class="card-example">
 <p class="text-body mb-3">A seed has probability 0.80 of germinating. Four seeds are planted independently. Find the probability that exactly three seeds germinate.</p>
@@ -2570,6 +4343,27 @@ html[data-theme="dark"] .module3-btn-light{
     </div>
 </div>
 </div>
+
+  <div class="section-complete-wrap" style="display:flex;gap:.7rem;flex-wrap:wrap;justify-content:space-between;">
+    <button class="section-complete-btn" onclick="return goToModule3Section('sec-3-3-formula','nav-3-3-formula')" type="button">← Back to Formula</button>
+    <button class="section-complete-btn" id="complete-sec-3-3-seed"
+            onclick="return goToModule3Section('sec-3-3-language','nav-3-3-language')" type="button">
+      Next: Probability Language &amp; Table →
+    </button>
+  </div>
+</section>
+
+<!-- 3.3 PAGE 4: PROBABILITY LANGUAGE TO END -->
+<section class="page-section" id="sec-3-3-language">
+  <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#25408F] via-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
+    <div class="relative z-10">
+      <span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider mb-1 block">3.3 · APPLICATION</span>
+      <h2 class="text-2xl md:text-3xl font-bold mb-1">Probability Language &amp; Binomial Table</h2>
+      <p class="text-[#F7F2F8] text-[14px] md:text-[15px] opacity-95">
+        Translate probability language correctly and use the binomial table to solve applied questions.
+      </p>
+    </div>
+  </div>
 <!-- Concept: Probability Language -->
 <div class="card-concept">
 <div class="card-concept-header">
@@ -2592,13 +4386,88 @@ html[data-theme="dark"] .module3-btn-light{
 <div class="bg-[#F5F6FA] p-2 rounded-lg border border-[#AAB1D1] mb-4 text-center text-sm font-bold text-[#512E5F]">
     \(X\sim B(6,0.30)\)
   </div>
+<div class="binom-table-guide" id="binomTableGuide">
+  <div class="binom-table-guide-head">
+    <span class="eyebrow">Interactive Table Guide</span>
+    <h4>Read the complete binomial table first, then follow the calculation below</h4>
+    <p>Use the table exactly as you would use a printed binomial table. First locate the <strong>\(n=6\)</strong> block, move across to the <strong>\(p=0.30\)</strong> column, then choose the required <strong>\(r\)</strong> row. The highlighted cell gives the required table value. The complete working is shown <strong>below the table</strong>.</p>
+  </div>
+  <div class="binom-table-guide-body">
+    <div class="binom-table-card">
+      <div class="binom-table-meta">
+        <span class="binom-pill"><strong>Binomial model:</strong>&nbsp; \(X\sim B(6,0.30)\)</span>
+        <span class="binom-pill"><strong>This table gives:</strong>&nbsp; \(P(X\ge r)\)</span>
+      </div>
+      <div class="binom-prompt-grid" id="binomPromptButtons">
+        <button type="button" class="binom-qbtn active" data-case="a" onclick="showBinomGuide('a',this)">(a) Exactly 2 respond</button>
+        <button type="button" class="binom-qbtn" data-case="b" onclick="showBinomGuide('b',this)">(b) At most 3 respond</button>
+        <button type="button" class="binom-qbtn" data-case="c" onclick="showBinomGuide('c',this)">(c) At least 2 respond</button>
+        <button type="button" class="binom-qbtn" data-case="d" onclick="showBinomGuide('d',this)">(d) Fewer than 3 respond</button>
+      </div>
+      <div class="binom-read-guide" aria-label="How to read the binomial table">
+        <div class="binom-read-step"><span>1</span><strong>Find \(n=6\)</strong><small>Use the block for six trials.</small></div>
+        <div class="binom-read-step"><span>2</span><strong>Find \(p=0.30\)</strong><small>Move to the 0.30 probability column.</small></div>
+        <div class="binom-read-step"><span>3</span><strong>Choose the row \(r\)</strong><small>For example, \(r=2\) for “at least 2”.</small></div>
+        <div class="binom-read-step"><span>4</span><strong>Read the intersection</strong><small>The highlighted cell is the table value.</small></div>
+      </div>
+      <div class="binom-table-wrap">
+        <table class="binom-guide-table binom-full-table" aria-label="Binomial cumulative upper-tail table for n equals 6">
+          <thead>
+            <tr>
+              <th rowspan="2" class="binom-n-head">n</th>
+              <th rowspan="2">r</th>
+              <th colspan="5">Probability of success, \(p\)</th>
+            </tr>
+            <tr>
+              <th data-p="0.10">0.10</th>
+              <th data-p="0.20">0.20</th>
+              <th data-p="0.30" class="binom-p-selected">0.30</th>
+              <th data-p="0.40">0.40</th>
+              <th data-p="0.50">0.50</th>
+            </tr>
+          </thead>
+          <tbody id="binomGuideTableBody">
+            <tr data-r="0"><td rowspan="7" class="binom-n-cell">6</td><td>0</td><td>1.0000</td><td>1.0000</td><td data-p="0.30">1.0000</td><td>1.0000</td><td>1.0000</td></tr>
+            <tr data-r="1"><td>1</td><td>0.4686</td><td>0.7379</td><td data-p="0.30">0.8824</td><td>0.9533</td><td>0.9844</td></tr>
+            <tr data-r="2"><td>2</td><td>0.1143</td><td>0.3446</td><td data-p="0.30">0.5798</td><td>0.7667</td><td>0.8906</td></tr>
+            <tr data-r="3"><td>3</td><td>0.0159</td><td>0.0989</td><td data-p="0.30">0.2557</td><td>0.4557</td><td>0.6563</td></tr>
+            <tr data-r="4"><td>4</td><td>0.0013</td><td>0.0170</td><td data-p="0.30">0.0705</td><td>0.1792</td><td>0.3438</td></tr>
+            <tr data-r="5"><td>5</td><td>0.0001</td><td>0.0016</td><td data-p="0.30">0.0109</td><td>0.0410</td><td>0.1094</td></tr>
+            <tr data-r="6"><td>6</td><td>0.0000</td><td>0.0001</td><td data-p="0.30">0.0007</td><td>0.0041</td><td>0.0156</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="binom-table-caption">
+        <strong>How to interpret a cell:</strong> for \(n=6\), \(p=0.30\), and \(r=2\), the table entry is
+        <strong>0.5798</strong>. Therefore, \(P(X\ge2)=0.5798\).
+      </div>
+      <div class="binom-legend">
+        <span><i class="binom-swatch" style="background:rgba(139,14,45,.16)"></i> Row used for the main table value</span>
+        <span><i class="binom-swatch" style="background:rgba(37,64,143,.16)"></i> Additional row used for subtraction or a complement</span>
+      </div>
+    </div>
+    <div class="binom-steps-card">
+      <div class="eyebrow" style="color:#8B0E2D;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;">Step-by-Step Calculation</div>
+      <h5 id="binomGuideTitle">(a) Exactly 2 respond</h5>
+      <div class="binom-step-list" id="binomGuideSteps"></div>
+      <div class="binom-answer-box">
+        <span class="label">Final Answer</span>
+        <div class="value" id="binomGuideAnswer">\(P(X=2)=0.3241\)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-4 rounded-xl border border-[#D8CDDC] bg-[#F7F2F8] p-3 text-sm text-[#512E5F]">
+<strong>Table-method solutions:</strong> The solutions below use exactly the same table values and method shown in the interactive guide above.
+</div>
 <div class="space-y-4">
 <div>
 <p class="font-bold text-gray-800 mb-1.5 text-sm">(a) exactly 2 customers respond</p>
 <button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded px-3 py-1" onclick="revealStep('ex7a-solution', this)">Translate &amp; Solve</button>
 <div class="hidden mt-2 pl-3 border-l-2 border-[#8B0E2D]" id="ex7a-solution">
 <p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \(P(X=2)\)</p>
-<div class="math-display text-sm">\[P(X=2)=\binom62(0.3)^2(0.7)^4\approx0.3241\]</div>
+<div class="math-display text-sm">\[P(X=2)=P(X\ge2)-P(X\ge3)=0.5798-0.2557=0.3241\]</div>
 </div>
 </div>
 <div>
@@ -2606,7 +4475,7 @@ html[data-theme="dark"] .module3-btn-light{
 <button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded px-3 py-1" onclick="revealStep('ex7b-solution', this)">Translate &amp; Solve</button>
 <div class="hidden mt-2 pl-3 border-l-2 border-[#8B0E2D]" id="ex7b-solution">
 <p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \(P(X\le3)\)</p>
-<div class="math-display text-sm">\[P(X\le3)\approx0.9295\]</div>
+<div class="math-display text-sm">\[P(X\le3)=1-P(X\ge4)=1-0.0705=0.9295\]</div>
 </div>
 </div>
 <div>
@@ -2614,7 +4483,7 @@ html[data-theme="dark"] .module3-btn-light{
 <button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded px-3 py-1" onclick="revealStep('ex7c-solution', this)">Translate &amp; Solve</button>
 <div class="hidden mt-2 pl-3 border-l-2 border-[#8B0E2D]" id="ex7c-solution">
 <p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \(P(X\ge2)\)</p>
-<div class="math-display text-sm">\[P(X\ge2)=1-[P(X=0)+P(X=1)]\approx0.5798\]</div>
+<div class="math-display text-sm">\[P(X\ge2)=0.5798\]</div>
 </div>
 </div>
 <div>
@@ -2622,44 +4491,21 @@ html[data-theme="dark"] .module3-btn-light{
 <button class="text-xs font-bold text-[#8B0E2D] border border-[#8B0E2D] rounded px-3 py-1" onclick="revealStep('ex7d-solution', this)">Translate &amp; Solve</button>
 <div class="hidden mt-2 pl-3 border-l-2 border-[#8B0E2D]" id="ex7d-solution">
 <p class="text-[10px] text-gray-500 font-bold mb-1 uppercase tracking-wider">Translation: \(P(X&lt;3)=P(X\le2)\)</p>
-<div class="math-display text-sm">\[P(X&lt;3)\approx0.7443\]</div>
+<div class="math-display text-sm">\[P(X&lt;3)=P(X\le2)=1-P(X\ge3)=1-0.2557=0.7443\]</div>
 </div>
 </div>
 </div>
 </div>
-<!-- Concept: Binomial Mean & Variance -->
-<div class="card-concept mb-0">
-<div class="card-concept-header">
-<svg class="w-5 h-5 mr-2 text-[#8B0E2D]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-                        Mean &amp; Variance of Binomial Distribution
-                    </div>
-<div class="p-4 md:p-5">
-<div class="binomial-mv-compact grid grid-cols-1 md:grid-cols-2 gap-3">
-<!-- Mean -->
-<div class="formula-card">
-<div class="formula-bg-pattern"><span class="text-4xl font-serif">μ</span></div>
-<div class="formula-tag">FORMULA</div>
-<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Mean</h3>
-<div class="math-display text-[#512E5F] font-bold formula-primary">
-                                    \[ \mu = np \]
-                                </div>
-</div>
-<!-- Variance -->
-<div class="formula-card">
-<div class="formula-bg-pattern"><span class="text-4xl font-serif">σ²</span></div>
-<div class="formula-tag">FORMULA</div>
-<h3 class="text-sm font-bold uppercase tracking-wider mt-2 mb-1 text-[#512E5F] text-center">Variance</h3>
-<div class="math-display text-[#512E5F] font-bold formula-primary">
-                                    \[ \sigma^2 = npq \]
-                                </div>
-</div>
-</div>
-</div>
-</div>
-<div class="section-complete-wrap">
-<button class="section-complete-btn" id="complete-sec-3-3" onclick="return goToModule3Section('sec-obt','nav-obt')" type="button">Next: Open Book Test →</button>
-</div>
+
+  <div class="section-complete-wrap" style="display:flex;gap:.7rem;flex-wrap:wrap;justify-content:space-between;">
+    <button class="section-complete-btn" onclick="return goToModule3Section('sec-3-3-seed','nav-3-3-seed')" type="button">← Back to Seed Example</button>
+    <button class="section-complete-btn" id="complete-sec-3-3-language"
+            onclick="return goToModule3Section('sec-obt','nav-obt')" type="button">
+      Next: Open Book Test →
+    </button>
+  </div>
 </section>
+
 <!-- OPEN BOOK TEST -->
 <section class="page-section" id="sec-obt">
 <div class="mb-5 playbook-card p-5 md:p-6 bg-gradient-to-r from-[#512E5F] to-[#8B0E2D] text-white rounded-2xl shadow-md relative overflow-hidden">
@@ -2709,7 +4555,7 @@ html[data-theme="dark"] .module3-btn-light{
 <span class="text-[#D8CDDC] font-bold text-xs md:text-sm uppercase tracking-wider" id="try-q-badge">Question 1</span>
 <h2 class="text-2xl md:text-3xl font-bold mt-1">Formative Practice</h2>
 </div>
-<div class="text-xs font-bold text-[#512E5F] bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap" id="try-q-tracker">1 OF 8</div>
+<div class="text-xs font-bold text-[#512E5F] bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap" id="try-q-tracker">1 OF 10</div>
 </div>
 <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewbox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
 </div>
@@ -2741,10 +4587,23 @@ html[data-theme="dark"] .module3-btn-light{
 <svg class="w-8 h-8 large-icon" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
 <h2 class="text-2xl font-bold text-[#512E5F] mb-2">TRY COMPLETED</h2>
-<div class="bg-[#F5F6FA] rounded-xl p-6 inline-block min-w-[200px] border border-[#E1E3ED] mb-6 shadow-sm">
+<div class="bg-[#F5F6FA] rounded-xl p-6 inline-block min-w-[200px] border border-[#E1E3ED] mb-4 shadow-sm">
 <div class="text-xs text-gray-500 font-bold mb-1 uppercase tracking-wide">Score</div>
-<div class="text-4xl font-bold text-[#8B0E2D] mb-1" id="try-final-score">0 / 8</div>
+<div class="text-4xl font-bold text-[#8B0E2D] mb-1" id="try-final-score">0 / 10</div>
 <div class="text-sm font-medium text-gray-500" id="try-final-accuracy">Accuracy: 0%</div>
+<div class="flex justify-center gap-4 text-xs font-bold mt-3">
+<div class="text-green-700"><span id="try-count-correct">0</span> Correct</div>
+<div class="text-red-700"><span id="try-count-incorrect">0</span> Incorrect</div>
+</div>
+</div>
+<div class="text-left mb-6" id="try-review-section">
+<button class="quiz-review-toggle" id="try-review-toggle" type="button"
+        onclick="toggleQuizReview('try-review-list','try-review-toggle')"
+        aria-expanded="false">
+  <span>Review All Answers</span>
+  <span class="quiz-review-toggle-icon">⌄</span>
+</button>
+<div class="space-y-3 quiz-review-list-collapsed" id="try-review-list"></div>
 </div>
 <div class="flex flex-col sm:flex-row justify-center gap-3">
 <button class="px-6 py-3 rounded-xl font-bold text-[#8B0E2D] bg-[#F7F2F8] hover:bg-[#D8CDDC] transition-colors border border-[#AAB1D1] text-sm" onclick="resetTryQuiz()">
@@ -2766,7 +4625,7 @@ html[data-theme="dark"] .module3-btn-light{
 <h2 class="text-2xl md:text-3xl font-bold mt-1">Mastery Assessment</h2>
 <p class="text-[#F7F2F8] text-[14px] opacity-95 mt-1">Test your full understanding of Chapter 3.</p>
 </div>
-<div class="text-xs font-bold text-[#512E5F] bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap" id="check-q-tracker">1 OF 8</div>
+<div class="text-xs font-bold text-[#512E5F] bg-white px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap" id="check-q-tracker">1 OF 10</div>
 </div>
 <svg class="absolute right-0 top-0 h-full w-48 text-white opacity-5 transform translate-x-10 scale-150 pointer-events-none" fill="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
 </div>
@@ -2797,7 +4656,7 @@ html[data-theme="dark"] .module3-btn-light{
 <p class="text-gray-600 text-sm">Here is how you performed across the chapter topics.</p>
 <div class="bg-[#F5F6FA] rounded-xl p-6 inline-block min-w-[240px] border border-[#E1E3ED] mt-4 shadow-sm">
 <div class="text-xs text-gray-500 font-bold mb-1 uppercase tracking-wide">FINAL SCORE</div>
-<div class="text-4xl font-bold text-[#8B0E2D] mb-1" id="check-final-score">0 / 8</div>
+<div class="text-4xl font-bold text-[#8B0E2D] mb-1" id="check-final-score">0 / 10</div>
 <div class="text-sm font-bold text-gray-700 mb-3" id="check-final-accuracy">0%</div>
 <div class="flex justify-center gap-4 text-xs font-medium">
 <div class="text-green-600"><span id="check-count-correct">0</span> Correct</div>
@@ -2812,12 +4671,15 @@ html[data-theme="dark"] .module3-btn-light{
 <!-- Breakdown populated here -->
 </div>
 </div>
-<!-- Mistakes List -->
-<div class="mb-6 hidden border-t border-gray-100 pt-5" id="check-mistakes-container">
-<h3 class="text-sm font-bold text-red-700 mb-3 uppercase tracking-wider">Review Your Mistakes</h3>
-<div class="space-y-4" id="check-mistakes-list">
-<!-- Mistakes populated here -->
-</div>
+<!-- Full Answer Review -->
+<div class="mb-6 border-t border-gray-100 pt-5" id="check-review-container">
+<button class="quiz-review-toggle" id="check-review-toggle" type="button"
+        onclick="toggleQuizReview('check-review-list','check-review-toggle')"
+        aria-expanded="false">
+  <span>Review All Answers</span>
+  <span class="quiz-review-toggle-icon">⌄</span>
+</button>
+<div class="space-y-4 quiz-review-list-collapsed" id="check-review-list"></div>
 </div>
 <div class="text-center w-full mx-auto pt-5 border-t border-gray-100">
 <button class="w-full md:w-auto bg-[#8B0E2D] hover:bg-[#512E5F] text-white px-8 py-3 rounded-xl font-bold text-sm transition-colors shadow-md inline-flex items-center justify-center" onclick="completeWorkbook()">
@@ -2928,12 +4790,16 @@ html[data-theme="dark"] .module3-btn-light{
 
         // Progress tracking
         let visitedSections = new Set(['sec-start']);
-        const allSections = ['sec-start', 'sec-3-1', 'sec-3-2', 'sec-3-3', 'sec-try', 'sec-check'];
+        const allSections = ['sec-start', 'sec-3-1', 'sec-3-2', 'sec-3-2-cafe', 'sec-3-3', 'sec-3-3-formula', 'sec-3-3-seed', 'sec-3-3-language', 'sec-try', 'sec-check'];
         const navMap = {
             'nav-start': 'sec-start',
             'nav-3-1': 'sec-3-1',
             'nav-3-2': 'sec-3-2',
+            'nav-3-2-cafe': 'sec-3-2-cafe',
             'nav-3-3': 'sec-3-3',
+            'nav-3-3-formula': 'sec-3-3-formula',
+            'nav-3-3-seed': 'sec-3-3-seed',
+            'nav-3-3-language': 'sec-3-3-language',
             'nav-try': 'sec-try',
             'nav-check': 'sec-check'
         };
@@ -2944,13 +4810,41 @@ html[data-theme="dark"] .module3-btn-light{
             }
         }
 
+        function toggleDesktopSidebar() {
+            const shell = document.getElementById('moduleShell');
+            const button = document.getElementById('desktopSidebarToggle');
+            const icon = document.getElementById('desktopSidebarToggleIcon');
+            if (!shell) return;
+
+            const collapsed = shell.classList.toggle('sidebar-collapsed');
+
+            if (button) {
+                button.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                button.setAttribute('aria-label', collapsed ? 'Show left navigation' : 'Hide left navigation');
+                button.setAttribute('title', collapsed ? 'Show left navigation' : 'Hide left navigation');
+            }
+            if (icon) icon.textContent = collapsed ? '›' : '‹';
+
+            try {
+                localStorage.setItem('STATXPLORE_MODULE3_SIDEBAR_COLLAPSED', collapsed ? '1' : '0');
+            } catch(e) {}
+        }
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            if (sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.remove('-translate-x-full');
-            } else {
-                sidebar.classList.add('-translate-x-full');
+
+            /* Mobile/tablet keeps the existing slide-in navigation. */
+            if (window.innerWidth <= 900) {
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.remove('-translate-x-full');
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                }
+                return;
             }
+
+            /* Desktop uses the new compact hide/show button. */
+            toggleDesktopSidebar();
         }
 
         function navigateTo(sectionId) {
@@ -3143,12 +5037,35 @@ html[data-theme="dark"] .module3-btn-light{
                 ],
                 ans: 2,
                 exp: "'At most 4' means 4 is the maximum possible value, which translates mathematically to \\( X \\le 4 \\)."
+            },
+            {
+                q: "For a binomial distribution \\( X \\sim B(12,0.7) \\), find the standard deviation.",
+                options: [
+                    "\\( 1.260 \\)",
+                    "\\( 1.587 \\)",
+                    "\\( 2.520 \\)",
+                    "\\( 8.400 \\)"
+                ],
+                ans: 1,
+                exp: "For a binomial distribution, \\( \\sigma^2=npq \\) and \\( \\sigma=\\sqrt{npq} \\). Here \\( q=0.3 \\).\\[ \\sigma=\\sqrt{12(0.7)(0.3)}=\\sqrt{2.52}\\approx1.587 \\]"
+            },
+            {
+                q: "For \\( X\\sim B(6,0.30) \\), a binomial table gives \\( P(X\\ge3)=0.2557 \\). Find \\( P(X<3) \\).",
+                options: [
+                    "\\( 0.2557 \\)",
+                    "\\( 0.5798 \\)",
+                    "\\( 0.7443 \\)",
+                    "\\( 0.9295 \\)"
+                ],
+                ans: 2,
+                exp: "Use the complement rule. Since \\( X<3 \\) is the complement of \\( X\\ge3 \\),\\[ P(X<3)=1-P(X\\ge3)=1-0.2557=0.7443. \\]"
             }
         ];
 
         let currentTryQ = 0;
         let tryScore = 0;
         let selectedTryOption = null;
+        let tryAnswers = [];
 
         function renderTryDots() {
             let dotsHtml = '';
@@ -3202,6 +5119,14 @@ html[data-theme="dark"] .module3-btn-light{
             
             if(isCorrect) tryScore++;
             
+            
+            tryAnswers.push({
+                isCorrect: isCorrect,
+                qData: qData,
+                selectedOptionIdx: selectedTryOption,
+                questionNumber: currentTryQ + 1
+            });
+
             // Disable all options
             document.querySelectorAll('#try-options-container button').forEach(btn => {
                 btn.disabled = true;
@@ -3256,11 +5181,13 @@ html[data-theme="dark"] .module3-btn-light{
 
         function addStatusLabel(btn, isCorrect) {
             const span = document.createElement('span');
-            span.className = 'absolute right-3 top-1/2 transform -translate-y-1/2 font-bold flex items-center bg-white bg-opacity-90 px-2 py-0.5 rounded shadow-sm text-xs';
+            span.className = 'quiz-status-label absolute right-3 top-1/2 transform -translate-y-1/2 font-bold flex items-center px-2.5 py-1 rounded-md shadow-sm text-xs';
+            span.classList.add(isCorrect ? 'status-correct' : 'status-incorrect');
+
             if(isCorrect) {
-                span.innerHTML = '<svg class="w-3 h-3 mr-1 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> <span class="text-green-700">Correct</span>';
+                span.innerHTML = '<svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Correct</span>';
             } else {
-                span.innerHTML = '<svg class="w-3 h-3 mr-1 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg> <span class="text-red-700">Incorrect</span>';
+                span.innerHTML = '<svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg><span>Incorrect</span>';
             }
             btn.appendChild(span);
         }
@@ -3274,14 +5201,53 @@ html[data-theme="dark"] .module3-btn-light{
                 document.getElementById('try-end-screen').style.display = 'block';
                 document.getElementById('try-final-score').innerText = `${tryScore} / ${tryQuestions.length}`;
                 document.getElementById('try-final-accuracy').innerText = `Accuracy: ${Math.round((tryScore/tryQuestions.length)*100)}%`;
+                document.getElementById('try-count-correct').innerText = tryScore;
+                document.getElementById('try-count-incorrect').innerText = tryQuestions.length - tryScore;
+
+                const tryReview = document.getElementById('try-review-list');
+                if(tryReview){
+                    tryReview.innerHTML = tryAnswers.map((a) => `
+                        <div class="quiz-review-card ${a.isCorrect ? 'review-correct' : 'review-incorrect'}">
+                          <div class="quiz-review-top">
+                            <span class="quiz-review-qno">Question ${a.questionNumber}</span>
+                            <span class="quiz-review-status">${a.isCorrect ? 'Correct' : 'Incorrect'}</span>
+                          </div>
+                          <div class="quiz-review-question">${a.qData.q}</div>
+                          <div class="quiz-review-grid">
+                            <div class="quiz-review-answer user-answer">
+                              <span>Your Answer</span>
+                              <div>${a.qData.options[a.selectedOptionIdx]}</div>
+                            </div>
+                            <div class="quiz-review-answer correct-answer">
+                              <span>Correct Answer</span>
+                              <div>${a.qData.options[a.qData.ans]}</div>
+                            </div>
+                          </div>
+                          <div class="quiz-review-explanation"><strong>Review:</strong> ${a.qData.exp}</div>
+                        </div>
+                    `).join('');
+                }
+                safeMathJaxTypeset();
             }
         });
 
-        function resetTryQuiz() {
+        window.resetTryQuiz = function resetTryQuiz() {
             currentTryQ = 0;
             tryScore = 0;
+            selectedTryOption = null;
+            tryAnswers = [];
             document.getElementById('try-quiz-content').style.display = 'block';
             document.getElementById('try-end-screen').style.display = 'none';
+            const tryReview = document.getElementById('try-review-list');
+            if(tryReview) tryReview.innerHTML = '';
+            
+            if(tryReview) tryReview.classList.add('quiz-review-list-collapsed');
+            const tryToggle = document.getElementById('try-review-toggle');
+            if(tryToggle){
+                tryToggle.setAttribute('aria-expanded','false');
+                const icon = tryToggle.querySelector('.quiz-review-toggle-icon');
+                if(icon) icon.textContent='⌄';
+            }
             renderTryQuestion();
         }
 
@@ -3373,6 +5339,26 @@ html[data-theme="dark"] .module3-btn-light{
                 why: "The variance of a binomial distribution takes into account the number of trials, the probability of success, and the probability of failure.",
                 error: "You may have calculated the mean \\( (np = 5) \\) instead of the variance.",
                 idea: "Binomial Variance: \\( \\sigma^2 = npq \\)."
+            },
+            {
+                topic: "3.3 Binomial Distribution",
+                q: "A random sample of 12 students is selected and each student has probability \\(0.70\\) of being satisfied with an online learning platform. What is the standard deviation of the number of satisfied students?",
+                options: ["\\( 1.587 \\)", "\\( 2.520 \\)", "\\( 3.600 \\)", "\\( 8.400 \\)"],
+                ans: 0,
+                solution: "\\[ n=12,\\quad p=0.70,\\quad q=0.30 \\]\\[ \\sigma=\\sqrt{npq}=\\sqrt{12(0.70)(0.30)}=\\sqrt{2.52}\\approx1.587 \\]",
+                why: "The standard deviation of a binomial distribution is the square root of its variance.",
+                error: "You may have selected the variance \\(2.52\\) instead of taking its square root.",
+                idea: "Binomial standard deviation: \\( \\sigma=\\sqrt{npq} \\)."
+            },
+            {
+                topic: "3.3 Binomial Distribution",
+                q: "For \\( X\\sim B(6,0.30) \\), the table gives \\( P(X\\ge3)=0.2557 \\). Which value is \\( P(X<3) \\)?",
+                options: ["\\( 0.2557 \\)", "\\( 0.5798 \\)", "\\( 0.7443 \\)", "\\( 0.9295 \\)"],
+                ans: 2,
+                solution: "\\[ P(X<3)=1-P(X\\ge3) \\]\\[ =1-0.2557=0.7443 \\]",
+                why: "The events \\( X<3 \\) and \\( X\\ge3 \\) are complements, so their probabilities add to 1.",
+                error: "You may have copied the upper-tail table value directly instead of using the complement rule.",
+                idea: "Complement rule: \\( P(A^c)=1-P(A) \\)."
             }
         ];
 
@@ -3556,45 +5542,38 @@ html[data-theme="dark"] .module3-btn-light{
             }
             document.getElementById('check-topic-breakdown').innerHTML = breakdownHtml;
             
-            // Mistakes Review
-            const mistakesList = checkAnswers.filter(a => !a.isCorrect).map((a, i) => {
-                const actualIndex = checkAnswers.indexOf(a) + 1;
-                return { ...a, questionNumber: actualIndex };
-            });
-            
-            if (mistakesList.length > 0) {
-                document.getElementById('check-mistakes-container').classList.remove('hidden');
-                let mistakesHtml = '';
-                mistakesList.forEach(m => {
-                    mistakesHtml += `
-                        <div class="bg-white border border-red-100 p-4 rounded-xl shadow-sm">
-                            <div class="flex items-center text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-2">
-                                <span class="bg-red-50 text-red-700 border border-red-200 px-1.5 py-0.5 rounded mr-2">Question ${m.questionNumber}</span>
-                                <span>${m.qData.topic}</span>
-                            </div>
-                            <div class="text-sm font-medium mb-3">${m.qData.q}</div>
-                            
-                            <div class="grid grid-cols-2 gap-2 mb-3 text-xs">
-                                <div class="bg-red-50 border border-red-200 p-2 rounded">
-                                    <div class="font-bold text-red-700 uppercase mb-1 text-[9px]">Your Answer</div>
-                                    <div class="opacity-80">${m.qData.options[m.selectedOptionIdx]}</div>
-                                </div>
-                                <div class="bg-green-50 border border-green-200 p-2 rounded">
-                                    <div class="font-bold text-green-700 uppercase mb-1 text-[9px]">Correct Answer</div>
-                                    <div class="font-medium">${m.qData.options[m.qData.ans]}</div>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-gray-50 border border-gray-200 p-3 rounded-lg text-xs">
-                                <div class="font-bold text-gray-600 uppercase mb-1 text-[10px]">Review</div>
-                                <div>${m.qData.idea}</div>
-                            </div>
+            // Review every answered question, whether correct or incorrect.
+            const reviewList = document.getElementById('check-review-list');
+            if(reviewList){
+                reviewList.innerHTML = checkAnswers.map((a, index) => `
+                    <div class="quiz-review-card ${a.isCorrect ? 'review-correct' : 'review-incorrect'}">
+                      <div class="quiz-review-top">
+                        <div>
+                          <span class="quiz-review-qno">Question ${index + 1}</span>
+                          <span class="quiz-review-topic">${a.qData.topic}</span>
                         </div>
-                    `;
-                });
-                document.getElementById('check-mistakes-list').innerHTML = mistakesHtml;
+                        <span class="quiz-review-status">${a.isCorrect ? 'Correct' : 'Incorrect'}</span>
+                      </div>
+                      <div class="quiz-review-question">${a.qData.q}</div>
+                      <div class="quiz-review-grid">
+                        <div class="quiz-review-answer user-answer">
+                          <span>Your Answer</span>
+                          <div>${a.qData.options[a.selectedOptionIdx]}</div>
+                        </div>
+                        <div class="quiz-review-answer correct-answer">
+                          <span>Correct Answer</span>
+                          <div>${a.qData.options[a.qData.ans]}</div>
+                        </div>
+                      </div>
+                      <div class="quiz-review-explanation">
+                        <strong>How to solve:</strong>
+                        <div class="mt-1">${a.qData.solution}</div>
+                      </div>
+                      <div class="quiz-review-keyidea"><strong>Key idea:</strong> ${a.qData.idea}</div>
+                    </div>
+                `).join('');
             }
-            
+
             safeMathJaxTypeset();
         }
 
@@ -3605,7 +5584,7 @@ html[data-theme="dark"] .module3-btn-light{
 <script id="progressive-locking-system">
 (function(){
   const KEY='chapter3InteractiveWorkbookProgressFreeNavV1';
-  const sections=['sec-start','sec-3-1','sec-3-2','sec-3-3','sec-obt','sec-try','sec-check'];
+  const sections=['sec-start','sec-3-1','sec-3-2','sec-3-2-cafe','sec-3-3','sec-3-3-formula','sec-3-3-seed','sec-3-3-language','sec-obt','sec-try','sec-check'];
 
   let visited=new Set(['sec-start']);
 
@@ -3655,7 +5634,24 @@ html[data-theme="dark"] .module3-btn-light{
         ? 'Module completed.'
         : 'Continue your learning journey.';
     }
+
+    const certBtn=document.getElementById('module3CertificateBtn');
+    const certNote=document.getElementById('module3CertificateNote');
+    if(certBtn){
+      certBtn.classList.toggle('locked',pct<100);
+      certBtn.textContent=pct>=100 ? '🏆 Print PDF Certificate' : '🔒 Certificate';
+    }
+    if(certNote){
+      certNote.textContent=pct>=100
+        ? '🏆 Certificate unlocked — personalise it and open the PDF.'
+        : 'Complete 100% of Module 3 to unlock your certificate.';
+    }
+    window.__module3ProgressPercent=pct;
   }
+
+  window.isModule3Complete=function(){
+    return Number(window.__module3ProgressPercent || 0) >= 100;
+  };
 
   function activateSection(sectionId,navId,recordVisit){
     document.querySelectorAll('.page-section').forEach(sec=>sec.classList.remove('active'));
@@ -3696,7 +5692,11 @@ html[data-theme="dark"] .module3-btn-light{
       'sec-start':'nav-start',
       'sec-3-1':'nav-3-1',
       'sec-3-2':'nav-3-2',
+      'sec-3-2-cafe':'nav-3-2-cafe',
       'sec-3-3':'nav-3-3',
+      'sec-3-3-formula':'nav-3-3-formula',
+      'sec-3-3-seed':'nav-3-3-seed',
+      'sec-3-3-language':'nav-3-3-language',
       'sec-obt':'nav-obt',
       'sec-try':'nav-try',
       'sec-check':'nav-check'
@@ -3745,9 +5745,9 @@ html[data-theme="dark"] .module3-btn-light{
 
     try{
       if(typeof currentCheckQ!=='undefined') currentCheckQ=0;
-      if(typeof checkScore!=='undefined') checkScore=0;
-      if(typeof selectedCheckOption!=='undefined') selectedCheckOption=null;
-      if(typeof window.renderCheckQuestion==='function') window.renderCheckQuestion();
+      if(typeof checkSelectedOpt!=='undefined') checkSelectedOpt=null;
+      if(typeof checkAnswers!=='undefined') checkAnswers=[];
+      if(typeof renderCheckQuestion==='function') renderCheckQuestion();
     }catch(e){}
 
     const checkResults=document.getElementById('check-results-screen');
@@ -3895,6 +5895,284 @@ window.addEventListener('DOMContentLoaded', function () {
             applyModuleTheme('light');
         }
 </script>
+
+<!-- MODULE 3 CERTIFICATE MODAL -->
+<div class="module3-cert-backdrop" id="module3CertificateModal" aria-hidden="true">
+  <div class="module3-cert-modal" role="dialog" aria-modal="true" aria-labelledby="module3CertificateDialogTitle">
+    <div class="module3-cert-toolbar">
+      <h3 id="module3CertificateDialogTitle">Module 3 Completion Certificate</h3>
+      <div class="module3-cert-actions">
+        <button class="module3-cert-action primary" type="button" onclick="openModule3CertificatePDF()">📄 Open PDF Certificate</button>
+        <button class="module3-cert-action light" type="button" onclick="closeModule3Certificate()">Close</button>
+      </div>
+    </div>
+    <div class="module3-cert-form">
+      <label>Full Name
+        <input id="module3CertificateName" type="text" placeholder="Enter your full name" oninput="updateModule3CertificatePreview()">
+      </label>
+      <label>Class / Section
+        <input id="module3CertificateClass" type="text" placeholder="e.g. 821" oninput="updateModule3CertificatePreview()">
+      </label>
+    </div>
+
+    <div class="module3-cert-preview" id="module3CertificatePreview">
+      <img class="module3-cert-logo" id="module3CertificateLogo" alt="Statistics & Probability logo">
+      <div class="module3-cert-kicker">STATXPLORE · CERTIFICATE OF COMPLETION</div>
+      <div class="module3-cert-title">Certificate of Completion</div>
+      <div class="module3-cert-copy">This certificate is proudly presented to</div>
+      <div class="module3-cert-name" id="module3CertificateNamePreview">YOUR NAME</div>
+      <div class="module3-cert-copy">for successfully completing</div>
+      <div class="module3-cert-pill">Module 3 · Discrete Probability Distributions</div>
+      <div class="module3-cert-desc">
+        Probability Distributions · Mean, Variance & Expectation · Binomial Distribution
+      </div>
+      <div class="module3-cert-meta">
+        <div><strong>Class / Section:</strong> <span id="module3CertificateClassPreview">—</span></div>
+        <div><strong>Date:</strong> <span id="module3CertificateDatePreview">—</span></div>
+      </div>
+      <div class="module3-cert-signatures">
+        <div>Student</div>
+        <div>Lecturer / Instructor</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script id="module3-certificate-script">
+(function(){
+  const NAME_KEY='STATXPLORE_MODULE3_CERT_NAME';
+  const CLASS_KEY='STATXPLORE_MODULE3_CERT_CLASS';
+
+  function certDate(){
+    return new Date().toLocaleDateString('en-GB',{
+      day:'2-digit',month:'long',year:'numeric'
+    });
+  }
+
+  window.updateModule3CertificatePreview=function(){
+    const nameInput=document.getElementById('module3CertificateName');
+    const classInput=document.getElementById('module3CertificateClass');
+    const namePreview=document.getElementById('module3CertificateNamePreview');
+    const classPreview=document.getElementById('module3CertificateClassPreview');
+    const datePreview=document.getElementById('module3CertificateDatePreview');
+
+    const name=(nameInput && nameInput.value.trim()) || 'YOUR NAME';
+    const cls=(classInput && classInput.value.trim()) || '—';
+
+    if(namePreview) namePreview.textContent=name.toUpperCase();
+    if(classPreview) classPreview.textContent=cls;
+    if(datePreview) datePreview.textContent=certDate();
+
+    try{
+      if(nameInput) localStorage.setItem(NAME_KEY,nameInput.value);
+      if(classInput) localStorage.setItem(CLASS_KEY,classInput.value);
+    }catch(e){}
+  };
+
+  window.openModule3Certificate=function(){
+    if(typeof window.isModule3Complete==='function' && !window.isModule3Complete()){
+      alert('Please complete 100% of Module 3 before opening the certificate.');
+      return false;
+    }
+
+    const modal=document.getElementById('module3CertificateModal');
+    const nameInput=document.getElementById('module3CertificateName');
+    const classInput=document.getElementById('module3CertificateClass');
+    const logo=document.getElementById('module3CertificateLogo');
+    const headerLogo=document.querySelector('.module-brand-logo img');
+
+    try{
+      if(nameInput) nameInput.value=localStorage.getItem(NAME_KEY) || '';
+      if(classInput) classInput.value=localStorage.getItem(CLASS_KEY) || '';
+    }catch(e){}
+
+    if(logo && headerLogo && headerLogo.src) logo.src=headerLogo.src;
+
+    window.updateModule3CertificatePreview();
+
+    if(modal){
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
+    }
+    return false;
+  };
+
+  window.closeModule3Certificate=function(){
+    const modal=document.getElementById('module3CertificateModal');
+    if(modal){
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+    }
+  };
+
+  function pdfEscape(value){
+    return String(value||'')
+      .replace(/[^\x20-\x7E]/g,' ')
+      .replace(/\\/g,'\\\\')
+      .replace(/\(/g,'\\(')
+      .replace(/\)/g,'\\)');
+  }
+
+  function byteLength(value){
+    return new TextEncoder().encode(value).length;
+  }
+
+  function makeModule3Pdf(name,cls,date){
+    const W=841.89,H=595.28;
+    const n=pdfEscape(name.toUpperCase());
+    const c=pdfEscape(cls);
+    const d=pdfEscape(date);
+
+    const titleX=Math.max(95,421-(n.length*7.2));
+
+    const stream=[
+      'q',
+      '1 1 1 rg',`0 0 ${W} ${H} re f`,
+      '0.97 0.94 0.96 rg',`0 ${H-110} 150 110 re f`,
+      '0.94 0.96 1 rg',`${W-150} 0 150 110 re f`,
+      '0.32 0.18 0.37 RG','5 w',`18 18 ${W-36} ${H-36} re S`,
+      '0.15 0.25 0.56 RG','1.8 w',`28 28 ${W-56} ${H-56} re S`,
+      '0.55 0.05 0.18 rg',
+      'BT /F2 12 Tf 1 0 0 1 282 500 Tm (STATXPLORE - CERTIFICATE OF COMPLETION) Tj ET',
+      '0.32 0.18 0.37 rg',
+      'BT /F3 34 Tf 1 0 0 1 220 440 Tm (Certificate of Completion) Tj ET',
+      '0.38 0.40 0.48 rg',
+      'BT /F1 14 Tf 1 0 0 1 322 397 Tm (This certificate is proudly presented to) Tj ET',
+      '0.12 0.13 0.21 rg',
+      `BT /F3 30 Tf 1 0 0 1 ${titleX} 342 Tm (${n}) Tj ET`,
+      '0.67 0.70 0.82 RG','1.2 w','170 322 m 672 322 l S',
+      '0.38 0.40 0.48 rg',
+      'BT /F1 14 Tf 1 0 0 1 333 292 Tm (for successfully completing) Tj ET',
+      '0.94 0.91 0.96 rg','240 238 362 42 re f',
+      '0.32 0.18 0.37 rg',
+      'BT /F2 15 Tf 1 0 0 1 275 254 Tm (Module 3 - Discrete Probability Distributions) Tj ET',
+      '0.38 0.40 0.48 rg',
+      'BT /F1 11 Tf 1 0 0 1 190 207 Tm (Probability Distributions - Mean, Variance & Expectation - Binomial Distribution) Tj ET',
+      '0.32 0.18 0.37 rg',
+      'BT /F2 11 Tf 1 0 0 1 190 150 Tm (Class / Section:) Tj ET',
+      '0.12 0.13 0.21 rg',
+      `BT /F1 11 Tf 1 0 0 1 278 150 Tm (${c}) Tj ET`,
+      '0.32 0.18 0.37 rg',
+      'BT /F2 11 Tf 1 0 0 1 470 150 Tm (Date:) Tj ET',
+      '0.12 0.13 0.21 rg',
+      `BT /F1 11 Tf 1 0 0 1 505 150 Tm (${d}) Tj ET`,
+      '0.32 0.18 0.37 rg',
+      'BT /F2 11 Tf 1 0 0 1 630 150 Tm (Completion: 100%) Tj ET',
+      '0.48 0.50 0.58 RG','0.9 w',
+      '175 88 m 335 88 l S','505 88 m 665 88 l S',
+      '0.38 0.40 0.48 rg',
+      'BT /F1 10 Tf 1 0 0 1 237 70 Tm (Student) Tj ET',
+      'BT /F1 10 Tf 1 0 0 1 535 70 Tm (Lecturer / Instructor) Tj ET',
+      'Q'
+    ].join('\n');
+
+    const objs=[];
+    objs[1]='<< /Type /Catalog /Pages 2 0 R >>';
+    objs[2]='<< /Type /Pages /Kids [3 0 R] /Count 1 >>';
+    objs[3]=`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R >> >> /Contents 4 0 R >>`;
+    objs[4]=`<< /Length ${byteLength(stream)} >>\nstream\n${stream}\nendstream`;
+    objs[5]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
+    objs[6]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
+    objs[7]='<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>';
+
+    let pdf='%PDF-1.4\n';
+    const offsets=[0];
+    for(let i=1;i<=7;i++){
+      offsets[i]=byteLength(pdf);
+      pdf+=`${i} 0 obj\n${objs[i]}\nendobj\n`;
+    }
+    const xrefOffset=byteLength(pdf);
+    pdf+='xref\n0 8\n0000000000 65535 f \n';
+    for(let i=1;i<=7;i++){
+      pdf+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+    }
+    pdf+=`trailer\n<< /Size 8 /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
+
+    return new Blob([new TextEncoder().encode(pdf)],{type:'application/pdf'});
+  }
+
+  window.openModule3CertificatePDF=function(){
+    if(typeof window.isModule3Complete==='function' && !window.isModule3Complete()){
+      alert('Please complete 100% of Module 3 first.');
+      return;
+    }
+
+    const nameInput=document.getElementById('module3CertificateName');
+    const classInput=document.getElementById('module3CertificateClass');
+
+    if(!nameInput || !nameInput.value.trim()){
+      alert('Please enter your full name first.');
+      if(nameInput) nameInput.focus();
+      return;
+    }
+    if(!classInput || !classInput.value.trim()){
+      alert('Please enter your class / section first.');
+      if(classInput) classInput.focus();
+      return;
+    }
+
+    window.updateModule3CertificatePreview();
+
+    const pdfWindow=window.open('about:blank','StatXploreModule3CertificatePDF');
+    if(!pdfWindow){
+      alert('The browser blocked the certificate window. Please allow pop-ups and try again.');
+      return;
+    }
+
+    const blob=makeModule3Pdf(
+      nameInput.value.trim(),
+      classInput.value.trim(),
+      certDate()
+    );
+    const url=URL.createObjectURL(blob);
+
+    pdfWindow.document.open();
+    pdfWindow.document.write(
+      '<!doctype html><html><head><title>StatXplore Module 3 Certificate</title>'+
+      '<meta name="viewport" content="width=device-width,initial-scale=1">'+
+      '<style>html,body{margin:0;width:100%;height:100%;background:#2b2d34;font-family:Arial,sans-serif}'+
+      '.bar{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px;background:#fff;color:#512E5F;box-sizing:border-box;border-bottom:1px solid #ddd}'+
+      '.bar strong{font-size:15px}.actions{display:flex;gap:8px}.actions a{display:inline-flex;align-items:center;padding:9px 14px;border-radius:999px;text-decoration:none;font-weight:700}'+
+      '.download{background:#8B0E2D;color:#fff}.print{background:#25408F;color:#fff}.close{background:#eef0f6;color:#202235}'+
+      'embed{display:block;width:100%;height:calc(100% - 56px);border:0;background:#52545b}</style>'+
+      '</head><body>'+
+      '<div class="bar"><strong>Module 3 Completion Certificate · PDF</strong>'+
+      '<div class="actions">'+
+      '<a class="download" id="downloadPdf" download="StatXplore_Module3_Certificate.pdf">⬇ Download PDF</a>'+
+      '<a class="print" href="#" onclick="window.print();return false;">🖨 Print PDF</a>'+
+      '<a class="close" href="#" onclick="window.close();return false;">Close</a>'+
+      '</div></div>'+
+      '<embed id="pdfEmbed" type="application/pdf">'+
+      '</body></html>'
+    );
+    pdfWindow.document.close();
+
+    const embed=pdfWindow.document.getElementById('pdfEmbed');
+    const download=pdfWindow.document.getElementById('downloadPdf');
+    if(embed) embed.src=url;
+    if(download) download.href=url;
+
+    pdfWindow.addEventListener('beforeunload',function(){
+      try{URL.revokeObjectURL(url);}catch(e){}
+    });
+  };
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') window.closeModule3Certificate();
+  });
+
+  document.addEventListener('DOMContentLoaded',function(){
+    const modal=document.getElementById('module3CertificateModal');
+    if(modal){
+      modal.addEventListener('click',function(e){
+        if(e.target===modal) window.closeModule3Certificate();
+      });
+    }
+  });
+})();
+</script>
+
 <script id="module3-next-button-fallback">
 window.goToModule3Section = function(sectionId, navId){
   if (typeof window.navigateTo === 'function') {
@@ -3925,5 +6203,171 @@ window.goToModule3Section = function(sectionId, navId){
   return false;
 };
 </script>
+
+<script id="module3-binomial-table-guide-script">
+window.binomGuideCases = {
+  a: {
+    title: '(a) Exactly 2 customers respond',
+    highlight: [2],
+    secondary: [3],
+    answer: '<span class="binom-math">P(X = 2) = P(X ≥ 2) − P(X ≥ 3) = 0.5798 − 0.2557 = 0.3241</span>',
+    steps: [
+      'Translate <strong>exactly 2</strong> into <span class="binom-math">P(X = 2)</span>.',
+      'The table gives <span class="binom-math">P(X ≥ r)</span>. At <span class="binom-math">r = 2</span>, read <span class="binom-math">P(X ≥ 2) = 0.5798</span>.',
+      'Read the next row, <span class="binom-math">r = 3</span>: <span class="binom-math">P(X ≥ 3) = 0.2557</span>. Subtract to isolate exactly 2 responses.',
+      'Therefore, <span class="binom-math">P(X = 2) = 0.5798 − 0.2557 = 0.3241</span>.'
+    ]
+  },
+  b: {
+    title: '(b) At most 3 customers respond',
+    highlight: [4],
+    secondary: [],
+    answer: '<span class="binom-math">P(X ≤ 3) = 1 − P(X ≥ 4) = 1 − 0.0705 = 0.9295</span>',
+    steps: [
+      'Translate <strong>at most 3</strong> into <span class="binom-math">P(X ≤ 3)</span>.',
+      'The table does not directly give <span class="binom-math">P(X ≤ 3)</span>, so use the complement rule.',
+      'The opposite event is <span class="binom-math">X ≥ 4</span>. At <span class="binom-math">r = 4</span>, read <span class="binom-math">P(X ≥ 4) = 0.0705</span>.',
+      'Therefore, <span class="binom-math">P(X ≤ 3) = 1 − 0.0705 = 0.9295</span>.'
+    ]
+  },
+  c: {
+    title: '(c) At least 2 customers respond',
+    highlight: [2],
+    secondary: [],
+    answer: '<span class="binom-math">P(X ≥ 2) = 0.5798</span>',
+    steps: [
+      'Translate <strong>at least 2</strong> into <span class="binom-math">P(X ≥ 2)</span>.',
+      'This matches the table directly because the table gives <span class="binom-math">P(X ≥ r)</span>.',
+      'Go to the row <span class="binom-math">r = 2</span> and the column <span class="binom-math">p = 0.30</span>. The table entry is <strong>0.5798</strong>.',
+      'So, <span class="binom-math">P(X ≥ 2) = 0.5798</span>.'
+    ]
+  },
+  d: {
+    title: '(d) Fewer than 3 customers respond',
+    highlight: [3],
+    secondary: [],
+    answer: '<span class="binom-math">P(X &lt; 3) = P(X ≤ 2) = 1 − P(X ≥ 3) = 1 − 0.2557 = 0.7443</span>',
+    steps: [
+      'Translate <strong>fewer than 3</strong> into <span class="binom-math">P(X &lt; 3)</span>. This is the same as <span class="binom-math">P(X ≤ 2)</span>.',
+      'The table does not directly give <span class="binom-math">P(X ≤ 2)</span>, so use the complement rule.',
+      'The opposite event is <span class="binom-math">X ≥ 3</span>. At <span class="binom-math">r = 3</span>, read <span class="binom-math">P(X ≥ 3) = 0.2557</span>.',
+      'Hence, <span class="binom-math">P(X &lt; 3) = 1 − 0.2557 = 0.7443</span>.'
+    ]
+  }
+}
+
+window.showBinomGuide = function(key, btn){
+  const config = window.binomGuideCases && window.binomGuideCases[key];
+  if(!config) return;
+  document.querySelectorAll('#binomPromptButtons .binom-qbtn').forEach(function(b){ b.classList.remove('active'); });
+  if(btn){ btn.classList.add('active'); }
+  const rows = document.querySelectorAll('#binomGuideTableBody tr');
+  rows.forEach(function(row){
+    row.classList.remove('highlight','highlight-secondary','result-row');
+    const r = Number(row.getAttribute('data-r'));
+    if(config.highlight.includes(r)) row.classList.add('highlight');
+    if(config.secondary.includes(r)) row.classList.add('highlight-secondary');
+  });
+  if(config.highlight.length===1 && config.secondary.length===0){
+    const row = document.querySelector('#binomGuideTableBody tr[data-r="'+config.highlight[0]+'"]');
+    if(row) row.classList.add('result-row');
+  }
+  const titleEl = document.getElementById('binomGuideTitle');
+  const stepsEl = document.getElementById('binomGuideSteps');
+  const ansEl = document.getElementById('binomGuideAnswer');
+  if(titleEl) titleEl.textContent = config.title;
+  if(stepsEl){
+    stepsEl.innerHTML = config.steps.map(function(step,idx){
+      return '<div class="binom-step"><div class="binom-step-num">'+(idx+1)+'</div><div class="binom-step-text">'+step+'</div></div>';
+    }).join('');
+  }
+  if(ansEl) ansEl.innerHTML = config.answer;
+  /* Dynamic guide uses native mathematical symbols (≤, ≥, <, −),
+     so it renders correctly even if MathJax is still loading. */
+};
+
+document.addEventListener('DOMContentLoaded', function(){
+  const firstBtn = document.querySelector('#binomPromptButtons .binom-qbtn[data-case="a"]');
+  if(firstBtn) window.showBinomGuide('a', firstBtn);
+});
+</script>
+
+
+<script id="module3-binomial-table-cell-highlight">
+(function(){
+  const original = window.showBinomGuide;
+  if(typeof original !== 'function') return;
+
+  window.showBinomGuide = function(key, btn){
+    original(key, btn);
+
+    document.querySelectorAll('#binomGuideTableBody td[data-p="0.30"]').forEach(function(cell){
+      cell.classList.remove('binom-current-main','binom-current-secondary');
+    });
+
+    const config = window.binomGuideCases && window.binomGuideCases[key];
+    if(!config) return;
+
+    config.highlight.forEach(function(r){
+      const cell = document.querySelector('#binomGuideTableBody tr[data-r="'+r+'"] td[data-p="0.30"]');
+      if(cell) cell.classList.add('binom-current-main');
+    });
+
+    config.secondary.forEach(function(r){
+      const cell = document.querySelector('#binomGuideTableBody tr[data-r="'+r+'"] td[data-p="0.30"]');
+      if(cell) cell.classList.add('binom-current-secondary');
+    });
+  };
+})();
+</script>
+
+
+<script id="module3-sidebar-collapse-restore">
+document.addEventListener('DOMContentLoaded', function(){
+  if(window.innerWidth <= 900) return;
+
+  let collapsed=false;
+  try{
+    collapsed = localStorage.getItem('STATXPLORE_MODULE3_SIDEBAR_COLLAPSED') === '1';
+  }catch(e){}
+
+  const shell=document.getElementById('moduleShell');
+  const button=document.getElementById('desktopSidebarToggle');
+  const icon=document.getElementById('desktopSidebarToggleIcon');
+
+  if(collapsed && shell){
+    shell.classList.add('sidebar-collapsed');
+    if(button){
+      button.setAttribute('aria-expanded','false');
+      button.setAttribute('aria-label','Show left navigation');
+      button.setAttribute('title','Show left navigation');
+    }
+    if(icon) icon.textContent='›';
+  }
+});
+</script>
+
+
+<script id="module3-review-toggle-script">
+window.toggleQuizReview = function(listId, buttonId){
+  const list = document.getElementById(listId);
+  const button = document.getElementById(buttonId);
+  if(!list || !button) return;
+
+  const isCollapsed = list.classList.contains('quiz-review-list-collapsed');
+  list.classList.toggle('quiz-review-list-collapsed');
+
+  const openNow = isCollapsed;
+  button.setAttribute('aria-expanded', openNow ? 'true' : 'false');
+
+  const icon = button.querySelector('.quiz-review-toggle-icon');
+  if(icon) icon.textContent = openNow ? '⌃' : '⌄';
+
+  if(openNow && window.MathJax && window.MathJax.typesetPromise){
+    window.MathJax.typesetPromise([list]).catch(function(){});
+  }
+};
+</script>
+
 </body>
 </html>
